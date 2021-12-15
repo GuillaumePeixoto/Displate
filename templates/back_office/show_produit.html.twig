@@ -1,0 +1,30 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block body %}
+
+    <h2 class="text-center my-3">Liste des produits</h2>
+    <div  style="overflow-x : scroll;">
+        <table class="table text-center align-middle">
+            <thead>
+                <tr>
+                    {% for data in colonnes %}
+                        {% if (data != 'id') and (data != 'password') %}
+                            <th>{{data}}</th>                    
+                        {% endif %}
+
+                    {% endfor %}
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produit in produits %}
+                    <td class="col-3"><img src="{{ asset('uploads/photos/' ~ produit.photo) }}"  class="w-75" alt=""></td>
+                    <td>{{produit.titre}}</td>
+                    <td>{{produit.description}}</td>
+                    <td><a href="#" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="#"><i class="bi bi-trash"></i></a></td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
