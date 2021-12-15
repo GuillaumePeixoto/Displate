@@ -20,7 +20,9 @@
 
         {{ form_row(userForm.codePostal) }}
 
-        {{ form_row(userForm.password) }}
+        {% if userForm.password is defined %}
+            {{ form_row(userForm.password) }}
+        {% endif %}
 
         {{ form_row(userForm._token) }}
 

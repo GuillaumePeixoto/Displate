@@ -150,6 +150,14 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
+            ->add('pseudo', TextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "Veuillez renseigner votre pseudo."
+                    ])
+                ]
+            ])
             ->add('email', TextType::class, [
                 'required' => false,
                 'constraints' => [

@@ -2,12 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
+use App\Entity\Commentaire;
 use App\Entity\Format;
 use App\Entity\Produit;
 use App\Entity\User;
+use App\Form\CategorieTypeFormType;
 use App\Form\FormatFormType;
 use App\Form\ProduitFormType;
 use App\Form\RegistrationFormType;
+use App\Repository\CategorieRepository;
+use App\Repository\CommentaireRepository;
 use App\Repository\FormatRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\UserRepository;
@@ -63,27 +68,33 @@ class BackOfficeController extends AbstractController
         if($user)
         {
             $action = "Modification";
+            $userForm = $this->createForm(RegistrationFormType::class, $user, [
+                'userUpdate' => true 
+            ]);
         }
         else
         {
             $user = new User();
             $action = "Ajout";
+            $userForm = $this->createForm(RegistrationFormType::class, $user, [
+                'userRegistration' => true 
+            ]);
         }
 
-        
-        $userForm = $this->createForm(RegistrationFormType::class, $user, [
-            'userRegistration' => true 
-        ]);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             // encode the plain password
-            $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
-                    $userForm->get('password')->getData()
-                )
-            );
+            if($action == 'Ajout')
+            {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $userForm->get('password')->getData()
+                    )
+                );            
+            }
+
 
             $manager->persist($user);
             $manager->flush();
@@ -233,7 +244,103 @@ class BackOfficeController extends AbstractController
         }
 
         return $this->render('back_office/format_form.html.twig',[
-            'userForm' => $formatForm->createView(),
+            'formatForm' => $formatForm->createView(),
+            'action' => $action,
+        ]);
+    }
+
+    #[Route('/backoffice/commentaires', name: 'show_commentaire')]
+    #[Route('/backoffice/commentaire/{id}/remove', name: 'remove_commentaire')]
+    public function adminComment(EntityManagerInterface $manager, CommentaireRepository $repoComment, Commentaire $commentaire = null): Response
+    {
+
+        $colonnes = $manager->getClassMetadata(Commentaire::class)->getFieldNames();
+        $comments = $repoComment->findAll();
+
+        if($commentaire)
+        {
+            $id = $commentaire->getId();
+
+            $manager->remove($commentaire);
+            $manager->flush();
+            $this->addFlash('success', "Le commentaire n°$id a été supprimer avec succès !");
+
+            return $this->redirectToRoute('show_commentaire');
+        }
+
+        return $this->render('back_office/show_commentaire.html.twig',[
+            'colonnes' => $colonnes,
+            'comments' => $comments
+        ]);
+    }
+
+    #[Route('/admin/categories', name: 'show_categories')]
+    #[Route('/admin/categorie/{id}/remove', name: 'remove_categorie')]
+    public function adminCategory(EntityManagerInterface $manager, CategorieRepository $repoCategorie, Categorie $categorie = null): Response
+    {
+
+        $colonnes = $manager->getClassMetadata(Categorie::class)->getFieldNames();
+        $categories = $repoCategorie->findAll();
+
+
+        if($categorie)
+        {
+            $titre = $categorie->getTitre();
+
+            // if(count($categorie->getArticles()) == 0)
+            // {
+                $manager->remove($categorie);
+                $manager->flush();
+                $this->addFlash('success', "La categorie $titre a été supprimer avec succès !");
+            // }
+            // else
+            // {
+            //     $this->addFlash('danger', "Vous ne pouvez pas supprimer cette catégorie tant qu'il reste des articles lié à celle-ci");
+            // }
+
+
+
+            return $this->redirectToRoute('show_categories');
+        }
+
+        return $this->render('back_office/show_categories.html.twig',[
+            'colonnes' => $colonnes,
+            'categories' => $categories
+        ]);
+    }
+
+    
+    #[Route('/admin/categorie/new', name: 'create_categorie')]
+    #[Route('/admin/categorie/{id}/modify', name: 'modify_categorie')]
+    public function adminCategoryForm(Categorie $categorie = null, EntityManagerInterface $manager, Request $request): Response
+    {
+        if($categorie)
+        {
+            $action = "Modification";
+        }
+        else
+        {
+            $categorie = new Categorie;
+            $action = "Ajout";
+        }
+
+        $categorieForm = $this->createForm(CategorieTypeFormType::class, $categorie);
+
+        $categorieForm->handleRequest($request);
+
+        if($categorieForm->isSubmitted() && $categorieForm->isValid())
+        {
+            $this->addFlash('success', "$action de la categorie !");
+
+            $manager->persist($categorie);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('show_categories');
+        }
+
+        return $this->render('back_office/categorie_form.html.twig',[
+            'categorieForm' => $categorieForm->createView(),
             'action' => $action,
         ]);
     }

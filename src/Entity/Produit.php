@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,22 @@ class Produit
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="produits")
+     */
+    private $categorie;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Format::class, inversedBy="produits")
+     */
+    private $format;
+
+    public function __construct()
+    {
+        $this->categorie = new ArrayCollection();
+        $this->format = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +87,54 @@ class Produit
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->categorie;
+    }
+
+    public function addCategorie(Categorie $categorie): self
+    {
+        if (!$this->categorie->contains($categorie)) {
+            $this->categorie[] = $categorie;
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categorie $categorie): self
+    {
+        $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Format[]
+     */
+    public function getFormat(): Collection
+    {
+        return $this->format;
+    }
+
+    public function addFormat(Format $format): self
+    {
+        if (!$this->format->contains($format)) {
+            $this->format[] = $format;
+        }
+
+        return $this;
+    }
+
+    public function removeFormat(Format $format): self
+    {
+        $this->format->removeElement($format);
 
         return $this;
     }

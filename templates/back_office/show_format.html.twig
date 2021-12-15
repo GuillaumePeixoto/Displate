@@ -3,8 +3,8 @@
 {% block body %}
 
     <h2 class="text-center my-3">Liste des formats</h2>
-    <div  style="overflow-x : scroll;">
-        <table class="table text-center align-middle">
+    <div>
+        <table class="table text-center align-middle" style="overflow-x : scroll;">
             <thead>
                 <tr>
                     {% for data in colonnes %}
@@ -18,10 +18,10 @@
             </thead>
             <tbody>
                 {% for format in formats %}
-                    <td>{{format.prix}}</td>
                     <td>{{format.format}}</td>
+                    <td>{{format.prix}}</td>
+                    <td>{{format.hauteur}}</td>
                     <td>{{format.largeur}}</td>
-                    <td>{{format.longueur}}</td>
                     <td><a href="#" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="#"><i class="bi bi-trash"></i></a></td>
                 {% endfor %}
             </tbody>

@@ -2,4 +2,20 @@
 
 {% block body %}
 
+    <h2 class="text-center my-3">{{ action }} d'un format</h2>
+
+    {{ form_start(formatForm) }}
+
+        {{ form_row(formatForm.format) }}
+
+        {{ form_row(formatForm.prix) }}
+
+        {{ form_row(formatForm.hauteur) }}
+
+        {{ form_row(formatForm.largeur) }}
+
+        <button type="submit" class="btn btn-dark">Continuer</button>
+
+    {{ form_end(formatForm)}}
+
 {% endblock %}

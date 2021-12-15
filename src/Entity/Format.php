@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FormatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,11 +20,6 @@ class Format
     private $id;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $prix;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $format;
@@ -30,16 +27,43 @@ class Format
     /**
      * @ORM\Column(type="float")
      */
-    private $largeur;
+    private $prix;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $longueur;
+    private $hauteur;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $largeur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Produit::class, mappedBy="format")
+     */
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(string $format): self
+    {
+        $this->format = $format;
+
+        return $this;
     }
 
     public function getPrix(): ?float
@@ -54,14 +78,14 @@ class Format
         return $this;
     }
 
-    public function getFormat(): ?string
+    public function getHauteur(): ?float
     {
-        return $this->format;
+        return $this->hauteur;
     }
 
-    public function setFormat(string $format): self
+    public function setHauteur(float $hauteur): self
     {
-        $this->format = $format;
+        $this->hauteur = $hauteur;
 
         return $this;
     }
@@ -78,14 +102,29 @@ class Format
         return $this;
     }
 
-    public function getLongueur(): ?float
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
     {
-        return $this->longueur;
+        return $this->produits;
     }
 
-    public function setLongueur(float $longueur): self
+    public function addProduit(Produit $produit): self
     {
-        $this->longueur = $longueur;
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->addFormat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->removeElement($produit)) {
+            $produit->removeFormat($this);
+        }
 
         return $this;
     }

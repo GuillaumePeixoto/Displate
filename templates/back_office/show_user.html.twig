@@ -27,7 +27,7 @@
                         <td>{{user.adresse}}</td>
                         <td>{{user.ville}}</td>
                         <td>{{user.codePostal}}</td>
-                        <td><a href="#" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="{{ path('remove_user', {'id': user.id}) }}"><i class="bi bi-trash"></i></a></td>
+                        <td><a href="{{ path('modify_user', {'id' : user.id }) }}" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="{{ path('remove_user', {'id': user.id}) }}"><i class="bi bi-trash"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>
