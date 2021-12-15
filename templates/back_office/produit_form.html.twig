@@ -1,0 +1,19 @@
+{% extends "base_backoffice.html.twig" %}
+
+{% block body %}
+
+    <h2 class="text-center my-3">{{action}} du produit</h2>
+
+    {{ form_start(produitForm, {'attr': {"class": "col-7 mx-auto"}}) }}
+
+        {{ form_row(produitForm.photo) }}
+
+        {{ form_row(produitForm.titre) }}
+
+        {{ form_row(produitForm.description) }}
+
+        <button type="submit" class="btn btn-dark">Continuer</button>
+    {{ form_end(produitForm) }}
+
+
+{% endblock %}
