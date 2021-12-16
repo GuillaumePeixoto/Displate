@@ -88,11 +88,12 @@ footer h5{
 .titre
 {
     font-size: 3.5rem;
-    font-family: 'Montserrat';
+    font-family: 'Karma', serif;
     font-weight: normal;
     color: #1f1e1e;
     text-align: center;
     margin: 2rem 0;
+    padding-top: 25px;
 }
 
 .logo {
@@ -127,3 +128,8 @@ body {
   border: 5px solid rgb(235, 235, 235);
   border-radius: 50%;
 }
+
+
+/* CSS artist */
+
+
