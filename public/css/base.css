@@ -68,3 +68,49 @@ footer h5{
     border-color: #1f1e1e;;
 }
 
+
+
+/* CSS artist */
+
+.titre
+{
+    font-size: 3.5rem;
+    font-family: 'Montserrat';
+    font-weight: normal;
+    color: #1f1e1e;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.logo {
+    text-align: center;
+  margin: 2rem 0 0 -2.25rem;
+  font-size: 3rem;
+    font-family: 'Arvo', serif;
+  font-weight: normal;
+    color: #555;
+  letter-spacing:-1px;
+}
+
+body {
+	background-color: #f5f7fa;
+}
+
+.testimonial-card .card-up {
+  height: 120px;
+  overflow: hidden;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+
+.darkbrown-gradient {
+  background: linear-gradient(40deg, #1f1e1e, #3f3a36) !important;
+}
+
+.testimonial-card .avatar {
+  width: 120px;
+  margin-top: -60px;
+  overflow: hidden;
+  border: 5px solid rgb(235, 235, 235);
+  border-radius: 50%;
+}
