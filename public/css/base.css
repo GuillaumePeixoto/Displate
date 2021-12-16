@@ -5,6 +5,10 @@
     color: rgb(253, 203, 128)  !important;
 }
 
+.couleurfontPC, .colorfontIcon{
+    color: rgb(248, 229, 200)  !important;
+}
+
 .searchformNav{
     display: contents;
 
@@ -71,7 +75,7 @@ footer h5{
 }
 
 .fontfooter{
-    background-color: #b85c38;
+    background-color: #ab674d;
     
 }
 
@@ -79,5 +83,10 @@ footer h5{
     background-color: #1f1e1e;
 
     border-color: #1f1e1e;;
+}
+
+footer div.row
+{
+    margin: 0;
 }
 
