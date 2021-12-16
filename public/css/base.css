@@ -1,6 +1,5 @@
 /* CSS BODY */
 
-
 .couleurfontP, .colorfontIcon
 {
     color: rgb(253, 203, 128)  !important;
@@ -49,6 +48,20 @@
     font-size: 100px;
     color: rgb(253, 203, 128)
 }
+
+/* CSS PAGE HOME */
+
+.titrehome{
+    font-family: 'Karma', serif;
+}
+
+    /* hover carousel */
+
+    
+
+    /* fin hover carousel */
+
+/* FIN CSS PAGE HOME */
 
 /* CSS FOOTER */
 
