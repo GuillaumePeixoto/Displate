@@ -32,6 +32,12 @@ class Commentaire
      */
     private $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $produit;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Commentaire
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }
