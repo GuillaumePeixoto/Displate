@@ -27,6 +27,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Karma&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href=" {{asset('css/base.css')}} ">
+<link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}} ">
 
 <script>(function(w,d){!function(e,t,r,a,s){e[r]=e[r]||{},e[r].executed=[],e.zaraz={deferred:[]};var n=t.getElementsByTagName("title")[0];e[r].c=t.cookie,n&&(e[r].t=t.getElementsByTagName("title")[0].text),e[r].w=e.screen.width,e[r].h=e.screen.height,e[r].j=e.innerHeight,e[r].e=e.innerWidth,e[r].l=e.location.href,e[r].r=t.referrer,e[r].k=e.screen.colorDepth,e[r].n=t.characterSet,e[r].o=(new Date).getTimezoneOffset(),//
 e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([t,r]),e[s].push({"zaraz.start":(new Date).getTime()});var i=t.getElementsByTagName(a)[0],o=t.createElement(a);o.defer=!0,o.src="/cdn-cgi/zaraz/s.js?"+new URLSearchParams(e[r]).toString(),i.parentNode.insertBefore(o,i)}(w,d,"zarazData","script","dataLayer");})(window,document);</script></head>
@@ -50,7 +51,7 @@ e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([
             <div class="col-md-8 order-md-last my-auto">
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <a class="navbar-brand text-white" href="index.html"><h1 class="my-auto font_titre ">Boots Art</h1></a>
+                        <a class="navbar-brand text-white" href="index.html"><h1 class="my-auto font_titre ">Boots Arts</h1></a>
                     </div>
                     <div class="col-md-6 d-md-flex justify-content-end mb-md-0 mt-5">
                     <div class="">
@@ -64,7 +65,7 @@ e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([
 
         <div class="col-md-4 d-flex ">
             <div class="logo">
-                <img src="img/logocode.png" class="w-25" style="" class="" alt="">
+                <img src="img/logocode.png" class="w-25">
             </div>
                 </div>
                     </div>
@@ -89,7 +90,7 @@ e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([
 
                         <div class="collapse navbar-collapse allfontcolor paddingNav" id="ftco-nav">
                             <ul class="navbar-nav mx-auto">
-                                <li class="nav-item active me-5"><a href="#" class="nav-link couleurfontPC">Accueil</a></li>
+                                <li class="nav-item active me-5"><a href=" {{ path('home') }} " class="nav-link couleurfontPC">Accueil</a></li>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                                 </button>
@@ -295,15 +296,14 @@ e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.js+bootstrap.min.js+main.js.pagespeed.jc.DGGnqwWURm.js"></script><script>eval(mod_pagespeed_UHYBn7eTCD);</script>
-<script>eval(mod_pagespeed_pjbkxWKFfo);</script>
-<script>eval(mod_pagespeed_6H5NR84qUD);</script>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v64f9daad31f64f81be21cbef6184a5e31634941392597" integrity="sha512-gV/bogrUTVP2N3IzTDKzgP0Js1gg4fbwtYB6ftgLbKQu/V8yH2+lrKCfKHelh4SO3DPzKj4/glTO+tNJGDnb0A==" data-cf-beacon='{"rayId":"6bde55290d24a855","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.12.0","si":100}' crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{{asset('js/base.js')}}"></script>
+
 
 </body>
-
 
 
 

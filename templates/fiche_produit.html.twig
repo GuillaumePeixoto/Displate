@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Boots Arts fiche produit
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Image -->
+        <div class="col-12 col-lg-6">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <a href="" data-toggle="modal" data-target="#productModal">
+                        <img class="img-fluid" src="https://pbs.twimg.com/profile_images/1228975690646794240/o5kCDcPA_400x400.jpg" style="height:500px; width:600px;"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add to cart -->
+        <div class="col-12 col-lg-6 add_to_cart_block">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <p class="price">Fiche produit</p>
+                    <form method="get" action="cart.html">
+                        <div class="form-group">
+                            <label for="colors">Choisir votre format</label>
+                            <select class="form-select form-select mb-3 selectFormat" id="colors">
+                                <option selected value="m">M</option>
+                                <option value="l">L</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantité :</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number me-1"  data-type="minus" data-field="">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="10" value="1">
+                                <div class="input-group-append">
+                                    <button type="button" class="quantity-right-plus btn btn-success btn-number ms-1" data-type="plus" data-field="">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center ">
+                            <a href="cart.html" class="btn btn-success btn-lg text-uppercase">
+                                <i class="fa fa-shopping-cart"></i> Ajouter au panier
+                            </a>
+                        </div>
+                    </form>
+                    <div class="product_rassurance">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br/>Livraison rapide</li>
+                            <li class="list-inline-item"><i class="fa fa-credit-card fa-2x"></i><br/>paiement sécurisé</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
