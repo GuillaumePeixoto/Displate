@@ -20,7 +20,11 @@
                 {% for user in users %}
                     <tr>
                         <td>{{user.email}}</td>
-                        <td>{{user.roles.0}}</td>
+                        <td>
+                            {% for role in user.roles %}
+                                {{role}}<br>
+                            {% endfor %}
+                        </td>
                         <td>{{user.prenom}}</td>
                         <td>{{user.nom}}</td>
                         <td>{{user.pseudo}}</td>
