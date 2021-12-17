@@ -49,6 +49,11 @@ class Produit
      */
     private $commentaires;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="produits")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -171,6 +176,18 @@ class Produit
                 $commentaire->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
