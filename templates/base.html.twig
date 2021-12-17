@@ -26,8 +26,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karma&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href=" {{asset('css/base.css')}} ">
-<link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}} ">
+<link rel="stylesheet" href=" {{asset('css/base.css')}}">
+<link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}}">
+<link rel="stylesheet" href=" {{asset('css/profil.css')}}">
+
 
 <script>(function(w,d){!function(e,t,r,a,s){e[r]=e[r]||{},e[r].executed=[],e.zaraz={deferred:[]};var n=t.getElementsByTagName("title")[0];e[r].c=t.cookie,n&&(e[r].t=t.getElementsByTagName("title")[0].text),e[r].w=e.screen.width,e[r].h=e.screen.height,e[r].j=e.innerHeight,e[r].e=e.innerWidth,e[r].l=e.location.href,e[r].r=t.referrer,e[r].k=e.screen.colorDepth,e[r].n=t.characterSet,e[r].o=(new Date).getTimezoneOffset(),//
 e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([t,r]),e[s].push({"zaraz.start":(new Date).getTime()});var i=t.getElementsByTagName(a)[0],o=t.createElement(a);o.defer=!0,o.src="/cdn-cgi/zaraz/s.js?"+new URLSearchParams(e[r]).toString(),i.parentNode.insertBefore(o,i)}(w,d,"zarazData","script","dataLayer");})(window,document);</script></head>
@@ -39,124 +41,65 @@ e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([
         background-size: cover;
         background-attachment: fixed;
         } 
-
-
     </style>  
  
 <body>
-    <section class="ftco-section">
 
-    <div class="container-fluid px-md-5">
-        <div class="row justify-content-between">
-            <div class="col-md-8 order-md-last my-auto">
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <a class="navbar-brand text-white" href="index.html"><h1 class="my-auto font_titre ">Boots Arts</h1></a>
-                    </div>
-                    <div class="col-md-6 d-md-flex justify-content-end mb-md-0 mt-5">
-                    <div class="">
-                        <a class="text-decoration-none couleurfontPC ">Inscription</a>
-                        <a class="text-decoration-none couleurfontPC ms-3">Connexion</a>
-                    </div>
-            </div>
-                </div>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark bgNav" aria-label="Eighth navbar example">
+            <div class="container">
+                <a class="navbar-brand shadow-none" href="#" style="background-color:transparent;font-size: 34px;vertical-align: baseline;display: flex;align-items: end;">
+                  <img src="img/logocode.png" style="width:50px; background-color:transparent" class="" alt=""><span style="" class="font_titre">oots Art</span></a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
 
+                    <div class="navbar-collapse collapse" id="navbarsExample07" style="">
+                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                          <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="#">Home</a>
+                        </li>
+                          <li class="nav-item">
+                            <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
+                              <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle couleurfontP" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Produits
+                                  </a>
 
-        <div class="col-md-4 d-flex ">
-            <div class="logo">
-                <img src="img/logocode.png" class="w-25">
-            </div>
-                </div>
-                    </div>
-                        </div>
-            <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar  ftco-navbar-light" id="ftco-navbar">
-                <div class="container-fluid allfontcolor">
-
-                <form action="#" class="searchform order-lg-last searchformNav">
-                        <div class="form-group d-flex">
-                            <input type="text" class="form-control pl-3 " placeholder="Search">
-                            <button type="submit" placeholder="" class="form-control search searchformnavwidth"><span class="fa fa-search"></span></button>
-                        </div>
-                        </form>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="fa fa-bars"></span> Menu
-                    </button>   
-
-
-
-                    
-                    
-
-                        <div class="collapse navbar-collapse allfontcolor paddingNav" id="ftco-nav">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item active me-5"><a href=" {{ path('home') }} " class="nav-link couleurfontPC">Accueil</a></li>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle me-5 couleurfontPC" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Produits
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark couleurfontPC"  aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Nouveauté</a></li>
-                                        <li><a class="dropdown-item" href="#">Tout nos prints</a></li>
-                                        <li><a class="dropdown-item" href="#">Concept Art</a></li>
-                                        <li><a class="dropdown-item" href="#">Illustration</a></li>
-                                        <li><a class="dropdown-item" href="#">Cyber</a></li>
-                                        <li><a class="dropdown-item" href="#">Fantasy</a></li>
-                                        <li><a class="dropdown-item" href="#">Abstrait</a></li>
-                                        
-                                    </ul>
-                                    </li>
+                                <ul class="dropdown-menu dropdown-menu-dark couleurfontP"  aria-labelledby="navbarDarkDropdownMenuLink">
+                                  <li><a class="dropdown-item" href="#">Tout nos prints</a></li>
+                                  <li><a class="dropdown-item" href="#">Concept Art</a></li>
+                                  <li><a class="dropdown-item" href="#">Illustration</a></li>
+                                  <li><a class="dropdown-item" href="#">Cyber</a></li>
+                                  <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                                  <li><a class="dropdown-item" href="#">Abstrait</a></li>   
                                 </ul>
-                                </div>
-
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle me-5 couleurfontPC" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Produits par couleurs
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item text-warning" href="#">Jaune</a></li>
-                                        <li><a class="dropdown-item text-danger" href="#">Rouge</a></li>
-                                        <li><a class="dropdown-item text-info" href="#">Bleu</a></li>
-                                        <li><a class="dropdown-item text-success" href="#">Vert</a></li>
-                                        <li><a class="dropdown-item text-violet" href="#">Violet</a></li>
-                                        <li><a class="dropdown-item text-noir" href="#">Noir</a></li>
-                                        <li><a class="dropdown-item text-light" href="#">Blanc</a></li>
-                                        
-                                    </ul>
-                                    </li>
-                                </ul>
-                                </div>
-                                
-
-                                <li class="nav-item me-5"><a href="#" class="nav-link couleurfontPC">Artiste</a></li>
-                                <li class="nav-item me-5"><a href="#" class="nav-link couleurfontPC">Nouveauté</a></li>
-                                
+                              </li>
                             </ul>
+                          </div>
+                        </li>
 
-
-
-                        
-                    </div>
+                        <li class="nav-item">
+                            <a class="nav-link text-white hover_effect mx-2" href="#">Artiste</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white hover_effect mx-2" href="#">Nouveautés</a>
+                        </li>
+                    </ul>
                     <div>
-                            <span class="me-5 colorfontIcon">
-                            <a class="me-3 text-white colorfontIcon" href="" ><i class="bi bi-bag fs-4"></i></a>
-                            <a class="me-2 text-white colorfontIcon" href=""><i class="bi bi-person-circle fs-4"></i></a>
-                            </span>
-                        </div>  
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="#">Inscription</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white hover_effect mx-2" href="#">Connexion</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </nav>
-
-    </section>
+            </div>
+        </nav>
+  
 <main>
 {% block body %}
 

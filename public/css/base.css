@@ -1,5 +1,13 @@
 /* CSS BODY */
 
+.bgNav{
+    background-color: #1f1e1e !important;
+}
+
+.logo img{
+    width: 100px !important;
+}
+
 .couleurfontP, .colorfontIcon
 {
     color: rgb(253, 203, 128)  !important;
@@ -25,12 +33,6 @@
     border-color: rgb(253, 203, 128);
 }
 
-
-
-.paddingNav
-{
-    padding-right: 110px;
-}
 .text-violet{
     color: rgb(182, 55, 194) !important;
 }
@@ -49,23 +51,17 @@
 
 .font_titre{
     font-family: 'Stardos Stencil', cursive;
-    font-size: 100px;
+    font-size: 42px;
     color: rgb(253, 203, 128)
 }
 
-/* CSS PAGE HOME */
+/* FONT TITRE KARMA */
 
-.titrehome{
+.titrehome, .titreprofil{
     font-family: 'Karma', serif;
 }
 
-    /* hover carousel */
-
-    
-
-    /* fin hover carousel */
-
-/* FIN CSS PAGE HOME */
+/* FIN FONT TITRE KARMA */
 
 /* CSS FOOTER */
 
@@ -105,13 +101,13 @@ footer div.row
 }
 
 .logo {
+
     text-align: center;
-  margin: 2rem 0 0 -2.25rem;
-  font-size: 3rem;
+    font-size: 3rem;
     font-family: 'Arvo', serif;
-  font-weight: normal;
+    font-weight: normal;
     color: #555;
-  letter-spacing:-1px;
+    letter-spacing:-1px;
 }
 
 body {
@@ -136,3 +132,14 @@ body {
   border: 5px solid rgb(235, 235, 235);
   border-radius: 50%;
 }
+
+/* REPONSIVE HOME */
+
+/* CSS PROFIL */
+
+/* FIN CSS PROFIL */
+
+@media screen and (max-width: 768px){
+
+}
+/* FIN REPONSIVE HOME */
