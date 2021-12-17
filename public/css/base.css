@@ -93,11 +93,12 @@ footer div.row
 .titre
 {
     font-size: 3.5rem;
-    font-family: 'Montserrat';
+    font-family: 'Karma', serif;
     font-weight: normal;
     color: #1f1e1e;
     text-align: center;
     margin: 2rem 0;
+
 }
 
 .logo {
@@ -108,7 +109,7 @@ footer div.row
     font-weight: normal;
     color: #555;
     letter-spacing:-1px;
-}
+
 
 body {
 	background-color: #f5f7fa;
@@ -133,6 +134,7 @@ body {
   border-radius: 50%;
 }
 
+
 /* REPONSIVE HOME */
 
 /* CSS PROFIL */
@@ -143,3 +145,9 @@ body {
 
 }
 /* FIN REPONSIVE HOME */
+=======
+
+/* CSS artist */
+
+
+
