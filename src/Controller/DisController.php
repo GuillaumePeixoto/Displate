@@ -43,5 +43,13 @@ class DisController extends AbstractController
         ]);
     }
 
+
+    #[Route('/profil', name: 'profil')]
+    public function pageProfil(): Response
+    {
+        return $this->render('profil.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
     
 }

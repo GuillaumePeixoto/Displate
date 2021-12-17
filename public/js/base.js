@@ -14,4 +14,13 @@ $(document).ready(function(){
         }
     });
 
+
+        $('#carousel1').carousel('pause');
+        $('#carousel2').carousel('pause');
+        $('#carousel3').carousel('pause');
+
 });
+
+
+
+  
