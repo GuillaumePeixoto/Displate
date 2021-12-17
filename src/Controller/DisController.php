@@ -16,6 +16,7 @@ class DisController extends AbstractController
         ]);
     }
 
+
     #[Route('/nos_artistes', name: 'nos_artistes')]
     public function article(): Response
     {
@@ -32,6 +33,7 @@ class DisController extends AbstractController
         ]);
     }
 
+
     #[Route('/home', name: 'home')]
     public function home(): Response
     {
@@ -39,4 +41,31 @@ class DisController extends AbstractController
             'controller_name' => 'DisController',
         ]);
     }
+
+    #[Route('/artiste', name: 'artiste')]
+    public function article(): Response
+    {
+        return $this->render('artiste.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+
+    #[Route('/fiche_produit', name: 'fiche_produit')]
+    public function ficheProduit(): Response
+    {
+        return $this->render('fiche_produit.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+
+    #[Route('/profil', name: 'profil')]
+    public function pageProfil(): Response
+    {
+        return $this->render('profil.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+    
 }
