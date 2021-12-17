@@ -1,8 +1,20 @@
 /* CSS BODY */
 
+.bgNav{
+    background-color: #1f1e1e !important;
+}
+
+.logo img{
+    width: 100px !important;
+}
+
 .couleurfontP, .colorfontIcon
 {
     color: rgb(253, 203, 128)  !important;
+}
+
+.couleurfontPC, .colorfontIcon{
+    color: rgb(248, 229, 200)  !important;
 }
 
 .searchformNav{
@@ -21,12 +33,6 @@
     border-color: rgb(253, 203, 128);
 }
 
-
-
-.paddingNav
-{
-    padding-right: 110px;
-}
 .text-violet{
     color: rgb(182, 55, 194) !important;
 }
@@ -45,23 +51,16 @@
 
 .font_titre{
     font-family: 'Stardos Stencil', cursive;
-    font-size: 100px;
+    font-size: 42px;
     color: rgb(253, 203, 128)
 }
 
-/* CSS PAGE HOME ##############################################################################################################################################################*/
 
-.titrehome{
+.titrehome, .titreprofil{
     font-family: 'Karma', serif;
 }
 
-    /* hover carousel */
-
-    
-
-    /* fin hover carousel */
-
-/* FIN CSS PAGE HOME */
+/* FIN FONT TITRE KARMA */
 
 /* CSS FOOTER ##################################################################################################################################################################*/
 
@@ -71,7 +70,7 @@ footer h5{
 }
 
 .fontfooter{
-    background-color: #b85c38;
+    background-color: #ab674d;
     
 }
 
@@ -79,6 +78,11 @@ footer h5{
     background-color: #1f1e1e;
 
     border-color: #1f1e1e;;
+}
+
+footer div.row
+{
+    margin: 0;
 }
 
 
@@ -93,18 +97,18 @@ footer h5{
     color: #1f1e1e;
     text-align: center;
     margin: 2rem 0;
-    padding-top: 25px;
+
 }
 
 .logo {
+
     text-align: center;
-  margin: 2rem 0 0 -2.25rem;
-  font-size: 3rem;
+    font-size: 3rem;
     font-family: 'Arvo', serif;
-  font-weight: normal;
+    font-weight: normal;
     color: #555;
-  letter-spacing:-1px;
-}
+    letter-spacing:-1px;
+
 
 body {
 	background-color: #f5f7fa;
@@ -128,6 +132,7 @@ body {
   border: 5px solid rgb(235, 235, 235);
   border-radius: 50%;
 }
+
 
 
 /* CSS artist #################################################################################################################################################################*/
@@ -354,5 +359,20 @@ a:hover {
 #abouttextstyle {
     font-family: 'Karma', serif !important;
   }
-  
+ /* REPONSIVE HOME */
+
+/* CSS PROFIL */
+
+/* FIN CSS PROFIL */
+
+@media screen and (max-width: 768px){
+
+}
+/* FIN REPONSIVE HOME */
+
+
+/* CSS artist */
+
+
+
 

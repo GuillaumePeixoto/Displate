@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Page Profil
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center my-5 titreprofil">Votre page profil : NOM et PRENOM</h1>
+
+{# {% if user.roles.0 == 'ROLE_ADMIN' %}
+    <p class="text-center text-secondary">Vous êtes ADMINISTRATEUR du site</p>
+{% endif %} #}
+
+<div class="container mb-5">
+    <div class="card mx-auto col-6 shadow p-3 mb-5 bg-body rounded">
+    <div class="d-flex">
+        <img src="https://pbs.twimg.com/profile_images/1402894430173110274/5zrO8sS5_400x400.jpg" class="rounded-circle mx-auto my-3" style="height:300px; width:300px;" >
+    </div>
+     <table class="table text-center mb-0">
+            <tr><td class="fontTD"><strong>Email :</strong></td><td>EMAIL</td></tr>
+            <tr><td class="fontTD"><strong>Prenom :</strong></td><td>PRENOM</td></tr>
+            <tr><td class="fontTD"><strong>Nom :</strong></td><td>NOM</td></tr>
+            <tr><td class="fontTD"><strong>Adresse :</strong></td><td>ADRESSE</td></tr>
+            <tr><td class="fontTD"><strong>Ville :</strong></td><td>VILLE</td></tr>
+            <tr><td class="fontTD"><strong>Code postal :</strong></td><td>CODE POSTAL</td></tr>
+            <tr><button class="btn btn-secondary"><a href="#" class="text-white">Modifier</a></button></tr>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

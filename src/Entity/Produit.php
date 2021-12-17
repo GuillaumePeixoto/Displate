@@ -49,10 +49,12 @@ class Produit
      */
     private $commentaires;
 
+
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="produits")
      */
     private $user;
+
 
     public function __construct()
     {
@@ -179,6 +181,7 @@ class Produit
 
         return $this;
     }
+
 
     public function getUser(): ?User
     {
