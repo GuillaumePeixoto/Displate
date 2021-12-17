@@ -1,0 +1,55 @@
+{% extends 'base_vendeur.html.twig' %}
+
+{% block title %}Espace Vendeur{% endblock %}
+
+{% block body %}
+
+    <h2 class="text-center mt-3">Bienvenue dans l'espace Vendeur</h2>
+    <h5 class="text-center fst-italic">Ici vous pourrez voir vos articles, les supprimés, en ajoutés et les modifiés</h5>
+
+
+
+    <div class="album py-3">
+        <div class="container">
+            <h4 class="fs-2 fw-bold">Vos articles</h4>
+            <div class="row justify-content-evenly h-100">
+                {% if app.user.produits|length > 0 %}
+                    {% for produit in app.user.produits %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-10 p-2 h-100">
+                            <div class="card shadow-sm">
+                                <div class="p-2">
+                                    <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" class="w-100" alt="naruto-sasuke">
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text mb-3">
+                                        {% for categorie in produit.categorie|slice(0,3) %}
+                                            <span class="badge-perso p-2">{{categorie.titre}}</span>
+                                        {% endfor %}
+                                        {% if produit.categorie|length > 3 %}
+                                            <span class="badge-perso p-2"><i class="bi bi-three-dots text-white"></i></span>
+                                        {% endif %}
+                                    </div>
+                                    <p class="card-text">{{produit.titre}}</p>
+                                    <p class="card-text">{{ produit.description|length > 40 ? produit.description|slice(0, 40) ~ '...' : produit.description  }}</p>
+                                    <p class="card-text">Format :
+                                        {% for format in produit.format %}
+                                            <span class="badge-perso p-2">{{format.format}}</span>
+                                        {% endfor %}
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
