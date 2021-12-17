@@ -54,8 +54,20 @@ e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([
                     </div>
                     <div class="col-md-6 d-md-flex justify-content-end mb-md-0 mt-5">
                     <div class="">
-                        <a class="text-decoration-none couleurfontP ">Inscription</a>
-                        <a class="text-decoration-none couleurfontP ms-3">Connexion</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                      <a href="{{path('back_office')}}" 
+                      class="text-decoration-none couleurfontP btn btn-outline-danger  btnNavBar">Backoffice</a>
+                      {% endif %}
+                    {% if app.user %}
+                         <a href="{{path('app_logout')}}" class="text-decoration-none couleurfontP ms-1 btn btn-outline-danger btnNavBar">Déconnexion</a>
+                    {% else %}
+                      <a href="{{path('app_register')}}" 
+                      class="text-decoration-none couleurfontP ">Inscription</a>
+                      <a href="{{path('app_login')}}" class="text-decoration-none couleurfontP ms-3 ">Connexion</a>
+                    
+                      
+            
+                    {% endif %}
                     </div>
             </div>
                 </div>

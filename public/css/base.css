@@ -22,7 +22,6 @@
 }
 
 
-
 .paddingNav
 {
     padding-right: 110px;
@@ -51,10 +50,13 @@
 
 /* CSS PAGE HOME */
 
-.titrehome{
+.titrehome, .titreinscription{
     font-family: 'Karma', serif;
 }
 
+.btnNavBar{
+    border:rgb(253, 203, 128) ;
+}
     /* hover carousel */
 
     
