@@ -32,3 +32,29 @@
     color: white;
     font-weight: 700;
 }
+
+#file-preview, #block-preview{
+    display: none;
+}
+
+#checkbox_form_vendeur #produit_form_categorie, #checkbox_form_vendeur #produit_form_format{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+#checkbox_form_vendeur .form-check{
+    width: 20%;
+}
+
+@media screen and (max-width: 992px){
+    #checkbox_form_vendeur .form-check{
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 450px){
+    #checkbox_form_vendeur .form-check{
+        width: 33%;
+    }
+}
