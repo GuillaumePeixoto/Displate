@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h2 class="text-center my-3">{{action}} de l'users</h2>
+    <h2 class="text-center my-3">{{action}} d'un user</h2>
 
     {{ form_start(userForm, {'attr': {"class": "col-7 mx-auto"}}) }}
 
@@ -24,7 +24,7 @@
             {{ form_row(userForm.password) }}
         {% endif %}
 
-        {{ form_row(userForm._token) }}
+        {{ form_row(userForm.roles) }}
 
         <button type="submit" class="btn btn-dark">Continuer</button>
     {{ form_end(userForm) }}

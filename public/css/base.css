@@ -1,9 +1,20 @@
 /* CSS BODY */
 
+.bgNav{
+    background-color: #1f1e1e !important;
+}
+
+.logo img{
+    width: 100px !important;
+}
 
 .couleurfontP, .colorfontIcon
 {
     color: rgb(253, 203, 128)  !important;
+}
+
+.couleurfontPC, .colorfontIcon{
+    color: rgb(248, 229, 200)  !important;
 }
 
 .searchformNav{
@@ -22,12 +33,6 @@
     border-color: rgb(253, 203, 128);
 }
 
-
-
-.paddingNav
-{
-    padding-right: 110px;
-}
 .text-violet{
     color: rgb(182, 55, 194) !important;
 }
@@ -46,11 +51,18 @@
 
 .font_titre{
     font-family: 'Stardos Stencil', cursive;
-    font-size: 100px;
+    font-size: 42px;
     color: rgb(253, 203, 128)
 }
 
-/* CSS FOOTER */
+
+.titrehome, .titreprofil{
+    font-family: 'Karma', serif;
+}
+
+/* FIN FONT TITRE KARMA */
+
+/* CSS FOOTER ##################################################################################################################################################################*/
 
 footer h5{
     font-family: 'Stardos Stencil', cursive;
@@ -58,7 +70,7 @@ footer h5{
 }
 
 .fontfooter{
-    background-color: #b85c38;
+    background-color: #ab674d;
     
 }
 
@@ -67,4 +79,300 @@ footer h5{
 
     border-color: #1f1e1e;;
 }
+
+footer div.row
+{
+    margin: 0;
+}
+
+
+
+/* CSS artist #################################################################################################################################################################*/
+
+.titre
+{
+    font-size: 3.5rem;
+    font-family: 'Karma', serif;
+    font-weight: normal;
+    color: #1f1e1e;
+    text-align: center;
+    margin: 2rem 0;
+
+}
+
+.logo {
+
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Arvo', serif;
+    font-weight: normal;
+    color: #555;
+    letter-spacing:-1px;
+
+
+body {
+	background-color: #f5f7fa;
+}
+
+.testimonial-card .card-up {
+  height: 120px;
+  overflow: hidden;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+
+.darkbrown-gradient {
+  background: linear-gradient(40deg, #1f1e1e, #3f3a36) !important;
+}
+
+.testimonial-card .avatar {
+  width: 120px;
+  margin-top: -60px;
+  overflow: hidden;
+  border: 5px solid rgb(235, 235, 235);
+  border-radius: 50%;
+}
+
+
+
+/* CSS artist #################################################################################################################################################################*/
+
+
+.profile-head {
+    transform: translateY(5rem)
+}
+
+.cover {
+    background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+body {
+    background: #654ea3;
+    background: linear-gradient(to right, #e96443, #904e95);
+    min-height: 100vh;
+    overflow-x: hidden
+}
+
+.font
+{
+    font-family: 'Karma', serif;
+}
+
+
+/* CSS tous_nos_produit #################################################################################################################################################*/
+
+
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: #444444;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.section-products {
+    padding: 80px 0 54px;
+}
+
+.section-products .header {
+    margin-bottom: 50px;
+}
+
+.section-products .header h3 {
+    font-size: 1rem;
+    color: #fe302f;
+    font-weight: 500;
+}
+
+.section-products .header h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #444444; 
+}
+
+.section-products .single-product {
+    margin-bottom: 26px;
+}
+
+.section-products .single-product .part-1 {
+    position: relative;
+    height: 290px;
+    max-height: 290px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.section-products .single-product .part-1::before {
+		position: absolute;
+		content: "";
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		transition: all 0.3s;
+}
+
+.section-products .single-product:hover .part-1::before {
+		transform: scale(1.2,1.2) rotate(5deg);
+}
+
+.section-products #product-1 .part-1::before {
+    background: url("https://picsum.photos/200/300") no-repeat center;
+    background-size: cover;
+		transition: all 0.3s;
+}
+
+.section-products #product-2 .part-1::before {
+    background: url("https://picsum.photos/200/300") no-repeat center;
+    background-size: cover;
+}
+
+.section-products #product-3 .part-1::before {
+    background: url("https://picsum.photos/200/300") no-repeat center;
+    background-size: cover;
+}
+
+.section-products #product-4 .part-1::before {
+    background: url("https://picsum.photos/200/300") no-repeat center;
+    background-size: cover;
+}
+
+
+.section-products .single-product .part-1 .new {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: #ffffff;
+    background-color: #fe302f;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.section-products .single-product .part-1 .new {
+    left: 0;
+    background-color: #444444;
+}
+
+.section-products .single-product .part-1 ul {
+    position: absolute;
+    bottom: -41px;
+    left: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    transition: bottom 0.5s, opacity 0.5s;
+}
+
+.section-products .single-product:hover .part-1 ul {
+    bottom: 30px;
+    opacity: 1;
+}
+
+.section-products .single-product .part-1 ul li {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.section-products .single-product .part-1 ul li a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #ffffff;
+    color: #444444;
+    text-align: center;
+    box-shadow: 0 2px 20px rgb(50 50 50 / 10%);
+    transition: color 0.2s;
+}
+
+.section-products .single-product .part-1 ul li a:hover {
+    color: #fe302f;
+}
+
+.section-products .single-product .part-2 .product-title {
+    font-size: 1rem;
+}
+
+.section-products .single-product .part-2 h4 {
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.section-products .single-product .part-2 .product-old-price {
+    position: relative;
+    padding: 0 7px;
+    margin-right: 2px;
+    opacity: 0.6;
+}
+
+.section-products .single-product .part-2 .product-old-price::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #444444;
+    transform: translateY(-50%);
+}
+
+/* .searchwrap {
+    display: flex;
+    justify-content: center;
+	float: left;
+	position: relative;
+}
+
+.searchwrap .search,
+.searchwrap .search-button {
+	border: 2px solid #3D1101;
+	background: #efe9e7;
+	outline: none;
+}
+
+.searchwrap .search-button {
+	border-radius: 3px;
+	background: #3D1101;
+	color: #fff;
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	padding: 8px 12px;
+	font-size: 16px;
+} */
+
+
+
+/* CSS page a propos ########################################################################################################################################################## */
+
+
+#abouttextstyle {
+    font-family: 'Karma', serif !important;
+  }
+ /* REPONSIVE HOME */
+
+/* CSS PROFIL */
+
+/* FIN CSS PROFIL */
+
+@media screen and (max-width: 768px){
+
+}
+/* FIN REPONSIVE HOME */
+
+
+/* CSS artist */
+
+
+
 

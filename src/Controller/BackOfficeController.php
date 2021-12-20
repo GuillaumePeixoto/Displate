@@ -69,7 +69,7 @@ class BackOfficeController extends AbstractController
         {
             $action = "Modification";
             $userForm = $this->createForm(RegistrationFormType::class, $user, [
-                'userUpdate' => true 
+                'adminUserUpdate' => true 
             ]);
         }
         else
@@ -77,7 +77,7 @@ class BackOfficeController extends AbstractController
             $user = new User();
             $action = "Ajout";
             $userForm = $this->createForm(RegistrationFormType::class, $user, [
-                'userRegistration' => true 
+                'adminUserRegistration' => true 
             ]);
         }
 
@@ -109,8 +109,21 @@ class BackOfficeController extends AbstractController
     }
 
     #[Route('/backoffice/produits', name: 'show_produits')]
+    #[Route('/backoffice/produit/{id}/remove', name: 'remove_produit')]
     public function showProduit(ProduitRepository $repoProduit, EntityManagerInterface $manager, Produit $produit = null): Response
     {
+
+        if($produit)
+        {
+            $titre = $produit->getTitre();
+
+            $manager->remove($produit);
+            $manager->flush();
+
+            $this->addFlash('success', "Le produit $titre a été supprimer avec succès !");
+            return $this->redirectToRoute('show_produits');
+        }
+
         $colonnes = $manager->getClassMetadata(Produit::class)->getFieldNames();
         $produits = $repoProduit->findAll();
 
@@ -122,71 +135,75 @@ class BackOfficeController extends AbstractController
 
 
     #[Route('/backoffice/produit/new', name: 'create_produit')]
-    #[Route('/backoffice/produit/{id}/modify', name: 'modify_produit')]
+    #[Route('/backoffice/produit/{id}/modifier', name: 'modify_produit')]
     public function produitForm(Produit $produit = null, EntityManagerInterface $manager, Request $request, SluggerInterface $slugger): Response
     {
         if($produit)
         {
             $photoBdd = $produit->getPhoto();
             $action = "Modification";
+            $produitForm = $this->createForm(ProduitFormType::class, $produit, ['modifyProduit' => true]);
         }
         else
         {
             $produit = new Produit();
             $action = "Ajout";
+            $produitForm = $this->createForm(ProduitFormType::class, $produit, ['newProduit' => true]);
         }
-
         
-        $produitForm = $this->createForm(ProduitFormType::class, $produit);
+       
         $produitForm->handleRequest($request);
+    
 
         if ($produitForm->isSubmitted() && $produitForm->isValid()) {
             // encode the plain password
 
+            if($action == 'Ajout')
+            {
+                $photo = $produitForm->get('photo')->getData();
+                if($photo)
+                {
+                    $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                    //dd($nomOriginePhoto);
+
+                    // cela est necessaire pour inclure en toute sécurité le nom du fichier dans l'URL
+                    $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+
+                    $nouveauNomFichier = $secureNomPhoto.' - '.uniqid().'.'.$photo->guessExtension();
+                    // dd($nouveauNomFichier);
+                    try
+                    {
+                        $photo->move(
+                            $this->getParameter('photo_directory'),
+                            $nouveauNomFichier
+                        );
+                    }
+                    catch(FileException $e)
+                    {
+
+                    }
+
+                    $produit->setPhoto($nouveauNomFichier);
+
+                }
+                else
+                {
+                    $produit->setPhoto($photoBdd);                    
+                }
+                
+            }
+
             
-            $photo = $produitForm->get('photo')->getData();
-
-            if($photo)
-            {
-                $nomOriginePhoto = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-                //dd($nomOriginePhoto);
-
-                // cela est necessaire pour inclure en toute sécurité le nom du fichier dans l'URL
-                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
-
-                $nouveauNomFichier = $secureNomPhoto.' - '.uniqid().'.'.$photo->guessExtension();
-                // dd($nouveauNomFichier);
-                try
-                {
-                    $photo->move(
-                        $this->getParameter('photo_directory'),
-                        $nouveauNomFichier
-                    );
-                }
-                catch(FileException $e)
-                {
-
-                }
-
-                $produit->setPhoto($nouveauNomFichier);
-
-            }
-            else
-            {
-
-                $produit->setPhoto($photoBdd);                    
-
-            }
-
 
             $manager->persist($produit);
             $manager->flush();
 
             return $this->redirectToRoute('show_produits');
         }
-
+        // 'formUserUpdate' => ($request->query->get('op') == 'update') ? $formUserUpdate->createView() : '',
         return $this->render('back_office/produit_form.html.twig',[
             'produitForm' => $produitForm->createView(),
+            'photoActuel' => !empty($photoBdd) ? $photoBdd : "",
             'action' => $action,
         ]);
     }
@@ -198,12 +215,12 @@ class BackOfficeController extends AbstractController
 
         if($format)
         {
-            $titre = $format->getFormat();
+            $format_title = $format->getFormat();
 
             $manager->remove($format);
             $manager->flush();
 
-            $this->addFlash('success', "L'utilisateur $titre été supprimer avec succès !");
+            $this->addFlash('success', "Le format $format_title été supprimer avec succès !");
             return $this->redirectToRoute('show_formats');
         }
 
@@ -249,13 +266,13 @@ class BackOfficeController extends AbstractController
         ]);
     }
 
-    #[Route('/backoffice/commentaires', name: 'show_commentaire')]
+    #[Route('/backoffice/commentaires', name: 'show_commentaires')]
     #[Route('/backoffice/commentaire/{id}/remove', name: 'remove_commentaire')]
     public function adminComment(EntityManagerInterface $manager, CommentaireRepository $repoComment, Commentaire $commentaire = null): Response
     {
 
         $colonnes = $manager->getClassMetadata(Commentaire::class)->getFieldNames();
-        $comments = $repoComment->findAll();
+        $commentaires = $repoComment->findAll();
 
         if($commentaire)
         {
@@ -265,12 +282,12 @@ class BackOfficeController extends AbstractController
             $manager->flush();
             $this->addFlash('success', "Le commentaire n°$id a été supprimer avec succès !");
 
-            return $this->redirectToRoute('show_commentaire');
+            return $this->redirectToRoute('show_commentaires');
         }
 
         return $this->render('back_office/show_commentaire.html.twig',[
             'colonnes' => $colonnes,
-            'comments' => $comments
+            'commentaires' => $commentaires
         ]);
     }
 
@@ -287,18 +304,9 @@ class BackOfficeController extends AbstractController
         {
             $titre = $categorie->getTitre();
 
-            // if(count($categorie->getArticles()) == 0)
-            // {
-                $manager->remove($categorie);
-                $manager->flush();
-                $this->addFlash('success', "La categorie $titre a été supprimer avec succès !");
-            // }
-            // else
-            // {
-            //     $this->addFlash('danger', "Vous ne pouvez pas supprimer cette catégorie tant qu'il reste des articles lié à celle-ci");
-            // }
-
-
+            $manager->remove($categorie);
+            $manager->flush();
+            $this->addFlash('success', "La categorie $titre a été supprimer avec succès !");
 
             return $this->redirectToRoute('show_categories');
         }
