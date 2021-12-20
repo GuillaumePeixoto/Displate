@@ -53,7 +53,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
             <div class="container">
-                <a class="navbar-brand shadow-none" href="#" style="background-color:transparent">
+                <a class="navbar-brand shadow-none" href="{{ path('home') }}" style="background-color:transparent">
                     <img src="{{ asset('img/logocode.png') }}" style="width:50px; background-color:transparent" class="" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,12 +81,16 @@
                     <div>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="{{ path('app_login') }}">Quitter</a>
+                                <a class="nav-link text-white hover_effect mx-2" href="{{ path('edit_vendeur', {'id': app.user.id}) }}">Mon compte</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="{{ path('home') }}">Quitter</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_logout') }}">Déconnexion</a>
                             </li>
                         </ul>
+                        
                     </div>
                 </div>
             </div>

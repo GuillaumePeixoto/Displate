@@ -1,32 +1,55 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-     Nos Artiste Boots Art
+    Nos Artiste Boots Art
 {% endblock %}
 
 {% block body %}
 
+  <h1 class='titre'>Nos Artistes</h1>
 
-
-
-    <h1 class='titre'>Nos Artistes</h1>
-
-<div class="container ">
-  <section class="mx-auto my-5 row justify-content-evenly col-12 " style="">
+  <div class="container ">
+    <section class="mx-auto my-5 row justify-content-evenly col-12 " style="">
       
-    <div class="card testimonial-card mt-2 mb-3 col-2 mx-2">
-      <div class="card-up darkbrown-gradient"></div>
-      <div class="avatar mx-auto white">
-        <img src="https://picsum.photos/seed/picsum/300/300" class="rounded-circle img-fluid"
-          alt="avatar">
+      {% for vendeur in vendeurs %}
+        {% if (vendeur.roles.1 is defined) and (vendeur.roles.1 == "ROLE_VENDEUR") %}
+          <div class="col-12 col-lg-3 col-md-6 p-2">
+            <div class="card testimonial-card my-2 col-12">
+              <div class="avatar mx-auto white col-6 col-md-8 mt-3">
+                <img src="https://picsum.photos/seed/picsum/300/300" class="rounded-circle img-fluid w-100" alt="avatar">
+              </div>
+              <div class="card-body text-center">
+                <h4 class="card-title font-weight-bold">{{vendeur.pseudo}}</h4>
+                <hr>
+                <p><i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>
+                <a class="btn bg-primary text-white" href="#">Détails</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+
+
+
+
+
+
+      <hr>
+
+      <div class="card testimonial-card mt-2 mb-3 col-2 mx-2">
+        <div class="card-up darkbrown-gradient"></div>
+        <div class="avatar mx-auto white">
+          <img src="https://picsum.photos/seed/picsum/300/300" class="rounded-circle img-fluid"
+            alt="avatar">
+        </div>
+        <div class="card-body text-center">
+          <h4 class="card-title font-weight-bold">Nom-prenom</h4>
+          <hr>
+          <p><i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos,
+            adipisci</p>
+        </div>
       </div>
-      <div class="card-body text-center">
-        <h4 class="card-title font-weight-bold">Nom-prenom</h4>
-        <hr>
-        <p><i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos,
-          adipisci</p>
-      </div>
-    </div>
 
     <div class="card testimonial-card mt-2 mb-3 col-2 mx-2">
       <div class="card-up darkbrown-gradient"></div>

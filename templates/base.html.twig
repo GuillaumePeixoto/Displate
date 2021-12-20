@@ -32,6 +32,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Karma&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href=" {{asset('css/base.css')}}">
+<link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}}">
+<link rel="stylesheet" href=" {{asset('css/profil.css')}}">
+<link rel="stylesheet" href=" {{asset('css/panier.css')}}">
 
         <link rel="stylesheet" href=" {{asset('css/base.css')}}">
         <link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}}">
@@ -73,47 +77,62 @@
 
     </style>  
  
-    <body>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark bgNav" aria-label="Eighth navbar example">
-                <div class="container">
-                    <a class="navbar-brand shadow-none" href="#" style="background-color:transparent;font-size: 34px;vertical-align: baseline;display: flex;align-items: end;">
-                      <img src="img/logocode.png" style="width:50px; background-color:transparent" class="" alt=""><span style="" class="font_titre">oots Art</span></a>
-                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
+<body>
 
-                        <div class="navbar-collapse collapse" id="navbarsExample07" style="">
-                          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                              <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="#">Home</a>
-                            </li>
-                              <li class="nav-item">
-                                <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
-                                  <ul class="navbar-nav">
-                                    <li class="nav-item dropdown">
-                                      <a class="nav-link dropdown-toggle couleurfontP" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Produits
-                                      </a>
 
-                                    <ul class="dropdown-menu dropdown-menu-dark couleurfontP"  aria-labelledby="navbarDarkDropdownMenuLink">
-                                      <li><a class="dropdown-item" href="#">Tout nos prints</a></li>
-                                      <li><a class="dropdown-item" href="#">Concept Art</a></li>
-                                      <li><a class="dropdown-item" href="#">Illustration</a></li>
-                                      <li><a class="dropdown-item" href="#">Cyber</a></li>
-                                      <li><a class="dropdown-item" href="#">Fantasy</a></li>
-                                      <li><a class="dropdown-item" href="#">Abstrait</a></li>   
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark bgNav" aria-label="Eighth navbar example">
+            <div class="container">
+                <a class="navbar-brand shadow-none" href="{{ path('home') }}" style="background-color:transparent;font-size: 34px;vertical-align: baseline;display: flex;align-items: end;">
+                  <img src="img/logocode.png" style="width:50px; background-color:transparent" class="" alt=""><span style="" class="font_titre">oots Art</span></a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                                    </ul>
-                                  </li>
+                    <div class="navbar-collapse collapse" id="navbarsExample07" style="">
+                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                          <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="{{ path('home') }}">Home</a>
+                        </li>
+                          <li class="nav-item">
+                            <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
+                              <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle hover_effect text-white mx-2" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Produits
+                                  </a>
+
+                                <ul class="dropdown-menu dropdown-menu-dark "  aria-labelledby="navbarDarkDropdownMenuLink">
+                                  <li><a class="dropdown-item" href="#">Tout nos prints</a></li>
+                                  <li><a class="dropdown-item" href="#">Concept Art</a></li>
+                                  <li><a class="dropdown-item" href="#">Illustration</a></li>
+                                  <li><a class="dropdown-item" href="#">Cyber</a></li>
+                                  <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                                  <li><a class="dropdown-item" href="#">Abstrait</a></li>   
+
                                 </ul>
-                              </div>
-                            </li>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link text-white hover_effect mx-2" href="{{ path('artiste') }}">Artiste</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white hover_effect mx-2" href="">Nouveautés</a>
+                        </li>
+                    </ul>
+                    <div>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white hover_effect mx-2" href="#">Artiste</a>
+                                <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="">Inscription</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white hover_effect mx-2" href="#">Nouveautés</a>
+
+                                <a class="nav-link text-white hover_effect mx-2" href="">Connexion</a>
+
+                                <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_login') }}">Connexion</a>
+
                             </li>
                         </ul>
                         <div>
@@ -128,10 +147,16 @@
                         </div>
                     </div>
                 </div>
-            </nav>
-      
-    <main>
-    {% block body %}
+            </div>
+        </nav>
+  
+<main>
+{% block body %}
+
+{% endblock %}
+
+</main>
+
 
 
 
@@ -140,11 +165,39 @@
     </main>
 
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+  
+<footer class="footer_bar text-center text-white">
+  
+  <div class="">
+    
+    <section class="mb-3 fontfooter p-2">
+      
+      <a class="btn btn-outline-light btn-floating m-1 colorfontReseaux" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+  
+      <a class="btn btn-outline-light btn-floating m-1 colorfontReseaux" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+  
+      <a class="btn btn-outline-light btn-floating m-1 colorfontReseaux" href="#!" role="button"><i class="fab fa-google"></i></a>
+    
+      <a class="btn btn-outline-light btn-floating m-1 colorfontReseaux" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+    
+      <a class="btn btn-outline-light btn-floating m-1 colorfontReseaux" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+      <a class="btn btn-outline-light btn-floating m-1 colorfontReseaux" href="#!" role="button"><i class="fab fa-github"></i></a>
+
+    </section>
+    
+    <section class="">
+      <form action="">
+        
+        <div class="row d-flex justify-content-center">
+>>>>>>> 6cb12367d8591bb49501acd14ca7eea75eb8dda0
           
         <footer class="footer_bar text-center text-white">
           
