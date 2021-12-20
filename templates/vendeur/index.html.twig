@@ -7,13 +7,20 @@
     <h2 class="text-center mt-3">Bienvenue dans l'espace Vendeur</h2>
     <h5 class="text-center fst-italic">Ici vous pourrez voir vos articles, les supprimés, en ajoutés et les modifiés</h5>
 
-
+    {% for label, messages in app.flashes(['success', 'danger']) %}
+        {% for message in messages %}
+            <div class="col-6 mx-auto text-center alert alert-{{ label }} my-5">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
     <div class="album py-3">
         <div class="container">
-            <h4 class="fs-2 fw-bold">Vos articles</h4>
-            <div class="row justify-content-evenly h-100">
-                {% if app.user.produits|length > 0 %}
+            {% if app.user.produits|length > 0 %}
+                <h4 class="fs-2 fw-bold">Vos articles</h4>
+                <div class="row justify-content-evenly h-100">
+                
                     {% for produit in app.user.produits %}
                         <div class="col-xl-3 col-lg-4 col-md-6 col-10 p-2 h-100">
                             <div class="card shadow-sm">
@@ -38,17 +45,24 @@
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            <a class="btn btn-outline-secondary btn-sm" href="#">View</a>
+                                            <a class="btn btn-outline-secondary btn-sm" href="{{ path('modify_produit_vendeur', {'id' : produit.id}) }}">Edit</a>
+                                            <a class="btn btn-outline-secondary btn-sm" href="{{ path('remove_produit', {'id' : produit.id}) }}">Delete</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
-                {% endif %}
+                </div>
             </div>
-        </div>
+        {% else %}
+            <h3 class="text-center">Vous n'avez aucun article.</h3>
+            <div class=" d-flex my-5">
+                <a href="{{ path('create_produit_vendeur') }}" class="btn bg-success text-white mx-auto"> Créer un article</a>
+            </div>
+
+        {% endif %}
     </div>
 
 

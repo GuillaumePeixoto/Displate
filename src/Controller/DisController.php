@@ -34,6 +34,24 @@ class DisController extends AbstractController
     }
 
 
+    #[Route('/tous_nos_produits', name: 'tous_nos_produits')]
+    public function produits(): Response
+    {
+        return $this->render('tous_nos_produits.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+
+    #[Route('/à_propos', name: 'à_propos')]
+    public function about(): Response
+    {
+        return $this->render('à_propos.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+
     #[Route('/home', name: 'home')]
     public function home(): Response
     {
@@ -41,6 +59,7 @@ class DisController extends AbstractController
             'controller_name' => 'DisController',
         ]);
     }
+
 
 
     #[Route('/fiche_produit', name: 'fiche_produit')]
