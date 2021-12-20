@@ -12,7 +12,7 @@
 
     <h2 class="text-center my-3">Liste des produits</h2>
     <div  style="overflow-x : scroll;">
-        <table class="table table-borders text-center align-middle">
+        <table class="table table-borders text-center align-middle" id="table-backoffice-produit">
             <thead>
                 <tr>
                     {% for data in colonnes %}
@@ -21,6 +21,7 @@
                         {% endif %}
 
                     {% endfor %}
+                    <th>Auteur</th>
                     <th>Categorie</th>
                     <th>Format</th>
                     <th>Action</th>
@@ -32,6 +33,7 @@
                         <td class="col-3"><img src="{{ asset('uploads/photos/' ~ produit.photo) }}"  class="w-75" alt=""></td>
                         <td>{{produit.titre}}</td>
                         <td>{{produit.description}}</td>
+                        <td>{{produit.user.pseudo}}</td>
                         <td>
                             <ul class="p-0 m-0">
                                 {% for categorie in produit.categorie %}

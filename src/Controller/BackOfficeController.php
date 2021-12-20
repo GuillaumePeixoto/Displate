@@ -135,7 +135,7 @@ class BackOfficeController extends AbstractController
 
 
     #[Route('/backoffice/produit/new', name: 'create_produit')]
-    #[Route('/backoffice/produit/{id}/{action}', name: 'modify_produit')]
+    #[Route('/backoffice/produit/{id}/modifier', name: 'modify_produit')]
     public function produitForm(Produit $produit = null, EntityManagerInterface $manager, Request $request, SluggerInterface $slugger): Response
     {
         if($produit)
