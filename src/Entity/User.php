@@ -74,6 +74,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $produits;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageProfil;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $banniereProfil;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -247,6 +262,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $produit->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImageProfil(): ?string
+    {
+        return $this->imageProfil;
+    }
+
+    public function setImageProfil(?string $imageProfil): self
+    {
+        $this->imageProfil = $imageProfil;
+
+        return $this;
+    }
+
+    public function getBanniereProfil(): ?string
+    {
+        return $this->banniereProfil;
+    }
+
+    public function setBanniereProfil(?string $banniereProfil): self
+    {
+        $this->banniereProfil = $banniereProfil;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

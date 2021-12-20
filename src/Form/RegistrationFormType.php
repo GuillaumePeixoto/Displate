@@ -6,10 +6,13 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -335,6 +338,112 @@ class RegistrationFormType extends AbstractType
                 'label' => "Définir le role de l'utilisteur"
             ]);
         }
+        elseif($options['vendeurUpdate'] == true)
+        {
+            $builder
+                ->add('adresse', TextType::class, [
+                    'required' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Veuillez renseigner votre adresse."
+                        ])
+                    ]
+                ])
+                ->add('ville', TextType::class, [
+                    'required' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Veuillez renseigner votre ville."
+                        ])
+                    ]
+                ])
+                ->add('codePostal', NumberType::class, [
+                    'required' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Veuillez renseigner votre code postal."
+                        ])
+                    ]
+                ])
+                ->add('prenom', TextType::class, [
+                    'required' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Veuillez renseigner votre prenom."
+                        ])
+                    ]
+                ])
+                ->add('nom', TextType::class, [
+                    'required' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Veuillez renseigner votre nom."
+                        ])
+                    ]
+                ])
+                ->add('pseudo', TextType::class, [
+                    'required' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Veuillez renseigner votre pseudo."
+                        ])
+                    ]
+                ])
+                ->add('email', TextType::class, [
+                    'required' => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Veuillez renseigner votre adresse mail."
+                        ])
+                    ]
+                ])
+                ->add('imageProfil', FileType::class, [
+                    'label' => "Uploader une image de profil",
+                    'mapped' => true,
+                    'required' => false,
+                    'data_class' => null,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '5M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/jpg'
+                            ],
+                            'mimeTypesMessage' => "Formats autorisé : jpeg, png, jpg."
+                        ])
+                    ]
+                ])
+                ->add('banniereProfil', FileType::class, [
+                    'label' => "Uploader une bannière ",
+                    'mapped' => true,
+                    'required' => false,
+                    'data_class' => null,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '5M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/jpg'
+                            ],
+                            'mimeTypesMessage' => "Formats autorisé : jpeg, png, jpg."
+                        ])
+                    ]
+                ])
+                ->add('description', TextareaType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'placeholder' => "Saisir une description du produit",
+                        'rows' => "10"
+                    ],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => "Merci de saisir une description."
+                        ])
+                    ]
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -344,7 +453,9 @@ class RegistrationFormType extends AbstractType
             'userRegistration' => false,
             'userUpdate' => false,
             'adminUserRegistration' => false,
-            'adminUserUpdate' => false
+            'adminUserUpdate' => false,
+            'vendeurRegistration' => false,
+            'vendeurUpdate' => false
         ]);
     }
 }
