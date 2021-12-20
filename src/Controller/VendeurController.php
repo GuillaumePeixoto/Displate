@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\User;
 use App\Form\ProduitFormType;
+use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +22,97 @@ class VendeurController extends AbstractController
     {
         return $this->render('vendeur/index.html.twig', [
             'controller_name' => 'VendeurController',
+        ]);
+    }
+
+    #[Route('/vendeur/{id}/edit', name: 'edit_vendeur')]
+    public function editProfil(User $user , EntityManagerInterface $manager, Request $request, SluggerInterface $slugger): Response
+    {
+
+        $ProfilBdd = $user->getImageProfil();
+        $banniereBdd = $user->getBanniereProfil();
+        $vendeurForm = $this->createForm(RegistrationFormType::class, $user, ['vendeurUpdate' => true]);
+    
+       
+        $vendeurForm->handleRequest($request);
+    
+
+        if ($vendeurForm->isSubmitted() && $vendeurForm->isValid()) {
+            // encode the plain password
+
+            $profilphoto = $vendeurForm->get('imageProfil')->getData();
+            if($profilphoto)
+            {
+                $nomOriginePhoto = pathinfo($profilphoto->getClientOriginalName(), PATHINFO_FILENAME);
+                //dd($nomOriginePhoto);
+
+                // cela est necessaire pour inclure en toute sécurité le nom du fichier dans l'URL
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+
+                $nouveauNomFichier = $secureNomPhoto.' - '.uniqid().'.'.$profilphoto->guessExtension();
+                // dd($nouveauNomFichier);
+                try
+                {
+                    $profilphoto->move(
+                        $this->getParameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+
+                }
+
+                $user->setImageProfil($nouveauNomFichier);
+
+            }
+            else
+            {
+                $user->setImageProfil($ProfilBdd);                    
+            }
+
+            $banniere = $vendeurForm->get('banniereProfil')->getData();
+            if($banniere)
+            {
+                $nomOriginePhoto = pathinfo($banniere->getClientOriginalName(), PATHINFO_FILENAME);
+                //dd($nomOriginePhoto);
+
+                // cela est necessaire pour inclure en toute sécurité le nom du fichier dans l'URL
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+
+                $nouveauNomFichier = $secureNomPhoto.' - '.uniqid().'.'.$banniere->guessExtension();
+                // dd($nouveauNomFichier);
+                try
+                {
+                    $banniere->move(
+                        $this->getParameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+
+                }
+
+                $user->setBanniereProfil($nouveauNomFichier);
+
+            }
+            else
+            {
+                $user->setBanniereProfil($banniereBdd);                    
+            }
+            
+
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('vendeur');
+        }
+
+        return $this->render('vendeur/edit_profil.html.twig', [
+            'vendeurForm' => $vendeurForm->createView(),
+            'photoBdd' => $ProfilBdd,
+            'banniereBdd' => $banniereBdd
         ]);
     }
 

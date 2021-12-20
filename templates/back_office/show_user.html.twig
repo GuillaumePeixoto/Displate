@@ -4,7 +4,7 @@
 
     <h2 class="text-center my-3">Liste des users</h2>
     <div  style="overflow-x : scroll;">
-        <table class="table text-center align-middle">
+        <table class="table text-center align-middle" id="table-backoffice-user">
             <thead>
                 <tr>
                     {% for data in colonnes %}
@@ -31,6 +31,27 @@
                         <td>{{user.adresse}}</td>
                         <td>{{user.ville}}</td>
                         <td>{{user.codePostal}}</td>
+                        <td>
+                            {% if user.imageProfil == null %}
+                                Vide
+                            {% else %}
+                                <img src="{{ asset('uploads/photos' ~ user.imageProfil) }}" alt="{{user.imageProfil}}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.banniereProfil == null %}
+                                Vide
+                            {% else %}
+                                <img src="{{ asset('uploads/photos' ~ user.banniereProfil) }}" alt="{{user.imagebanniereProfil}}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.description == null %}
+                                Vide
+                            {% else %}
+                                {{ user.description }}
+                            {% endif %}
+                        </td>
                         <td><a href="{{ path('modify_user', {'id' : user.id }) }}" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="{{ path('remove_user', {'id': user.id}) }}"><i class="bi bi-trash"></i></a></td>
                     </tr>
                 {% endfor %}

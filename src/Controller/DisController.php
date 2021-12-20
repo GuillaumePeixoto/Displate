@@ -2,50 +2,49 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DisController extends AbstractController
 {
-    #[Route('/dis', name: 'dis')]
-    public function index(): Response
+
+    #[Route('/artistes', name: 'nos_artistes')]
+    public function artistes(UserRepository $repoUser): Response
     {
-        return $this->render('base.html.twig', [
-            'controller_name' => 'DisController',
+
+        $vendeurs = $repoUser->findAll();
+
+        return $this->render('base/nos_artistes.html.twig', [
+            'vendeurs' => $vendeurs
+        ]);
+    }
+
+    #[Route('/artiste/{id}', name: 'artiste')]
+    public function artiste(User $user): Response
+    {
+        
+
+        return $this->render('base/artiste.html.twig', [
+            'user' => $user,
         ]);
     }
 
 
-    #[Route('/nos_artistes', name: 'nos_artistes')]
-    public function article(): Response
-    {
-        return $this->render('nos_artistes.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
-    }
-
-    #[Route('/artiste', name: 'artiste')]
-    public function artiste(): Response
-    {
-        return $this->render('artiste.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
-    }
-
-
-    #[Route('/tous_nos_produits', name: 'tous_nos_produits')]
+    #[Route('/produits', name: 'tous_nos_produits')]
     public function produits(): Response
     {
-        return $this->render('tous_nos_produits.html.twig', [
+        return $this->render('base/tous_nos_produits.html.twig', [
             'controller_name' => 'DisController',
         ]);
     }
 
-    #[Route('/à_propos', name: 'à_propos')]
+    #[Route('/a_propos', name: 'a_propos')]
     public function about(): Response
     {
-        return $this->render('à_propos.html.twig', [
+        return $this->render('base/a_propos.html.twig', [
             'controller_name' => 'DisController',
         ]);
     }
@@ -54,16 +53,33 @@ class DisController extends AbstractController
     #[Route('/', name: 'home')]
     public function home(): Response
     {
-        return $this->render('home.html.twig', [
+        return $this->render('base/home.html.twig', [
             'controller_name' => 'DisController',
         ]);
     }
 
 
+
     #[Route('/fiche_produit', name: 'fiche_produit')]
     public function ficheProduit(): Response
     {
-        return $this->render('fiche_produit.html.twig', [
+        return $this->render('base/fiche_produit.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/contact', name: 'contact')]
+    public function fichecontact(): Response
+    {
+        return $this->render('contact.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/faq', name: 'faq')]
+    public function fichefaq(): Response
+    {
+        return $this->render('faq.html.twig', [
             'controller_name' => 'DisController',
         ]);
     }
@@ -72,9 +88,16 @@ class DisController extends AbstractController
     #[Route('/profil', name: 'profil')]
     public function pageProfil(): Response
     {
-        return $this->render('profil.html.twig', [
+        return $this->render('base/profil.html.twig', [
             'controller_name' => 'DisController',
         ]);
     }
     
+    #[Route('/panier', name: 'panier')]
+    public function panier(): Response
+    {
+        return $this->render('panier.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
 }
