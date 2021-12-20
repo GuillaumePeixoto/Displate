@@ -20,12 +20,12 @@
         </div>
 
         <table class="table text-center mb-0">
-            <tr><td class="fontTD"><strong>Email :</strong></td><td>EMAIL</td></tr>
-            <tr><td class="fontTD"><strong>Prenom :</strong></td><td>PRENOM</td></tr>
-            <tr><td class="fontTD"><strong>Nom :</strong></td><td>NOM</td></tr>
-            <tr><td class="fontTD"><strong>Adresse :</strong></td><td>ADRESSE</td></tr>
-            <tr><td class="fontTD"><strong>Ville :</strong></td><td>VILLE</td></tr>
-            <tr><td class="fontTD"><strong>Code postal :</strong></td><td>CODE POSTAL</td></tr>
+            <tr><td class="fontTD"><strong>Email :</strong></td><td>{{ app.user.email }}</td></tr>
+            <tr><td class="fontTD"><strong>Prenom :</strong></td><td>{{ app.user.prenom }}</td></tr>
+            <tr><td class="fontTD"><strong>Nom :</strong></td><td>{{ app.user.nom }}</td></tr>
+            <tr><td class="fontTD"><strong>Adresse :</strong></td><td>{{ app.user.adresse }}</td></tr>
+            <tr><td class="fontTD"><strong>Ville :</strong></td><td>{{ app.user.ville }}</td></tr>
+            <tr><td class="fontTD"><strong>Code postal :</strong></td><td>{{ app.user.codePostal }}</td></tr>
             <tr><button class="btn btn-secondary"><a href="#" class="text-white">Modifier</a></button></tr>
         </table>
     </div>
