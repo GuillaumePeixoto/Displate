@@ -17,6 +17,32 @@
     color: rgb(248, 229, 200)  !important;
 }
 
+.hover_effect{
+    padding: 10px;
+    position:relative;
+    border: none !important;
+    outline: none;
+}
+
+.hover_effect:before{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    content: '';
+    width: 0%;
+    height: 2px;
+    background-color: #c49a52;
+    transition: 0.3s;
+}
+
+.hover_effect:hover{
+    color: #c49a52 !important;
+}
+
+.hover_effect:hover:before{
+    width: 100%;
+}
+
 .searchformNav{
     display: contents;
 
@@ -108,7 +134,7 @@ footer div.row
     font-weight: normal;
     color: #555;
     letter-spacing:-1px;
-
+}
 
 body {
 	background-color: #f5f7fa;
