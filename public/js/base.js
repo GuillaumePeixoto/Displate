@@ -32,8 +32,3 @@ $(document).ready(function(){
 
 
 });
-
-
-
-  
-

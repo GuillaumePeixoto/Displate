@@ -68,6 +68,22 @@ class DisController extends AbstractController
         ]);
     }
 
+    #[Route('/contact', name: 'contact')]
+    public function fichecontact(): Response
+    {
+        return $this->render('contact.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/faq', name: 'faq')]
+    public function fichefaq(): Response
+    {
+        return $this->render('faq.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
 
     #[Route('/profil', name: 'profil')]
     public function pageProfil(): Response
