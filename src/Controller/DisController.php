@@ -15,10 +15,37 @@ class DisController extends AbstractController
             'controller_name' => 'DisController',
         ]);
     }
-    #[Route('/artiste', name: 'artiste')]
+
+
+    #[Route('/nos_artistes', name: 'nos_artistes')]
     public function article(): Response
     {
+        return $this->render('nos_artistes.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/artiste', name: 'artiste')]
+    public function artiste(): Response
+    {
         return $this->render('artiste.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+
+    #[Route('/tous_nos_produits', name: 'tous_nos_produits')]
+    public function produits(): Response
+    {
+        return $this->render('tous_nos_produits.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/à_propos', name: 'à_propos')]
+    public function about(): Response
+    {
+        return $this->render('à_propos.html.twig', [
             'controller_name' => 'DisController',
         ]);
     }
@@ -31,4 +58,39 @@ class DisController extends AbstractController
             'controller_name' => 'DisController',
         ]);
     }
+
+
+    #[Route('/fiche_produit', name: 'fiche_produit')]
+    public function ficheProduit(): Response
+    {
+        return $this->render('fiche_produit.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/contact', name: 'contact')]
+    public function fichecontact(): Response
+    {
+        return $this->render('contact.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/faq', name: 'faq')]
+    public function fichefaq(): Response
+    {
+        return $this->render('faq.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+
+
+    #[Route('/profil', name: 'profil')]
+    public function pageProfil(): Response
+    {
+        return $this->render('profil.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
+    
 }

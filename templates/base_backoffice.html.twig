@@ -52,7 +52,7 @@
             <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
             <div class="navbar-nav">
                 <div class="nav-item text-nowrap">
-                    <a class="nav-link px-3" href="#">Sign out</a>
+                    <a class="nav-link px-3" href="{{ path('home') }}">Quitter</a>
                 </div>
             </div>
         </header>
@@ -146,12 +146,27 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse5" aria-expanded="true">
+                                    Commentaires
+                                </button>
+                                <div class="collapse show" id="home-collapse5" style="">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li class="nav-item">
+                                            <a class="nav-link fs-6" aria-current="page" href="{{ path('show_commentaires') }}">
+                                                <i class="bi bi-chat-left-dots-fill"></i>
+                                                Liste des Commentaires
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                             
                         </ul>
                         <hr>
                         <div class="dropdown bg-dark p-3">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <img src="https://cdn.shopify.com/s/files/1/0090/7034/6276/products/rengoku_kyojuro_400x.jpg?v=1589960764" alt="" width="32" height="32" class="rounded-circle me-2">
                                 <strong>mdo</strong>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
