@@ -345,8 +345,6 @@ class RegistrationFormType extends AbstractType
             'userUpdate' => false,
             'adminUserRegistration' => false,
             'adminUserUpdate' => false
-            'adminUserUpdate' => false,
-            'csrf_protection' => false
         ]);
     }
 }

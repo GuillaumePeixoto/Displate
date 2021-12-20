@@ -42,14 +42,6 @@ class DisController extends AbstractController
         ]);
     }
 
-    #[Route('/artiste', name: 'artiste')]
-    public function article(): Response
-    {
-        return $this->render('artiste.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
-    }
-
 
     #[Route('/fiche_produit', name: 'fiche_produit')]
     public function ficheProduit(): Response
@@ -68,4 +60,11 @@ class DisController extends AbstractController
         ]);
     }
     
+    #[Route('/panier', name: 'panier')]
+    public function panier(): Response
+    {
+        return $this->render('panier.html.twig', [
+            'controller_name' => 'DisController',
+        ]);
+    }
 }
