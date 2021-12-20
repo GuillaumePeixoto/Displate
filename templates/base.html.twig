@@ -124,16 +124,31 @@
                     </ul>
                     <div>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="">Inscription</a>
-                            </li>
-                            <li class="nav-item">
-
-                                <a class="nav-link text-white hover_effect mx-2" href="">Connexion</a>
-
-                                <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_login') }}">Connexion</a>
-
-                            </li>
+                            {% if app.user %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('profil') }}">Profil</a>
+                                </li>
+                                {% if "ROLE_VENDEUR" in app.user.roles %}
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white hover_effect mx-2" href="{{ path('vendeur') }}">Espace Vendeur</a>
+                                    </li>
+                                {% endif %}
+                                {% if "ROLE_ADMIN" in app.user.roles %}
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white hover_effect mx-2" href="{{ path('back_office') }}">BACKOFFICE</a>
+                                    </li>
+                                {% endif %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_logout') }}">Deconnexion</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="#">Inscription</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_login') }}">Connexion</a>
+                                </li>
+                            {% endif %}
                         </ul>
                         <div>
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -164,14 +179,6 @@
 
     </main>
 
-
-<<<<<<< HEAD
-
-
-
-
-
-=======
   
 <footer class="footer_bar text-center text-white">
   
@@ -197,7 +204,7 @@
       <form action="">
         
         <div class="row d-flex justify-content-center">
->>>>>>> 6cb12367d8591bb49501acd14ca7eea75eb8dda0
+
           
         <footer class="footer_bar text-center text-white">
           
