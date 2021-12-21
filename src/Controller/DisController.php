@@ -111,6 +111,38 @@ class DisController extends AbstractController
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             // encode the plain password
 
+            $profilphoto = $vendeurForm->get('imageProfil')->getData();
+            if($profilphoto)
+            {
+                $nomOriginePhoto = pathinfo($profilphoto->getClientOriginalName(), PATHINFO_FILENAME);
+                //dd($nomOriginePhoto);
+
+                // cela est necessaire pour inclure en toute sécurité le nom du fichier dans l'URL
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+
+                $nouveauNomFichier = $secureNomPhoto.' - '.uniqid().'.'.$profilphoto->guessExtension();
+                // dd($nouveauNomFichier);
+                try
+                {
+                    $profilphoto->move(
+                        $this->getParameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+
+                }
+
+                $user->setImageProfil($nouveauNomFichier);
+
+            }
+            else
+            {
+                $user->setImageProfil($ProfilBdd);                    
+            }
+
+
             $manager->persist($user);
             $manager->flush();
 
