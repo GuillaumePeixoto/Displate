@@ -17,6 +17,7 @@
         height: 200px !important;
         width: 200px !important;
     }
+}
 
 @media(max-width: 555px){
     .responsive_profil{
