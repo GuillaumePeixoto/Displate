@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -105,13 +106,14 @@ class DisController extends AbstractController
         $userForm = $this->createForm(RegistrationFormType::class, $user, [
             'userUpdate' => true 
         ]);
+        $ProfilBdd = $user->getImageProfil();
 
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             // encode the plain password
 
-            $profilphoto = $vendeurForm->get('imageProfil')->getData();
+            $profilphoto = $userForm->get('imageProfil')->getData();
             if($profilphoto)
             {
                 $nomOriginePhoto = pathinfo($profilphoto->getClientOriginalName(), PATHINFO_FILENAME);
@@ -146,11 +148,12 @@ class DisController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('profil');
+            return $this->redirectToRoute('app_logout');
         }
 
         return $this->render('base/user_edit.html.twig', [
             'userForm' => $userForm->createView(),
+            'photoBdd' => $ProfilBdd,
         ]);
     }
     
