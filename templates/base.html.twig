@@ -130,7 +130,7 @@
                                 </li>
                                 {% if "ROLE_VENDEUR" in app.user.roles %}
                                     <li class="nav-item">
-                                        <a class="nav-link text-white hover_effect mx-2" href="{{ path('vendeur') }}">Espace Vendeur</a>
+                                        <a class="nav-link text-white hover_effect mx-2" href="{{ path('mon_profil') }}">Espace Vendeur</a>
                                     </li>
                                 {% endif %}
                                 {% if "ROLE_ADMIN" in app.user.roles %}
@@ -169,10 +169,10 @@
     <section class="">
       <form action="">
         
-        <div class="row d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
 
           
-        <footer class="footer_bar text-center text-white">
+        <footer class="footer_bar text-center text-white w-100">
           
           <div class="">
             

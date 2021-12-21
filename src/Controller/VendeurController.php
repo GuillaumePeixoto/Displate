@@ -25,6 +25,13 @@ class VendeurController extends AbstractController
         ]);
     }
 
+    #[Route('vendeur/profil/', name: 'mon_profil')]
+    public function mon_profil(): Response
+    {
+        return $this->render('vendeur/artiste.html.twig');
+    }
+
+
     #[Route('/vendeur/{id}/edit', name: 'edit_vendeur')]
     public function editProfil(User $user , EntityManagerInterface $manager, Request $request, SluggerInterface $slugger): Response
     {

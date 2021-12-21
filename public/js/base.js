@@ -38,10 +38,10 @@ $(document).ready(function(){
         preview_block.style.display = "block";
     });
 
-    $('#add_photo #produit_form_photo').change(function(event){
+    $('#add_photo_banniere').change(function(event){
         var src = URL.createObjectURL(event.target.files[0]);
-        var preview = document.getElementById("file-preview");
-        var preview_block = document.getElementById("block-preview");
+        var preview = document.getElementById("banniere-preview");
+        var preview_block = document.getElementById("block-banniere-preview");
         preview.src = src;
         preview.style.display = "block";
         preview_block.style.display = "block";

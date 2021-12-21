@@ -436,11 +436,6 @@ class RegistrationFormType extends AbstractType
                     'attr' => [
                         'placeholder' => "Saisir une description du produit",
                         'rows' => "10"
-                    ],
-                    'constraints' => [
-                        new NotBlank([
-                            'message' => "Merci de saisir une description."
-                        ])
                     ]
                 ]);
         }
