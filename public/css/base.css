@@ -396,14 +396,12 @@ a:hover {
 	float: left;
 	position: relative;
 }
-
 .searchwrap .search,
 .searchwrap .search-button {
 	border: 2px solid #3D1101;
 	background: #efe9e7;
 	outline: none;
 }
-
 .searchwrap .search-button {
 	border-radius: 3px;
 	background: #3D1101;

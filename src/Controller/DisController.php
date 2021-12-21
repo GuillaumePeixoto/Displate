@@ -3,10 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DisController extends AbstractController
 {
@@ -90,6 +95,30 @@ class DisController extends AbstractController
     {
         return $this->render('base/profil.html.twig', [
             'controller_name' => 'DisController',
+        ]);
+    }
+
+    #[Route('/profil/{id}/edit', name: 'edit_profil_user')]
+    public function editProfilUser(User $user, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
+    {
+
+        $userForm = $this->createForm(RegistrationFormType::class, $user, [
+            'userUpdate' => true 
+        ]);
+
+        $userForm->handleRequest($request);
+
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            // encode the plain password
+
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('profil');
+        }
+
+        return $this->render('base/user_edit.html.twig', [
+            'userForm' => $userForm->createView(),
         ]);
     }
     
