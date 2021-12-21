@@ -27,4 +27,8 @@
     
 }
 
+#file-preview, #block-preview, #block-profil-preview, #block-banniere-preview{
+    display: none;
+}
+
 /* tentative */

@@ -186,16 +186,12 @@ body {
   border-top-right-radius: .25rem;
 }
 
-.darkbrown-gradient {
-  background: linear-gradient(40deg, #1f1e1e, #3f3a36) !important;
-}
-
 .testimonial-card .avatar {
-  width: 120px;
-  margin-top: -60px;
-  overflow: hidden;
-  border: 5px solid rgb(235, 235, 235);
-  border-radius: 50%;
+    width: 150px;
+    margin-top: -75px;
+    overflow: hidden;
+    border: 5px solid rgb(235, 235, 235);
+    border-radius: 50%;
 }
 
 
