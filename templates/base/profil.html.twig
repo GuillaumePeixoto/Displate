@@ -26,7 +26,7 @@
             <tr class="responsive_profil"><td class="fontTD"><strong>Adresse :</strong></td><td>{{ app.user.adresse }}</td></tr>
             <tr class="responsive_profil"><td class="fontTD"><strong>Ville :</strong></td><td>{{ app.user.ville }}</td></tr>
             <tr class="responsive_profil"><td class="fontTD"><strong>Code postal :</strong></td><td>{{ app.user.codePostal }}</td></tr>
-            <tr class="responsive_profil"><button class="btn btn-secondary"><a href="#" class="text-white">Modifier</a></button></tr>
+            <tr class="responsive_profil"><a href="{{ path('edit_profil_user', {'id' : app.user.id}) }}" class="text-white btn btn-secondary w-100">Modifier</a></tr>
         </table>
     </div>
 </div>
