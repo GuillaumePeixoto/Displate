@@ -6,38 +6,49 @@
 
 {% block body %}
 <div class="bodypanier">
+    {{ dump(panier) }}
+    {% set panier_length = panier.id_produit|length %}
+    {% if panier_length > 0 %}
+    
 
-    <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 mx-auto d-flex justify-content-center shadow-sm px-0 mt-5">
+        {% for  key1 ,tab in panier %}
+            {{ dump(key1) }}
+            {{ dump(tab) }}
 
-        <div class="col-md-2 bgpanier p-2">
+            {% for key, data in tab %}
+                {{ dump(key) }}
+                {{ dump(data) }}
+            {% endfor %}
+            <div class="col-12 col-lg-8 col-xl-8 mx-auto d-flex justify-content-center shadow-sm px-0 mt-5">
 
-            <a href="fiche_produit.html.twig"><img src="https://pbs.twimg.com/profile_images/1228975690646794240/o5kCDcPA_400x400.jpg" style="height:180px; width:200px;" alt=""></a>
+                <div class="col-md-2 bgpanier p-2">
 
-        </div>
+                    <a href="fiche_produit.html.twig"><img src="https://pbs.twimg.com/profile_images/1228975690646794240/o5kCDcPA_400x400.jpg" style="height:180px; width:200px;" alt=""></a>
 
-        <div class="col-md-6 bgpanier d-flex flex-column justify-content-center p-2">
-            <h4><a href="fiche_produit.html.twig" class="text-dark text-decoration-none">Tableau Itachi</a></h4>
-                <div class="form-group">
-                    <label for="colors">Format :</label>
-                    <select class="form-select form-select mb-3 selectFormat" id="colors">
-                        <option selected value="m">M</option>
-                        <option value="l">L</option>
-                        <option value="Xl">XL</option>
-                    </select>
                 </div>
-            <p>Quantité : 1</p>
-            <p class="mb-0"><a href="#" class="alert-link text-dark text-decoration-none">Supprimer</a></p>
+
+                <div class="col-md-6 bgpanier d-flex flex-column justify-content-center p-2">
+                    <h4><a href="fiche_produit.html.twig" class="text-dark text-decoration-none">Tableau Itachi</a></h4>
+                    <p>Quantité : 1</p>
+                    <p class="mb-0"><a href="#" class="alert-link text-dark text-decoration-none">Supprimer</a></p>
+                </div>
+
+                <div class=" col-md-4 bgpanier d-flex justify-content-end align-items-center p-2">
+                    <p class="fw-bold mb-0">25€</p>
+                </div>
+
+            </div>
+        {% endfor %}
+
+        <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-end align-items-center shadow-sm px-0 py-3 bgpanier mt-2 mb-3">
+            <h5 class="m-0 px-2 fw-bold">Sous total (1 article): 25€</h5>
         </div>
+    {% else %}
 
-        <div class=" col-md-4 bgpanier d-flex justify-content-end align-items-center p-2">
-            <p class="fw-bold mb-0">25€</p>
-        </div>
+    <h3 class="text-center">Votre panier est vide.</h3>
 
-    </div>
-
-    <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-end align-items-center shadow-sm px-0 py-3 bgpanier mt-2 mb-3">
-        <h5 class="m-0 px-2 fw-bold">Sous total (1 article): 25€</h5>
-    </div>
+    {% endif %}
+    
 
     <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-between">
 

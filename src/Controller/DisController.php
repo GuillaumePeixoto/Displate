@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Entity\User;
 use App\Entity\Produit;
 use App\Form\RegistrationFormType;
@@ -10,6 +11,8 @@ use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -86,9 +89,13 @@ class DisController extends AbstractController
         ]);
     }
 
-
-
-  
+    #[Route('/fiche_produit/{id}', name: 'fiche_produit')]
+    public function ficheProduit(Produit $produit): Response
+    {
+        return $this->render('base/fiche_produit.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
 
     #[Route('/contact', name: 'contact')]
     public function fichecontact(): Response
@@ -182,10 +189,21 @@ class DisController extends AbstractController
     }
     
     #[Route('/panier', name: 'panier')]
-    public function panier(): Response
+    public function panier(Session $session): Response
     {
+        $panier = $session->get("panier");
+        if(empty($panier))
+        {
+            $panier['id_produit'] = [];
+            $panier['titre'] = [];
+            $panier['photo'] = [];
+            $panier['format'] = [];
+            $panier['prix'] = [];
+            $panier['quantite'] = [];
+        }
+
         return $this->render('base/panier.html.twig', [
-            'controller_name' => 'DisController',
+            'panier' => $panier
         ]);
     }
 
