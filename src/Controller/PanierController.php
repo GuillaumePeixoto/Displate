@@ -19,10 +19,6 @@ class PanierController extends AbstractController
     public function index(SessionInterface $session, Request $request, ProduitRepository $produitRepository, FormatRepository $formatRepository)
     {
         $panier = $session->get("panier", []);
-        if(empty($panier))
-        {
-            $panier[] = [];
-        }
 
         $id_produit = intval($request->query->get('id_produit'));
         $format = intval($request->query->get('format'));
@@ -57,7 +53,7 @@ class PanierController extends AbstractController
             array_push($panier, $newValues);
         }
         $session->set('panier', $panier);
-        $session->remove('panier');
+        //$session->remove('panier');
         return $this->render('panier/index.html.twig', [
             'panier' => $panier
         ]);

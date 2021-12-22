@@ -6,60 +6,51 @@
 
 {% block body %}
 <div class="bodypanier">
-    {{ dump(panier) }}
-    {% set panier_length = panier.id_produit|length %}
-    {% if panier_length > 0 %}
-    
+    <div class="container">
+    {{dump(panier)}}
+        {% if panier is not empty %}
+            {% for article in panier %}
+                <div class="col-12 col-lg-6 col-xl-6 mx-auto d-flex justify-content-center mt-5">
 
-        {% for  key1 ,tab in panier %}
-            {{ dump(key1) }}
-            {{ dump(tab) }}
+                    <div class=" col-6 col-md-2 bgpanier p-2">
 
-            {% for key, data in tab %}
-                {{ dump(key) }}
-                {{ dump(data) }}
+                        <a href="fiche_produit.html.twig"><img src="{{ asset('uploads/photos/' ~ article.produit.photo) }}" class="w-100" alt=""></a>
+
+                    </div>
+
+                    <div class="col-md-6 bgpanier d-flex flex-column justify-content-center p-2">
+                        <h4><a href="fiche_produit.html.twig" class="text-dark text-decoration-none">{{ article.produit.titre }}</a></h4>
+                        <p>Quantité : {{ article.quantite }}</p>
+                        <p class="mb-0"><a href="#" class="alert-link text-dark text-decoration-none">Supprimer</a></p>
+                    </div>
+
+                    <div class=" col-md-4 bgpanier d-flex justify-content-end align-items-center p-2">
+                        <p class="fw-bold mb-0">{{article.format.prix}} €</p>
+                    </div>
+
+                </div>
             {% endfor %}
-            <div class="col-12 col-lg-8 col-xl-8 mx-auto d-flex justify-content-center shadow-sm px-0 mt-5">
 
-                <div class="col-md-2 bgpanier p-2">
-
-                    <a href="fiche_produit.html.twig"><img src="https://pbs.twimg.com/profile_images/1228975690646794240/o5kCDcPA_400x400.jpg" style="height:180px; width:200px;" alt=""></a>
-
-                </div>
-
-                <div class="col-md-6 bgpanier d-flex flex-column justify-content-center p-2">
-                    <h4><a href="fiche_produit.html.twig" class="text-dark text-decoration-none">Tableau Itachi</a></h4>
-                    <p>Quantité : 1</p>
-                    <p class="mb-0"><a href="#" class="alert-link text-dark text-decoration-none">Supprimer</a></p>
-                </div>
-
-                <div class=" col-md-4 bgpanier d-flex justify-content-end align-items-center p-2">
-                    <p class="fw-bold mb-0">25€</p>
-                </div>
-
+            <div class="col-12 col-sm-12 col-lg-6 col-xl-6 d-flex justify-content-end align-items-center px-0 py-3 bgpanier my-2 mx-auto">
+                <h5 class="m-0 px-2 fw-bold">Total (1 article): 25€</h5>
             </div>
-        {% endfor %}
+        {% else %}
 
-        <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-end align-items-center shadow-sm px-0 py-3 bgpanier mt-2 mb-3">
-            <h5 class="m-0 px-2 fw-bold">Sous total (1 article): 25€</h5>
-        </div>
-    {% else %}
+        <h3 class="text-center">Votre panier est vide.</h3>
 
-    <h3 class="text-center">Votre panier est vide.</h3>
-
-    {% endif %}
+        {% endif %}
     
 
-    <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-between">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-between mx-auto">
 
-        <div>
-            <p><a href="#" class="text-dark">Poursuivre mes achats</a></p>
-        </div>
+            <div>
+                <p><a href="#" class="text-dark">Poursuivre mes achats</a></p>
+            </div>
 
-        <div>
-            <a href="#" class="btn btn-dark">Valider ma commande</a>
+            <div>
+                <a href="#" class="btn btn-dark">Valider ma commande</a>
+            </div>
         </div>
     </div>
-    
 </div>
 {% endblock %}
