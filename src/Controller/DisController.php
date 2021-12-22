@@ -56,7 +56,7 @@ class DisController extends AbstractController
     }
 
 
-    #[Route('/home', name: 'home')]
+    #[Route('/', name: 'home')]
     public function home(): Response
     {
         return $this->render('base/home.html.twig', [
@@ -99,13 +99,14 @@ class DisController extends AbstractController
         ]);
     }
 
-<<<<<<< HEAD
     #[Route('/legal_notice', name: 'legal_notice')]
     public function pageNotice(): Response
     {
         return $this->render('base/legal_notice.html.twig', [
             'controller_name' => 'DisController',
-=======
+        ]);
+    }
+
     #[Route('/profil/{id}/edit', name: 'edit_profil_user')]
     public function editProfilUser(User $user, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
@@ -161,7 +162,6 @@ class DisController extends AbstractController
         return $this->render('base/user_edit.html.twig', [
             'userForm' => $userForm->createView(),
             'photoBdd' => $ProfilBdd,
->>>>>>> d98d237f76a155e42bfca623f707adc19cd00222
         ]);
     }
     
