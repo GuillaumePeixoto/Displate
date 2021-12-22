@@ -6,34 +6,68 @@
 
 
 
+
 {% block body %}
+
+<style>
+
+.labl {
+    display : block;
+}
+.labl > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+.labl > input + div{ /* DIV STYLES */
+    cursor:pointer;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+.labl > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
+    background-color: rgb(197, 197, 197);
+    outline: 3px solid rgb(32, 140, 228);
+    border-radius: 4px;
+    box-shadow: rgb(32, 140, 228) 0px 2px 8px 0px;
+}
+
+.text-blue{
+    color: rgb(104, 140, 245);
+}
+
+</style>
 
 <div class="container my-5">
     <div class="row">
-        <!-- Image -->
         <div class="col-12 col-lg-6">
             <div class="card bg-light mb-3">
-                <div class="card-body">
-                    <a href="" data-toggle="modal" data-target="#productModal">
-                        <img class="img-fluid" src="https://pbs.twimg.com/profile_images/1228975690646794240/o5kCDcPA_400x400.jpg" style="height:500px; width:600px;"/>
+                <div class="card-body d-flex">
+                    <a href="" class="mx-auto text-center" data-toggle="modal" data-target="#productModal">
+                        <img class="img-fluid w-75 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}" >
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
                     <p class="price">Fiche produit</p>
-                    <form method="get" action="cart.html">
-                        <div class="form-group">
-                            <label for="colors">Choisir votre format</label>
-                            <select class="form-select form-select mb-3 selectFormat" id="colors">
-                                <option selected value="m">M</option>
-                                <option value="l">L</option>
-                                <option value="Xl">XL</option>
-                            </select>
+                    <form method="get" action="{{ path('ajout_panier') }}">
+                        <div class="form-group d-flex flex-wrap flex-row justify-content-evenly">
+                            {% set defaultcheck = true %}
+                            {% for format in produit.format %}
+                                <div class="col-4 p-2">
+                                    <label class="labl col-12">
+                                        <input type="radio" name="format" value="{{format.id}}" {% if defaultcheck == true %} checked="checked" {% endif %}/>
+                                        <div class="text-center">
+                                            <p> Taille : {{format.format}} </p>
+                                            <p> {{format.hauteur}}cm x {{format.largeur}}cm </p>
+                                            <p class="text-blue fs-5"> Prix : {{format.prix}} € </p>
+                                        </div>
+                                    </label>
+                                </div>
+                            {% set defaultcheck = false %}
+                            {% endfor %}                        
                         </div>
                         <div class="form-group">
                             <label>Quantité :</label>
@@ -51,10 +85,11 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="id_produit" value="{{produit.id}}">
                         <div class="text-center ">
-                            <a href="cart.html" class="btn btn-success btn-lg text-uppercase">
+                            <button type="submit" class="btn btn-success btn-lg text-uppercase">
                                 <i class="fa fa-shopping-cart"></i> Ajouter au panier
-                            </a>
+                            </button>
                         </div>
                     </form>
                     <div class="product_rassurance">

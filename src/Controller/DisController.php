@@ -2,17 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Entity\User;
+use App\Entity\Produit;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DisController extends AbstractController
 {
@@ -40,12 +45,29 @@ class DisController extends AbstractController
 
 
     #[Route('/produits', name: 'tous_nos_produits')]
-    public function produits(): Response
+    public function produits(ProduitRepository $repoProduct, Produit $product = null): Response
     {
+
+        $produit = $repoProduct->findAll();
+
+        
+
         return $this->render('base/tous_nos_produits.html.twig', [
             'controller_name' => 'DisController',
+            'produit' => $produit
         ]);
     }
+    #[Route('/produit/{id}', name: 'fiche_produit')]
+    public function ficheProduit(Produit $product) : Response
+    {
+
+
+        return $this->render('base/fiche_produit.html.twig', [
+            'produit'=> $product
+        ]);
+    }
+
+    
 
     #[Route('/a_propos', name: 'a_propos')]
     public function about(): Response
@@ -57,20 +79,21 @@ class DisController extends AbstractController
 
 
     #[Route('/', name: 'home')]
-    public function home(): Response
+    public function home(ProduitRepository $repoProduct, Produit $product = null): Response
     {
+        $produit = $repoProduct->findAll();
+
         return $this->render('base/home.html.twig', [
             'controller_name' => 'DisController',
+            'produit' => $produit
         ]);
     }
 
-
-
-    #[Route('/fiche_produit', name: 'fiche_produit')]
-    public function ficheProduit(): Response
+    #[Route('/fiche_produit/{id}', name: 'fiche_produit')]
+    public function ficheProduit(Produit $produit): Response
     {
         return $this->render('base/fiche_produit.html.twig', [
-            'controller_name' => 'DisController',
+            'produit' => $produit,
         ]);
     }
 
@@ -166,10 +189,23 @@ class DisController extends AbstractController
     }
     
     #[Route('/panier', name: 'panier')]
-    public function panier(): Response
+    public function panier(Session $session): Response
     {
+        $panier = $session->get("panier");
+        if(empty($panier))
+        {
+            $panier['id_produit'] = [];
+            $panier['titre'] = [];
+            $panier['photo'] = [];
+            $panier['format'] = [];
+            $panier['prix'] = [];
+            $panier['quantite'] = [];
+        }
+
         return $this->render('base/panier.html.twig', [
-            'controller_name' => 'DisController',
+            'panier' => $panier
         ]);
     }
+
+    
 }
