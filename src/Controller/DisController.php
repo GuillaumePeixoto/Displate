@@ -3,10 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DisController extends AbstractController
 {
@@ -93,11 +99,69 @@ class DisController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
     #[Route('/legal_notice', name: 'legal_notice')]
     public function pageNotice(): Response
     {
         return $this->render('base/legal_notice.html.twig', [
             'controller_name' => 'DisController',
+=======
+    #[Route('/profil/{id}/edit', name: 'edit_profil_user')]
+    public function editProfilUser(User $user, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
+    {
+
+        $userForm = $this->createForm(RegistrationFormType::class, $user, [
+            'userUpdate' => true 
+        ]);
+        $ProfilBdd = $user->getImageProfil();
+
+        $userForm->handleRequest($request);
+
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            // encode the plain password
+
+            $profilphoto = $userForm->get('imageProfil')->getData();
+            if($profilphoto)
+            {
+                $nomOriginePhoto = pathinfo($profilphoto->getClientOriginalName(), PATHINFO_FILENAME);
+                //dd($nomOriginePhoto);
+
+                // cela est necessaire pour inclure en toute sécurité le nom du fichier dans l'URL
+                $secureNomPhoto = $slugger->slug($nomOriginePhoto);
+
+                $nouveauNomFichier = $secureNomPhoto.' - '.uniqid().'.'.$profilphoto->guessExtension();
+                // dd($nouveauNomFichier);
+                try
+                {
+                    $profilphoto->move(
+                        $this->getParameter('photo_directory'),
+                        $nouveauNomFichier
+                    );
+                }
+                catch(FileException $e)
+                {
+
+                }
+
+                $user->setImageProfil($nouveauNomFichier);
+
+            }
+            else
+            {
+                $user->setImageProfil($ProfilBdd);                    
+            }
+
+
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('app_logout');
+        }
+
+        return $this->render('base/user_edit.html.twig', [
+            'userForm' => $userForm->createView(),
+            'photoBdd' => $ProfilBdd,
+>>>>>>> d98d237f76a155e42bfca623f707adc19cd00222
         ]);
     }
     

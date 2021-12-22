@@ -162,6 +162,23 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
+            ->add('imageProfil', FileType::class, [
+                'label' => "Uploader une image de profil",
+                'mapped' => true,
+                'required' => false,
+                'data_class' => null,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/jpg'
+                        ],
+                        'mimeTypesMessage' => "Formats autorisé : jpeg, png, jpg."
+                    ])
+                ]
+            ])
             ->add('email', TextType::class, [
                 'required' => false,
                 'constraints' => [
@@ -436,11 +453,6 @@ class RegistrationFormType extends AbstractType
                     'attr' => [
                         'placeholder' => "Saisir une description du produit",
                         'rows' => "10"
-                    ],
-                    'constraints' => [
-                        new NotBlank([
-                            'message' => "Merci de saisir une description."
-                        ])
                     ]
                 ]);
         }

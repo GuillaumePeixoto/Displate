@@ -5,3 +5,30 @@
 .bg-body{
     background-color: #e8e8e8 !important;
 }
+.img_profil{
+    height:300px; 
+    width:300px;
+}
+
+/* Responsive */
+
+@media(max-width: 768px){
+    .img_profil{
+        height: 200px !important;
+        width: 200px !important;
+    }
+}
+
+@media(max-width: 555px){
+    .responsive_profil{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+
+#file-preview, #block-preview, #block-profil-preview, #block-banniere-preview{
+    display: none;
+}
+
+/* tentative */

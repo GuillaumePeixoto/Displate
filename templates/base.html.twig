@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href=" {{asset('css/base.css')}} ">
+
 
         <link rel="stylesheet" href=" {{asset('css/lightbox.css')}} ">
 
@@ -20,8 +20,6 @@
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <link rel="stylesheet" href="css/A.style.css.pagespeed.cf.SrefZvnj6s.css">
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,16 +30,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Karma&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href=" {{asset('css/base.css')}}">
-<link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}}">
-<link rel="stylesheet" href=" {{asset('css/profil.css')}}">
-<link rel="stylesheet" href=" {{asset('css/panier.css')}}">
-
-        <link rel="stylesheet" href=" {{asset('css/base.css')}}">
         <link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}}">
         <link rel="stylesheet" href=" {{asset('css/profil.css')}}">
+        <link rel="stylesheet" href=" {{asset('css/panier.css')}}">
 
 
+        <link rel="stylesheet" href=" {{asset('css/base.css')}} ">
 
         <script>(function(w,d){!function(e,t,r,a,s){e[r]=e[r]||{},e[r].executed=[],e.zaraz={deferred:[]};var n=t.getElementsByTagName("title")[0];e[r].c=t.cookie,n&&(e[r].t=t.getElementsByTagName("title")[0].text),e[r].w=e.screen.width,e[r].h=e.screen.height,e[r].j=e.innerHeight,e[r].e=e.innerWidth,e[r].l=e.location.href,e[r].r=t.referrer,e[r].k=e.screen.colorDepth,e[r].n=t.characterSet,e[r].o=(new Date).getTimezoneOffset(),//
         e[s]=e[s]||[],e.zaraz._preTrack=[],e.zaraz.track=(t,r)=>e.zaraz._preTrack.push([t,r]),e[s].push({"zaraz.start":(new Date).getTime()});var i=t.getElementsByTagName(a)[0],o=t.createElement(a);o.defer=!0,o.src="/cdn-cgi/zaraz/s.js?"+new URLSearchParams(e[r]).toString(),i.parentNode.insertBefore(o,i)}(w,d,"zarazData","script","dataLayer");})(window,document);</script>
@@ -75,85 +69,101 @@
           background: url('{{ asset("img/loading.gif") }}') no-repeat;
         }
 
+ 
     </style>  
  
 <body>
 
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark bgNav" aria-label="Eighth navbar example">
-            <div class="container">
-                <a class="navbar-brand shadow-none" href="{{ path('home') }}" style="background-color:transparent;font-size: 34px;vertical-align: baseline;display: flex;align-items: end;">
-                  <img src="img/logocode.png" style="width:50px; background-color:transparent" class="" alt=""><span style="" class="font_titre">oots Art</span></a>
-                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="navbar-collapse collapse" id="navbarsExample07" style="">
-                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                          <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="{{ path('home') }}">Home</a>
-                        </li>
-                          <li class="nav-item">
-                            <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
-                              <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                  <a class="nav-link dropdown-toggle hover_effect text-white mx-2" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Produits
-                                  </a>
-
-                                <ul class="dropdown-menu dropdown-menu-dark "  aria-labelledby="navbarDarkDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="#">Tout nos prints</a></li>
-                                  <li><a class="dropdown-item" href="#">Concept Art</a></li>
-                                  <li><a class="dropdown-item" href="#">Illustration</a></li>
-                                  <li><a class="dropdown-item" href="#">Cyber</a></li>
-                                  <li><a class="dropdown-item" href="#">Fantasy</a></li>
-                                  <li><a class="dropdown-item" href="#">Abstrait</a></li>   
-
-                                </ul>
-                              </li>
-                            </ul>
+      <div class="container">
+          <a class="navbar-brand shadow-none" href="{{ path('home') }}" style="background-color:transparent;font-size: 34px;vertical-align: baseline;display: flex;align-items: end;">
+            <img src="{{ asset('img/logocode.png') }}" style="width:50px; background-color:transparent" class="" alt=""><span style="" class="font_titre">oots Art</span></a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarsExample07" style="">
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="{{ path('home') }}">Home</a>
+                </li>
+                <li class="dropdown pos-static nav-item">
+                  <button class="btn border-0 text-white dropdown-toggle nav-link hover_effect" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Produit
+                  </button>
+                  <ul class="dropdown-menu under-menu" aria-labelledby="dropdownMenuButton1">
+                    <div class="row">
+                          <div class="column col-4 p-2">
+                            <h3 class="text-center text-white">Categorie</h3>
+                            <div class=" d-flex col-12">
+                              <div class="col-6">
+                                <a class="text-center" href="#">Link 1</a>
+                                <a class="text-center" href="#">Link 2</a>
+                                <a class="text-center" href="#">Link 3</a>
+                              </div>
+                              <div class="col-6">
+                                <a class="text-center" href="#">Link 1</a>
+                                <a class="text-center" href="#">Link 2</a>
+                                <a class="text-center" href="#">Link 3</a>
+                              </div>
+                            </div>
                           </div>
-                        </li>
-
+                          <div class="column col-4 p-2">
+                            <h3 class="text-center text-white">Format</h3>
+                              <div class="col-12">
+                                <a class="text-center" href="#">Link 1</a>
+                                <a class="text-center" href="#">Link 2</a>
+                                <a class="text-center" href="#">Link 3</a>
+                              </div>
+                          </div>
+                          <div class="column col-4 p-2">
+                            <h3>Category 3</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                          </div>
+                        </div>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('nos_artistes') }}">Artistes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white hover_effect mx-2" href="#">Nouveautés</a>
+                </li>
+            </ul>
+            <div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if app.user %}
                         <li class="nav-item">
-                            <a class="nav-link text-white hover_effect mx-2" href="{{ path('nos_artistes') }}">Artiste</a>
+                            <a class="nav-link text-white hover_effect mx-2" href="{{ path('profil') }}">Profil</a>
+                        </li>
+                        {% if "ROLE_VENDEUR" in app.user.roles %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white hover_effect mx-2" href="{{ path('mon_profil') }}">Espace Vendeur</a>
+                            </li>
+                        {% endif %}
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white hover_effect mx-2" href="{{ path('back_office') }}">BACKOFFICE</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_logout') }}">Deconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white hover_effect mx-2" href="">Nouveautés</a>
+                            <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_login') }}">Connexion</a>
                         </li>
-                    </ul>
-                    <div>
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            {% if app.user %}
-                                <li class="nav-item">
-                                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('profil') }}">Profil</a>
-                                </li>
-                                {% if "ROLE_VENDEUR" in app.user.roles %}
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white hover_effect mx-2" href="{{ path('vendeur') }}">Espace Vendeur</a>
-                                    </li>
-                                {% endif %}
-                                {% if "ROLE_ADMIN" in app.user.roles %}
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white hover_effect mx-2" href="{{ path('back_office') }}">BACKOFFICE</a>
-                                    </li>
-                                {% endif %}
-                                <li class="nav-item">
-                                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_logout') }}">Deconnexion</a>
-                                </li>
-                            {% else %}
-                                <li class="nav-item">
-                                    <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="#">Inscription</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('app_login') }}">Connexion</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                </div>
+                    {% endif %}
+                </ul>
             </div>
-        </nav>
+          </div>
+      </div>
+  </nav>
   
 <main>
 {% block body %}
@@ -169,10 +179,10 @@
     <section class="">
       <form action="">
         
-        <div class="row d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
 
           
-        <footer class="footer_bar text-center text-white">
+        <footer class="footer_bar text-center text-white w-100">
           
           <div class="">
             
@@ -286,7 +296,7 @@
 
           
           <div class="text-center p-3 colorfontIcon" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2020 Copyright:
+            © 2021 Copyright:
             <a class="colorfontIcon" href="https://mdbootstrap.com/">Boots Art</a>
           </div>
           
