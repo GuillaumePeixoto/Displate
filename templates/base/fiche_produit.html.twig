@@ -6,26 +6,23 @@
 
 
 
+
 {% block body %}
 
 <div class="container my-5">
     <div class="row">
-        <!-- Image -->
         <div class="col-12 col-lg-6">
-            <div class="card bg-light mb-3">
-                <div class="card-body">
-                    <a href="" data-toggle="modal" data-target="#productModal">
-                        <img class="img-fluid" src="https://pbs.twimg.com/profile_images/1228975690646794240/o5kCDcPA_400x400.jpg" style="height:500px; width:600px;"/>
-                    </a>
+            <div class="card bg-light mb-3 bgProduct">
+                <div class="card-body text-center growID">
+                        <img class="img-fluid w-25 mt-5 shadow p-3 mb-5 bg-body rounded imgProduct" src="{{ asset("uploads/photos/" ~ produit.photo)}}"/>  
                 </div>
             </div>
         </div>
 
-        <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
-                <div class="card-body">
-                    <p class="price">Fiche produit</p>
+                <div class="card-body">                  
+                    <p class="price">{{produit.titre}}</p>
                     <form method="get" action="cart.html">
                         <div class="form-group">
                             <label for="colors">Choisir votre format</label>

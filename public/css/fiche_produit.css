@@ -1,3 +1,18 @@
+.bgProduct{
+    background-image: url(https://www.murs-3d.fr/3168-thickbox_default/planche-de-bois-vieilli.jpg);
+    background-size: contain;
+    height: 600px;
+    width: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.imgProduct{
+    padding: 0 !important;
+    height: 250px !important;
+    width: 200px !important;
+}
+
 .bloc_left_price {
     color: #1f1e1e;
     text-align: center;
