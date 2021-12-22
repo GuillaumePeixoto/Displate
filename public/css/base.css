@@ -1,7 +1,7 @@
 /* CSS BODY */
 
 .bgNav{
-    background-color: #1f1e1e !important;
+    background-color: #1e1e1f !important;
 }
 
 .logo img{
@@ -124,6 +124,7 @@ text-align: left;
 
 .titrehome, .titreprofil{
     font-family: 'Karma', serif;
+    color: rgb(253, 203, 128)
 }
 
 /* FIN FONT TITRE KARMA */
@@ -135,7 +136,7 @@ footer a h5{
 }
 
 .fontfooter{
-    background-color: #ab674d;
+    background-color: #523434;
     
 }
 
@@ -162,6 +163,7 @@ footer div.row
     color: #1f1e1e;
     text-align: center;
     margin: 2rem 0;
+    color: rgb(253, 203, 128);
 
 }
 
@@ -313,7 +315,6 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
 	font-family: 'Karma', serif;
 	padding-top: 45px;
     padding-bottom: 50px;
-	background-color: rgba(0, 0, 0, 0.438);
     color: #1f1e1e;
 }
 
@@ -351,6 +352,7 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
 	font-weight: 500;
     font-size: 20px;
     font-weight: bold;
+    color: rgb(238, 231, 221);
 }
 
 .section-contact .content .title {
@@ -367,7 +369,7 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
     margin-bottom: 40px;
 	line-height: 1.85em;
     max-width: 70%;
-    font-weight: bold;
+    color: rgb(238, 231, 221);
 }
 
 .section-contact .content .social-links {
@@ -463,12 +465,14 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
 	margin-bottom: 7px;
     font-size: 22px;
     font-weight: 700;
+    color: rgb(253, 203, 128);
+    
 }
 
 .section-contact .infos .single-info .text p {
 	line-height: 1.85em;
 	margin: 0;
-    color: rgb(253, 203, 128);
+    color: rgb(238, 231, 221);
 
 }
 .bouton 
@@ -541,7 +545,12 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
     padding-left: 50px;
     padding-right: 50px;
 	background-color: rgba(0, 0, 0, 0.253);
-    color: #1f1e1e;
+    color: rgb(238, 231, 221);
+}
+
+.faq .texte
+{
+    color: rgb(238, 231, 221);
 }
 
 .title 
