@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Entity\User;
-use App\Entity\Produit;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
@@ -12,12 +11,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DisController extends AbstractController
 {
@@ -55,15 +52,6 @@ class DisController extends AbstractController
         return $this->render('base/tous_nos_produits.html.twig', [
             'controller_name' => 'DisController',
             'produit' => $produit
-        ]);
-    }
-    #[Route('/produit/{id}', name: 'fiche_produit')]
-    public function ficheProduit(Produit $product) : Response
-    {
-
-
-        return $this->render('base/fiche_produit.html.twig', [
-            'produit'=> $product
         ]);
     }
 
@@ -192,15 +180,15 @@ class DisController extends AbstractController
     public function panier(Session $session): Response
     {
         $panier = $session->get("panier");
-        if(empty($panier))
-        {
-            $panier['id_produit'] = [];
-            $panier['titre'] = [];
-            $panier['photo'] = [];
-            $panier['format'] = [];
-            $panier['prix'] = [];
-            $panier['quantite'] = [];
-        }
+        // if(empty($panier))
+        // {
+        //     $panier['id_produit'] = [];
+        //     $panier['titre'] = [];
+        //     $panier['photo'] = [];
+        //     $panier['format'] = [];
+        //     $panier['prix'] = [];
+        //     $panier['quantite'] = [];
+        // }
 
         return $this->render('base/panier.html.twig', [
             'panier' => $panier
