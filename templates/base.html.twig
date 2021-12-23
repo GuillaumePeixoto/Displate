@@ -93,43 +93,47 @@
                   </button>
                   <ul class="dropdown-menu under-menu" aria-labelledby="dropdownMenuButton1">
                     <div class="row">
-                          <div class="column col-4 p-2">
-                            <h3 class="text-center text-white">Categorie</h3>
-                            <div class=" d-flex col-12">
-                              <div class="col-6">
-                                <a class="text-center" href="#">Link 1</a>
-                                <a class="text-center" href="#">Link 2</a>
-                                <a class="text-center" href="#">Link 3</a>
-                              </div>
-                              <div class="col-6">
-                                <a class="text-center" href="#">Link 1</a>
-                                <a class="text-center" href="#">Link 2</a>
-                                <a class="text-center" href="#">Link 3</a>
-                              </div>
-                            </div>
+                      <div class="col-12 text-center">
+                        <a href="{{ path('produits') }}" class="fs-5">Tous nos produits</a>
+                      </div>
+                      <div class="column col-6 p-2">
+                        <h3 class="text-center text-white">Categorie</h3>
+                        <div class=" d-flex col-12">
+                          <div class="col-4">
+                            <a class="text-center" href="#">Anime</a>
+                            <a class="text-center" href="#">Jeu Vidéo</a>
+                            <a class="text-center" href="#">Film</a>
                           </div>
-                          <div class="column col-4 p-2">
-                            <h3 class="text-center text-white">Format</h3>
-                              <div class="col-12">
-                                <a class="text-center" href="#">Link 1</a>
-                                <a class="text-center" href="#">Link 2</a>
-                                <a class="text-center" href="#">Link 3</a>
-                              </div>
+                          <div class="col-4">
+                            <a class="text-center" href="#">Retro</a>
+                            <a class="text-center" href="#">Réaliste</a>
+                            <a class="text-center" href="#">Futur</a>
                           </div>
-                          <div class="column col-4 p-2">
-                            <h3>Category 3</h3>
-                            <a href="#">Link 1</a>
-                            <a href="#">Link 2</a>
-                            <a href="#">Link 3</a>
+                          <div class="col-4">
+                            <a class="text-center" href="#">Voiture</a>
+                            <a class="text-center" href="#">Nature</a>
+                            <a class="text-center" href="#">Espace</a>
                           </div>
                         </div>
+                      </div>
+                      <div class="column col-3 p-2">
+                        <h3 class="text-center text-white">Format</h3>
+                          <div class="col-12">
+                            <a class="text-center" href="#">M</a>
+                            <a class="text-center" href="#">L</a>
+                            <a class="text-center" href="#">XL</a>
+                          </div>
+                      </div>
+                      <div class="column col-3 p-2">
+                        <h3 class="text-center text-white">Tags</h3>
+                        <a  class="text-center" href="#">BestSellers</a>
+                        <a  class="text-center" href="#">Nouveautés</a>
+                      </div>
+                    </div>
                   </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white hover_effect mx-2" href="{{ path('nos_artistes') }}">Artistes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white hover_effect mx-2" href="#">Nouveautés</a>
                 </li>
             </ul>
             <div>
