@@ -30,16 +30,6 @@ class DisController extends AbstractController
         ]);
     }
 
-    #[Route('/artiste/{id}', name: 'artiste')]
-    public function artiste(User $user): Response
-    {
-        
-
-        return $this->render('base/artiste.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
 
     #[Route('/produits', name: 'produits')]
     public function produits(ProduitRepository $repoProduct): Response
@@ -189,6 +179,16 @@ class DisController extends AbstractController
 
         return $this->render('base/panier.html.twig', [
             'panier' => $panier
+        ]);
+    }
+
+    #[Route('artiste/{id}', name: 'profil_vendeur')]
+    public function mon_profil(User $user): Response 
+    {
+
+
+        return $this->render('base/profil_vendeur.html.twig', [
+            'vendeur' => $user
         ]);
     }
 
