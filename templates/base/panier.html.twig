@@ -6,49 +6,43 @@
 
 {% block body %}
 <div class="bodypanier">
-
-    <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 mx-auto d-flex justify-content-center shadow-sm px-0 mt-5">
-
-        <div class="col-md-2 bgpanier p-2">
-
-            <a href="fiche_produit.html.twig"><img src="https://pbs.twimg.com/profile_images/1228975690646794240/o5kCDcPA_400x400.jpg" style="height:180px; width:200px;" alt=""></a>
-
-        </div>
-
-        <div class="col-md-6 bgpanier d-flex flex-column justify-content-center p-2">
-            <h4><a href="fiche_produit.html.twig" class="text-dark text-decoration-none">Tableau Itachi</a></h4>
-                <div class="form-group">
-                    <label for="colors">Format :</label>
-                    <select class="form-select form-select mb-3 selectFormat" id="colors">
-                        <option selected value="m">M</option>
-                        <option value="l">L</option>
-                        <option value="Xl">XL</option>
-                    </select>
+    <div class="container py-4">
+        {% if panier is not empty %}
+        
+            {% set total = 0 %}
+            {% set total_article = 0 %}
+            {% for key, produit in panier %}
+                <div class="bg-light p-2 d-flex flex-wrap my-2">
+                    <div class="col-lg-2 col-md-3 col-12 text-center">
+                        <img src="{{ asset('uploads/photos/' ~ produit.produit.photo) }}" class="col-8 col-md-12 mx-auto" alt="test">
+                    </div>
+                    <div class="col-lg-8 col-md-7 col-6 d-flex align-items-center">
+                        <div class="ms-2">
+                            <p class="fs-4 fw-bold">{{ produit.produit.titre }}</p>
+                            <p><strong>Taille : </strong> {{produit.format.format}} ( {{produit.format.hauteur}}cm x {{produit.format.largeur}}cm ) </p>
+                            <p><strong>Quantité :</strong> {{produit.quantite}}</p>
+                            <a href="{{ path('remove', {'id' : key }) }}" class="btn btn-dark mt-2">Supprimer</a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-6 d-flex align-items-center justify-content-end">
+                        <p class="fw-bold fs-4">Prix unitaire : {{produit.format.prix}} €</p>
+                    </div>
+                </div>  
+            {% set total = total + (produit.format.prix * produit.quantite) %}
+            {% set total_article = total_article + produit.quantite %} 
+            {% endfor %}
+            <div class="bg-light p-2 my-2">
+                <p class="fw-bold fs-4 text-end">Total ( {{total_article}} article{% if total_article > 1 %}s{% endif %} ) : {{total}}  € </p>
+            </div>
+        {% else %}
+            <div class="mt-5">
+                <h3 class="text-white text-center">Votre panier est vide</h3>
+                <div class="text-center">
+                    <a href="{{ path('produits') }}" class="text-white mt-2">Lien vers la boutique</a>
                 </div>
-            <p>Quantité : 1</p>
-            <p class="mb-0"><a href="#" class="alert-link text-dark text-decoration-none">Supprimer</a></p>
-        </div>
-
-        <div class=" col-md-4 bgpanier d-flex justify-content-end align-items-center p-2">
-            <p class="fw-bold mb-0">25€</p>
-        </div>
+            </div>
+        {% endif %}
 
     </div>
-
-    <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-end align-items-center shadow-sm px-0 py-3 bgpanier mt-2 mb-3">
-        <h5 class="m-0 px-2 fw-bold">Sous total (1 article): 25€</h5>
-    </div>
-
-    <div class="container col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 d-flex justify-content-between">
-
-        <div>
-            <p><a href="#" class="btn btn-dark">Poursuivre mes achats</a></p>
-        </div>
-
-        <div>
-            <a href="#" class="btn btn-dark">Valider ma commande</a>
-        </div>
-    </div>
-    
 </div>
 {% endblock %}
