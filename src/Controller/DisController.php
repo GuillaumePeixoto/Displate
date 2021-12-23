@@ -41,8 +41,8 @@ class DisController extends AbstractController
     }
 
 
-    #[Route('/produits', name: 'tous_nos_produits')]
-    public function produits(ProduitRepository $repoProduct, Produit $product = null): Response
+    #[Route('/produits', name: 'produits')]
+    public function produits(ProduitRepository $repoProduct): Response
     {
 
         $produit = $repoProduct->findAll();
@@ -67,13 +67,16 @@ class DisController extends AbstractController
 
 
     #[Route('/', name: 'home')]
-    public function home(ProduitRepository $repoProduct, Produit $product = null): Response
+    public function home(ProduitRepository $repoProduct): Response
     {
         $produit = $repoProduct->findAll();
 
+        $derniers_produit = $repoProduct->findBy([], ['id' => 'DESC'], 9, null);
+
         return $this->render('base/home.html.twig', [
             'controller_name' => 'DisController',
-            'produit' => $produit
+            'produit' => $produit,
+            'derniers_produit' => $derniers_produit
         ]);
     }
 
@@ -180,15 +183,9 @@ class DisController extends AbstractController
     public function panier(Session $session): Response
     {
         $panier = $session->get("panier");
-        // if(empty($panier))
-        // {
-        //     $panier['id_produit'] = [];
-        //     $panier['titre'] = [];
-        //     $panier['photo'] = [];
-        //     $panier['format'] = [];
-        //     $panier['prix'] = [];
-        //     $panier['quantite'] = [];
-        // }
+
+        // features :
+        // Ajout frai de livraison si panier moins de 50€
 
         return $this->render('base/panier.html.twig', [
             'panier' => $panier

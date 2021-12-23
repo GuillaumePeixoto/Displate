@@ -30,9 +30,9 @@ class PanierController extends AbstractController
         $all_ready_have = false;
         foreach($panier as $key => $id)
         {
-            if($id == $id_produit)
+            if($id['produit']->getId() == $id_produit)
             {
-                if($panier['format'][$key] == $format)
+                if($id['format']->getId() == $format)
                 {
                     $all_ready_have = true;
                     $emplacement = $key;
@@ -42,7 +42,7 @@ class PanierController extends AbstractController
 
         if($all_ready_have)
         { 
-            $panier['quantite'][$emplacement] += $quantite;
+            $panier[$emplacement]['quantite'] += $quantite;
         }
         else // Sinon, l'id_article n'exsite pas dans la session $_SESSION['panier']['id_article'], on ajoute l'article normalement dans le panier
         {
@@ -54,68 +54,19 @@ class PanierController extends AbstractController
         }
         $session->set('panier', $panier);
         //$session->remove('panier');
-        return $this->render('panier/index.html.twig', [
-            'panier' => $panier
-        ]);
-    }
-
-    /**
-     * @Route("/add/{id}", name="add")
-     */
-    public function add(Produit $product, SessionInterface $session)
-    {
-       //On récupere le panier actuel
-       $panier = $session->get("panier", []);
-        $id= $product->getId();
-
-        if(!empty($panier[$id])){
-            $panier[$id]++;
-        }
-        else {
-            $panier[$id] = 1;
-        }
-        //On sauvegarde dans la session
-        $session->set("panier", $panier);
-        
-        return $this->redirectToRoute("cart_index");
+        // return $this->render('panier/index.html.twig', [
+        //     'panier' => $panier
+        // ]);
+        return $this->redirectToRoute("panier");
     }
 
     /**
      * @Route("/remove/{id}", name="remove")
      */
-    public function remove(Produit $product, SessionInterface $session)
+    public function remove(SessionInterface $session, $id)
     {
-       //On récupere le panier actuel
-       $panier = $session->get("panier", []);
-        $id= $product->getId();
-
-        if(!empty($panier[$id]))
-        {
-            if($panier[$id] > 1)
-            {
-                $panier[$id]--;
-            }
-            else
-            {
-                unset($panier[$id]);
-            }
-        
-        }
-        
-        //On sauvegarde dans la session
-        $session->set("panier", $panier);
-        
-        return $this->redirectToRoute("cart_index");
-    }
-
-     /**
-     * @Route("/delete/{id}", name="delete")
-     */
-    public function delete(Produit $product, SessionInterface $session)
-    {
-       //On récupere le panier actuel
-       $panier = $session->get("panier", []);
-        $id= $product->getId();
+        //On récupere le panier actuel
+        $panier = $session->get("panier", []);
 
         if(!empty($panier[$id]))
         {
@@ -125,7 +76,7 @@ class PanierController extends AbstractController
         //On sauvegarde dans la session
         $session->set("panier", $panier);
         
-        return $this->redirectToRoute("cart_index");
+        return $this->redirectToRoute("panier");
     }
 
     /**
@@ -136,7 +87,7 @@ class PanierController extends AbstractController
        //On récupere le panier actuel
         $session->set("panier", []);
 
-        return $this->redirectToRoute("cart_index");
+        return $this->redirectToRoute("panier");
     }
 
 }
