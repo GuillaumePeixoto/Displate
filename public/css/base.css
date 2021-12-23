@@ -43,6 +43,8 @@
     width: 100%;
 }
 
+
+
 .hover_effect.show:before{
     position: absolute;
     left: 0px;
