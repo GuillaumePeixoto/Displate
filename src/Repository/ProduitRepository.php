@@ -36,6 +36,20 @@ class ProduitRepository extends ServiceEntityRepository
     }
     */
 
+    public function findByCategorie($categories){
+        $query = $this->createQueryBuilder('produit')
+                      ->select('produit')
+                      ->leftJoin('produit.categorie', 'categorie')
+                      ->addSelect('categorie')
+                      ->setMaxResults(10);
+ 
+        $query = $query->add('where', $query->expr()->in('categorie', ':categorie'))
+                      ->setParameter('categorie', $categories)
+                      ->getQuery()
+                      ->getResult();
+        return $query;
+    }
+
     /*
     public function findOneBySomeField($value): ?Produit
     {

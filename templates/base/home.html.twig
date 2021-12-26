@@ -47,7 +47,7 @@
                   <div class="carousel-item active">
                     {% set nb_carousel = 0 %}
                     {% for produit in derniers_produit %}
-                      <a href="{{ path('fiche_produit', {'id': produit.id}) }}">
+                      <a href="{{ path('fiche_produit', {'id': produit.id}) }}" class="text-decoration-none">
                         <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" alt="{{produit.titre}}" class="mx-4" style="width:300px">
                       </a>
                       {% set nb_tour = nb_tour + 1 %}
@@ -63,7 +63,6 @@
                                  
                   </div>
 
-                </div>
                 
                     <button class="carousel-control-prev text-primary" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
                       <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-left-square"></i></span>
@@ -99,8 +98,7 @@
                     <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-lg-inline" >
                     <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-xxl-inline" >
                   </div>
-
-              </div>
+                </div>
 
                   <button class="carousel-control-prev text-primary" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
                     <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-left-square"></i></span>

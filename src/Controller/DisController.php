@@ -71,10 +71,19 @@ class DisController extends AbstractController
     }
 
     #[Route('/fiche_produit/{id}', name: 'fiche_produit')]
-    public function ficheProduit(Produit $produit): Response
+    public function ficheProduit(Produit $produit, ProduitRepository $repoProduct): Response
     {
+        $categories = array();
+        foreach($produit->getCategorie() as $category)
+        {
+            array_push($categories, $category);
+        }
+        
+        $sameCategorie = $repoProduct->findByCategorie($categories);
+
         return $this->render('base/fiche_produit.html.twig', [
             'produit' => $produit,
+            'sameCategorie' => $sameCategorie
         ]);
     }
 

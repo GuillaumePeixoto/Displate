@@ -35,14 +35,14 @@
                             {% if user.imageProfil == null %}
                                 Vide
                             {% else %}
-                                <img src="{{ asset('uploads/photos' ~ user.imageProfil) }}" alt="{{user.imageProfil}}">
+                                <img src="{{ asset('uploads/photos/' ~ user.imageProfil) }}" alt="{{user.imageProfil}}" style="width: 100px">
                             {% endif %}
                         </td>
                         <td>
                             {% if user.banniereProfil == null %}
                                 Vide
                             {% else %}
-                                <img src="{{ asset('uploads/photos' ~ user.banniereProfil) }}" alt="{{user.banniereProfil}}">
+                                <img src="{{ asset('uploads/photos/' ~ user.banniereProfil) }}" alt="{{user.banniereProfil}}" style="width: 100px">
                             {% endif %}
                         </td>
                         <td>
@@ -52,7 +52,7 @@
                                 {{ user.description }}
                             {% endif %}
                         </td>
-                        <td><a href="{{ path('modify_user', {'id' : user.id }) }}" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="{{ path('remove_user', {'id': user.id}) }}"><i class="bi bi-trash"></i></a></td>
+                        <td><a href="{{ path('profil_vendeur', {'id' : user.id }) }}" class="btn bg-success text-white"><i class="bi bi-eye-fill"></i></a> <a href="{{ path('modify_user', {'id' : user.id }) }}" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="{{ path('remove_user', {'id': user.id}) }}"><i class="bi bi-trash"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>

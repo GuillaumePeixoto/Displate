@@ -129,7 +129,7 @@ class VendeurController extends AbstractController
         return $this->render('vendeur/presentation.html.twig');
     }
 
-    #[Route('/vendeur/produit/{id}/remove', name: 'remove_produit')]
+    #[Route('/vendeur/produit/{id}/remove', name: 'vendeur_remove_produit')]
     public function showProduit(EntityManagerInterface $manager, Produit $produit): Response
     {
 
