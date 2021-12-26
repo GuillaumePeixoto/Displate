@@ -143,6 +143,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-white hover_effect mx-2" href="{{ path('profil') }}">Profil</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white hover_effect mx-2" href="{{ path('panier') }}">Panier</a>
+                        </li>
                         {% if "ROLE_VENDEUR" in app.user.roles %}
                             <li class="nav-item">
                                 <a class="nav-link text-white hover_effect mx-2" href="{{ path('mon_profil') }}">Espace Vendeur</a>

@@ -235,22 +235,22 @@ body {
     }
     
 .grow img:hover{
--webkit-transform: scale(1.1);
--ms-transform: scale(1.1);
-transform: scale(1.1);
-transition: 0.5s ease;
-    }
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.5s ease;
+}
 
 .growID{
     transition: 0.8s ease;
-    }
+}
     
 .growID img:hover{
--webkit-transform: scale(1.4);
--ms-transform: scale(1.4);
-transform: scale(1.4);
-transition: 0.8s ease;
-    }
+    -webkit-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    transform: scale(1.4);
+    transition: 0.8s ease;
+}
 /* .searchwrap {
     display: flex;
     justify-content: center;

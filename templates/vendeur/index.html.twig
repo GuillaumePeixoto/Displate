@@ -21,10 +21,10 @@
                 <h4 class="fs-2 fw-bold">Vos articles</h4>
                 <div class="row justify-content-evenly h-100">
                     {% for produit in app.user.produits %}
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-10 p-2 h-100">
-                            <div class="card shadow-sm">
-                                <div class="p-2">
-                                    <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" class="w-100" alt="naruto-sasuke">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-10 p-2">
+                            <div class="card shadow-sm align-self-stretch h-100">
+                                <div class="p-2 h-100 d-flex">
+                                    <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" class="w-100 my-auto" alt="naruto-sasuke">
                                 </div>
                                 <div class="card-body">
                                     <div class="card-text mb-3">
@@ -44,9 +44,9 @@
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a class="btn btn-outline-secondary btn-sm" href="#">View</a>
+                                            <a class="btn btn-outline-secondary btn-sm" href="{{ path('fiche_produit', {'id' : produit.id}) }}">View</a>
                                             <a class="btn btn-outline-secondary btn-sm" href="{{ path('modify_produit_vendeur', {'id' : produit.id}) }}">Edit</a>
-                                            <a class="btn btn-outline-secondary btn-sm" href="{{ path('remove_produit', {'id' : produit.id}) }}">Delete</a>
+                                            <a class="btn btn-outline-secondary btn-sm" href="{{ path('vendeur_remove_produit', {'id' : produit.id}) }}">Delete</a>
                                         </div>
                                     </div>
                                 </div>

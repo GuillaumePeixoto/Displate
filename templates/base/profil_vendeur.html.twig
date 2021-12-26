@@ -52,17 +52,16 @@
                 <div class="mb-3">
                     <h5 class="mb-0">Travaux Récent :</h5>
                 </div>
-                <div class="d-flex justify-content-evenly">
-                    {% for produit in vendeur.produits %}
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-10 p-2 h-100">
-                            <div class="card shadow-sm bg-light">
-                                <div class="p-2">
-                                    <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" class="w-100" alt="{{produit.photo}}">
+                <div class="d-flex justify-content-evenly flex-wrap">
+                    {% for produit in app.user.produits %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-10 p-2">
+                            <div class="card shadow-sm bg-light align-self-stretch h-100">
+                                <div class="p-2 h-100 d-flex">
+                                    <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" class="w-100 my-auto" alt="naruto-sasuke">
                                 </div>
                                 <div class="card-body">
                                     <div class="card-text">
-                                        <a class="text-center m-0 p-0 text-decoration-none text-black stretched-link d-block" href="
-                                        {{path("fiche_produit", {'id' : produit.id})}} ">{{ produit.titre }}</a>
+                                        <a class="text-center m-0 p-0 text-decoration-none text-black stretched-link d-block" href="{{ path('fiche_produit', {'id' : produit.id}) }}">{{ produit.titre }}</a>
                                     </div>
                                 </div>
                             </div>

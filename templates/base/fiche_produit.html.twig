@@ -22,9 +22,9 @@
     cursor:pointer;
     border: 1px solid grey;
     border-radius: 4px;
+    padding: 8px;
 }
 .labl > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
-    background-color: rgb(197, 197, 197);
     outline: 3px solid rgb(32, 140, 228);
     border-radius: 4px;
     box-shadow: rgb(32, 140, 228) 0px 2px 8px 0px;
@@ -38,22 +38,49 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col-12 col-lg-6">
-            <div class="card bg-light mb-3">
-                <div class="card-body d-flex bgProduct growID">
+        <a href="{{ path('produits') }}" class="text-white text-decoration-none my-2"><i class="bi bi-caret-left-fill"></i> Retour vers la boutique</a>
+        <div class="col-12 col-lg-7">
+            <div class="card bg-light">
+                {# <div class="card-body d-flex bgProduct growID">
                     <a href="" class="mx-auto text-center" data-toggle="modal" data-target="#productModal">
                         <img class="img-fluid imgProduct mt-5" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
                     </a>
+                </div> #}
+
+                <div id="carousel-fiche-produit" class="carousel slide d-flex">
+                    <div class="col-4 m-0">
+                        <button type="button" class="active border-0 col-12 mb-2" data-bs-target="#carousel-fiche-produit" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1">
+                            <img class="w-100 mt-1 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
+                        </button>
+                        <button type="button" data-bs-target="#carousel-fiche-produit" data-bs-slide-to="1" class="col-12 border-0 " aria-label="Slide 2">
+                            <div class="card-body d-flex bg-carousel-button w-100 p-1">
+                                <img class="img-fluid img-carousel-button mt-1 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col-8 overflow-hidden">
+                        <div class="carousel-item active py-1 h-100">
+                            <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" class="d-block m-auto" style="width: 375px" alt="...">
+                        </div>
+                        <div class="carousel-item h-100 py-1">
+                            <div class="card-body d-flex bgProduct rounded my-auto">
+                                <img class="img-fluid imgProduct mt-1 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 col-lg-6 add_to_cart_block">
-            <div class="card bg-light mb-3">
+        <div class="col-12 col-lg-5 add_to_cart_block">
+            <div class="card bg-light h-100">
                 <div class="card-body">
-                    <p class="price">Fiche produit</p>
+                    <p class="fw-bold fs-3 text-center">{{produit.titre}}</p>
+                    <p class="fs-5 text-center mb-2">Posté par : <a class="text-decoration-none" href="{{ path('profil_vendeur', {'id': produit.user.id}) }}"><strong>{{produit.user.pseudo}}</strong></a> </p>
+
                     <form method="get" action="{{ path('ajout_panier') }}">
-                        <div class="form-group d-flex flex-wrap flex-row justify-content-evenly">
+                        <h6 class="mb-2">Choisissez un format :</h6>
+                        <div class="form-group d-flex flex-wrap flex-row justify-content-evenly">  
                             {% set defaultcheck = true %}
                             {% for format in produit.format %}
                                 <div class="col-4 p-2">
@@ -62,16 +89,16 @@
                                         <div class="text-center">
                                             <p> Taille : {{format.format}} </p>
                                             <p> {{format.hauteur}}cm x {{format.largeur}}cm </p>
-                                            <p class="text-blue fs-5"> Prix : {{format.prix}} € </p>
+                                            <p class="text-blue fs-5 fw-bold"> Prix : {{format.prix}} € </p>
                                         </div>
                                     </label>
                                 </div>
                             {% set defaultcheck = false %}
                             {% endfor %}                        
                         </div>
-                        <div class="form-group">
+                        <div class="form-group my-2">
                             <label>Quantité :</label>
-                            <div class="input-group mb-3">
+                            {# <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button type="button" class="quantity-left-minus btn btn-danger btn-number me-1"  data-type="minus" data-field="">
                                         <i class="fa fa-minus"></i>
@@ -83,7 +110,15 @@
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> #}
+
+                                <select name="quantity" class="form-select">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                         </div>
                         <input type="hidden" name="id_produit" value="{{produit.id}}">
                         <div class="text-center ">
@@ -102,4 +137,21 @@
             </div>
         </div>  
     </div>
+    <div class="row">
+        {% if sameCategorie|length > 1 %}
+            <h2 class="text-white my-5"> Articles similaires </h2>
+            {% for sameproduit in sameCategorie %}
+                {% if sameproduit.id != produit.id %}
+                    <div class="col-md-6 col-lg-3 col-xl-2 mb-4 d-flex">
+                        <div id="product-1" class="single-product my-auto">
+                            <div class="part-1 grow">
+                                <a href=" {{path("fiche_produit", {'id' : sameproduit.id})}} "><img src="{{ asset("uploads/photos/" ~ sameproduit.photo)}}" class="w-100" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

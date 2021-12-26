@@ -1,16 +1,26 @@
 .bgProduct{
     background-image: url(https://www.murs-3d.fr/3168-thickbox_default/planche-de-bois-vieilli.jpg);
-    background-size: contain;
-    height: 600px;
+    height: 500px;
     width: auto;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+.bg-carousel-button{
+    background-image: url(https://www.murs-3d.fr/3168-thickbox_default/planche-de-bois-vieilli.jpg);
+    background-size: contain;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img-carousel-button{
+    height: 100px;
+}
+
 .imgProduct{
     padding: 0 !important;
-    height: 250px !important;
-    width: 200px !important;
+    height: 225px !important;
 }
 
 .bloc_left_price {
@@ -32,13 +42,6 @@
 }
 .category_block li a {
     color: #1f1e1e;
-}
-.add_to_cart_block .price {
-    color: #1f1e1e;
-    text-align: center;
-    font-weight: bold;
-    font-size: 200%;
-    margin-bottom: 0;
 }
 .add_to_cart_block .price_discounted {
     color: #343a40;
@@ -65,3 +68,6 @@
     color: gold;
 }
 
+#carousel-fiche-produit .carousel-item-next, #carousel-fiche-produit .carousel-item-prev, #carousel-fiche-produit  .carousel-item.active{
+    display: flex !important;
+}
