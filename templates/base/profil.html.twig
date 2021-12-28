@@ -18,7 +18,6 @@
         <div class="d-flex">
             <img src="{{ asset('uploads/photos/' ~ app.user.imageProfil) }}" class="rounded-circle mx-auto my-3 img_profil">
         </div>
-
         <table class="table text-center mb-0">
             <tr class="responsive_profil"><td class="fontTD"><strong>Email :</strong></td><td>{{ app.user.email }}</td></tr>
             <tr class="responsive_profil"><td class="fontTD"><strong>Pseudo :</strong></td><td>{{ app.user.pseudo }}</td></tr>
@@ -29,6 +28,32 @@
             <tr class="responsive_profil"><td class="fontTD"><strong>Code postal :</strong></td><td>{{ app.user.codePostal }}</td></tr>
             <tr class="responsive_profil"><a href="{{ path('edit_profil_user', {'id' : app.user.id}) }}" class="text-white btn btn-secondary w-100">Modifier</a></tr>
         </table>
+    </div>
+    <div class="card mx-auto col-lg-6 col-md-8 shadow p-3 mb-5 bg-body rounded mt-2">
+        <h3 class="text-center mb-2">Historique de Commande</h3>
+        {% if app.user.commandes|length > 0 %}
+            <table class="table text-center mb-0">
+                <thead>
+                    <tr>
+                        <th>Commande Numero</th>
+                        <th>Montant</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for commande in app.user.commandes %}
+                        <tr>
+                            <td><a href="{{ path('ma_commande', {'id' : commande.id}) }}">{{ commande.id }}</a></td>
+                            <td>{{ commande.montant }} €</td>
+                            <td>{{ commande.dateCommande|date('d-m-Y H:i') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Vous n'avez passée aucune commande.</p>
+        {% endif %}
+
     </div>
 </div>
 

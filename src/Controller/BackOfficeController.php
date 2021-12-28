@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Commande;
 use App\Entity\Commentaire;
 use App\Entity\Format;
 use App\Entity\Produit;
@@ -12,6 +13,7 @@ use App\Form\FormatFormType;
 use App\Form\ProduitFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\CategorieRepository;
+use App\Repository\CommandeRepository;
 use App\Repository\CommentaireRepository;
 use App\Repository\FormatRepository;
 use App\Repository\ProduitRepository;
@@ -350,6 +352,50 @@ class BackOfficeController extends AbstractController
         return $this->render('back_office/categorie_form.html.twig',[
             'categorieForm' => $categorieForm->createView(),
             'action' => $action,
+        ]);
+    }
+
+    #[Route('/backoffice/commande', name: 'show_commandes')]
+    #[Route('/backoffice/commande/{id}/remove', name: 'remove_commande')]
+    public function showCommande(CommandeRepository $repoCommande, EntityManagerInterface $manager, Commande $commande = null): Response
+    {
+
+        if($commande)
+        {
+            $id = $commande->getId();
+
+            $manager->remove($commande);
+            $manager->flush();
+
+            $this->addFlash('success', "La commande N°$id a été supprimer avec succès !");
+            return $this->redirectToRoute('show_commandes');
+        }
+
+        $colonnes = $manager->getClassMetadata(Commande::class)->getFieldNames();
+        $commandes = $repoCommande->findAll();
+
+        return $this->render('back_office/show_commande.html.twig', [
+            'commandes' => $commandes,
+            'colonnes' => $colonnes
+        ]);
+    }
+
+    #[Route('backoffice_commmande/{id}', name: 'commande_backoffice')]
+    public function ma_commande(Commande $commande, ProduitRepository $repoProduit, FormatRepository $repoFormat): Response 
+    {
+        $articles = array();
+        foreach($commande->getDetailsCommandes() as $details)
+        {
+            $article['produit'] = $repoProduit->find($details->getProduitId());
+            $article['format'] = $repoFormat->find($details->getFormatId());
+            $article['quantite'] = $details->getQuantite();
+            $article['prix'] = $details->getPrix();
+            array_push($articles, $article);
+        }
+
+        return $this->render('back_office/details_commande.html.twig', [
+            'commande' => $commande,
+            'articles' => $articles
         ]);
     }
 

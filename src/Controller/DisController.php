@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\Produit;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\FormatRepository;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,12 +34,17 @@ class DisController extends AbstractController
 
 
     #[Route('/produits', name: 'produits')]
-    public function produits(ProduitRepository $repoProduct): Response
+    #[Route('/produits/{categorie}', name: 'produits_par_cat')]
+    public function produits(ProduitRepository $repoProduct, string $categorie): Response
     {
+        if($categorie)
+        {
 
-        $produit = $repoProduct->findAll();
-
-        
+        }
+        else
+        {
+            $produit = $repoProduct->findAll();        
+        }        
 
         return $this->render('base/tous_nos_produits.html.twig', [
             'controller_name' => 'DisController',
@@ -182,10 +189,7 @@ class DisController extends AbstractController
     public function panier(Session $session): Response
     {
         $panier = $session->get("panier");
-
-        // features :
-        // Ajout frai de livraison si panier moins de 50€
-
+  
         return $this->render('base/panier.html.twig', [
             'panier' => $panier
         ]);
@@ -194,12 +198,34 @@ class DisController extends AbstractController
     #[Route('artiste/{id}', name: 'profil_vendeur')]
     public function mon_profil(User $user): Response 
     {
-
-
         return $this->render('base/profil_vendeur.html.twig', [
             'vendeur' => $user
         ]);
     }
 
+    #[Route('mescommandes/{id}', name: 'ma_commande')]
+    public function ma_commande(Commande $commande, ProduitRepository $repoProduit, FormatRepository $repoFormat): Response 
+    {
+        $user = $this->getUser();
+        if($user->getId() != $commande->getUser()->getId())
+        {
+            return $this->redirectToRoute('profil');
+        }
+
+        $articles = array();
+        foreach($commande->getDetailsCommandes() as $details)
+        {
+            $article['produit'] = $repoProduit->find($details->getProduitId());
+            $article['format'] = $repoFormat->find($details->getFormatId());
+            $article['quantite'] = $details->getQuantite();
+            $article['prix'] = $details->getPrix();
+            array_push($articles, $article);
+        }
+
+        return $this->render('base/ma_commande.html.twig', [
+            'commande' => $commande,
+            'articles' => $articles
+        ]);
+    }
     
 }
