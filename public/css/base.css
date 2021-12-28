@@ -607,3 +607,7 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
     font-size: 1.25rem;
   }
 }
+
+.bg-golden{
+    background-color: #c49a52;
+}

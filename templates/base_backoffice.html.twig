@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.88.1">
-        <title>Dashboard Template · Bootstrap v5.1</title>
+        <title>Boots Art BACKOFFICE</title>
 
         {# Tom-Select #}
         <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/css/tom-select.css" rel="stylesheet">
@@ -49,7 +49,6 @@
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
             <div class="navbar-nav">
                 <div class="nav-item text-nowrap">
                     <a class="nav-link px-3" href="{{ path('home') }}">Quitter</a>
@@ -161,20 +160,35 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li class="mb-1">
+                                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse6" aria-expanded="true">
+                                    Commandes
+                                </button>
+                                <div class="collapse show" id="home-collapse6" style="">
+                                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                        <li class="nav-item">
+                                            <a class="nav-link fs-6" aria-current="page" href="{{ path('show_commandes') }}">
+                                                <i class="bi bi-basket3-fill"></i>
+                                                Liste des Commandes
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                             
                         </ul>
                         <hr>
                         <div class="dropdown bg-dark p-3">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://cdn.shopify.com/s/files/1/0090/7034/6276/products/rengoku_kyojuro_400x.jpg?v=1589960764" alt="" width="32" height="32" class="rounded-circle me-2">
-                                <strong>mdo</strong>
+                                <img src="{{ asset('uploads/photos/' ~ app.user.imageProfil) }}" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>{{ app.user.pseudo }}</strong>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                                 <li><a class="dropdown-item" href="#">New project...</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ path('profil') }}">Profil</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_logout') }}">Sign out</a></li>
                             </ul>
                         </div>
                     </div>

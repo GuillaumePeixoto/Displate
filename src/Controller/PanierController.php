@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
+use App\Entity\DetailsCommande;
 use App\Entity\Produit;
 use App\Repository\FormatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\TextUI\Command;
 use Symfony\Component\HttpFoundation\Request;
 
 class PanierController extends AbstractController
@@ -88,6 +92,48 @@ class PanierController extends AbstractController
         $session->set("panier", []);
 
         return $this->redirectToRoute("panier");
+    }
+
+    /**
+     * @Route("/panier/achat", name="validatePanier")
+     */
+    public function validPanier(SessionInterface $session, EntityManagerInterface $manager) : Response
+    {
+        $panier = $session->get("panier", []);
+        $commande = new Commande;
+        $commande->setDateCommande(new \DateTime());
+        $commande->setUser($this->getUser());
+        $montant = 0;
+        foreach($panier as $produitPanier)
+        {
+            $prix = $produitPanier['quantite'] * $produitPanier['format']->getPrix();
+            $montant += $prix;
+        }
+
+        $commande->setMontant($montant);
+
+        $manager->persist($commande);
+
+
+
+        foreach($panier as $produitPanier)
+        {
+            $detailsCommande = new DetailsCommande;
+            $detailsCommande->setProduitId($produitPanier['produit']->getId());
+            $detailsCommande->setFormatId($produitPanier['format']->getId());
+            $detailsCommande->setQuantite($produitPanier['quantite']);
+            $prix = $produitPanier['quantite'] * $produitPanier['format']->getPrix();
+            $detailsCommande->setPrix($prix);
+            $detailsCommande->setCommande($commande);
+            $manager->persist($detailsCommande);
+
+        }
+        $manager->flush();        
+
+        $this->addFlash('success', "Félicitations ! Votre commande a été enregistré avec succès !");
+        $session->remove('panier');
+
+        return $this->redirectToRoute("profil");
     }
 
 }
