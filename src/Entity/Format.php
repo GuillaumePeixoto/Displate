@@ -102,6 +102,12 @@ class Format
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->format;
+    }
+
+
     /**
      * @return Collection|Produit[]
      */

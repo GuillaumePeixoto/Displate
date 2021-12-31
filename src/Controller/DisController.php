@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Commande;
 use App\Entity\Produit;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\SearchFormType;
+use App\Repository\CategorieRepository;
 use App\Repository\FormatRepository;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
@@ -35,20 +38,35 @@ class DisController extends AbstractController
 
     #[Route('/produits', name: 'produits')]
     #[Route('/produits/{categorie}', name: 'produits_par_cat')]
-    public function produits(ProduitRepository $repoProduct, string $categorie): Response
+    public function produits(ProduitRepository $repoProduct, Request $request): Response
     {
-        if($categorie)
-        {
 
-        }
-        else
-        {
-            $produit = $repoProduct->findAll();        
-        }        
+        // $cat = '';
+        // if($categorie == "nouveaute")
+        // {
+        //     $produit = $repoProduct->findBy([], ['id' => 'DESC'], null , null);
+        //     $cat = $categorie;
+        // }
+        // elseif($categorie)
+        // {
+        //     $category = $repoCategory->findBy(['titre' => $categorie], [], null , null);
+        //     $cat = $categorie;
+        //     $produit = $repoProduct->findByCategorie($category);
+        // }
+        // else
+        // {
+        //     $data = new SearchData();
+        //     $produit = $repoProduct->findSearch($data);     
+        // }        
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $searchForm = $this->createForm(SearchFormType::class, $data);
+        $searchForm->handleRequest($request);
+        $produit = $repoProduct->findSearch($data);
 
         return $this->render('base/tous_nos_produits.html.twig', [
-            'controller_name' => 'DisController',
-            'produit' => $produit
+            'produit' => $produit,
+            'searchForm' => $searchForm->createView()
         ]);
     }
 

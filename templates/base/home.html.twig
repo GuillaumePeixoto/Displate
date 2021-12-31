@@ -38,42 +38,22 @@
                 </button>
             </div>
 
+            <div class="mx-auto col-10">
               <h2 class="text-center me-5 my-3 titrehome">Nouveautés</h2>
-
-              <div id="carousel1" class="carousel slide">
-  
-                <div class="carousel-inner text-center">
-                {% set nb_tour = 0 %}
-                  <div class="carousel-item active">
-                    {% set nb_carousel = 0 %}
-                    {% for produit in derniers_produit %}
-                      <a href="{{ path('fiche_produit', {'id': produit.id}) }}" class="text-decoration-none">
-                        <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" alt="{{produit.titre}}" class="mx-4" style="width:300px">
-                      </a>
-                      {% set nb_tour = nb_tour + 1 %}
-                      {% if nb_tour == 3 %}
-                        {% set nb_carousel = nb_carousel + 1 %}
-                        </div>
-                        {% if nb_carousel != 3 %}
-                          <div class="carousel-item">                      
-                        {% endif %}                        
-                        {% set nb_tour = 0 %}
-                      {% endif %}
-                    {% endfor %}
-                                 
+              <div id="sameProdSplide" class="splide">
+                  <div class="splide__track">
+                      <ul class="splide__list">
+                          {% for produit in derniers_produit %}
+                              <li class="splide__slide mx-1 d-flex align-items-center">
+                                  <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
+                                      <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
+                                  </a>
+                              </li>
+                          {% endfor %}
+                      </ul>
                   </div>
-
-                
-                    <button class="carousel-control-prev text-primary" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
-                      <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-left-square"></i></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-
-                    <button class="carousel-control-next ms-3" type="button" data-bs-target="#carousel1" data-bs-slide="next">
-                      <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-right-square"></i></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+              </div>
+            </div>
 
 
               <h2 class="text-center my-3 titrehome">Bestcellers</h2>

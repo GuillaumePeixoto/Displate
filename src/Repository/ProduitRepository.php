@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProduitRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Produit::class);
+        $this->paginator = $paginator;
     }
 
     // /**
@@ -44,10 +47,45 @@ class ProduitRepository extends ServiceEntityRepository
                       ->setMaxResults(10);
  
         $query = $query->add('where', $query->expr()->in('categorie', ':categorie'))
-                      ->setParameter('categorie', $categories)
-                      ->getQuery()
-                      ->getResult();
-        return $query;
+                      ->setParameter('categorie', $categories);
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function findSearch(SearchData $search)
+    {
+        $query = $this
+            ->createQueryBuilder('produit')
+            ->select('produit', 'categorie', 'format')
+            ->leftJoin('produit.categorie', 'categorie')
+            ->leftJoin('produit.format', 'format');
+        if(!empty($search->q))
+        {
+            $query = $query
+                    ->andWhere('produit.titre LIKE :q')
+                    ->setParameter('q', "%{$search->q}%");
+        }
+
+        if(!empty($search->categories))
+        {
+            $query = $query
+                    ->andWhere('categorie.id IN (:categories)')
+                    ->setParameter('categories', $search->categories);
+        }
+
+        if(!empty($search->formats))
+        {
+            $query = $query
+                    ->andWhere('format.id IN (:formats)')
+                    ->setParameter('formats', $search->formats);
+        }
+
+        $query = $query->getQuery();
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            24
+        );
     }
 
     /*
