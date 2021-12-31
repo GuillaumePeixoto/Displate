@@ -39,7 +39,7 @@
 <div class="container my-5">
     <div class="row">
         <a href="{{ path('produits') }}" class="text-white text-decoration-none my-2"><i class="bi bi-caret-left-fill"></i> Retour vers la boutique</a>
-        <div class="col-12 col-lg-7">
+        <div class="col-12 col-lg-7 mb-2">
             <div class="card bg-light">
                 {# <div class="card-body d-flex bgProduct growID">
                     <a href="" class="mx-auto text-center" data-toggle="modal" data-target="#productModal">
@@ -47,23 +47,23 @@
                     </a>
                 </div> #}
 
-                <div id="carousel-fiche-produit" class="carousel slide d-flex">
-                    <div class="col-4 m-0">
+                <div id="carousel-fiche-produit" class="carousel slide d-flex flex-wrap">
+                    <div class="col-md-4 col-12 m-0">
                         <button type="button" class="active border-0 col-12 mb-2" data-bs-target="#carousel-fiche-produit" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1">
                             <img class="w-100 mt-1 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
                         </button>
-                        <button type="button" data-bs-target="#carousel-fiche-produit" data-bs-slide-to="1" class="col-12 border-0 " aria-label="Slide 2">
+                        <button type="button" data-bs-target="#carousel-fiche-produit" data-bs-slide-to="1" class="col-12 border-0 d-none d-md-block" aria-label="Slide 2">
                             <div class="card-body d-flex bg-carousel-button w-100 p-1">
                                 <img class="img-fluid img-carousel-button mt-1 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
                             </div>
                         </button>
                     </div>
-                    <div class="col-8 overflow-hidden">
+                    <div class="col-md-8 col-12 d-none d-md-block overflow-hidden">
                         <div class="carousel-item active py-1 h-100">
                             <img src="{{ asset('uploads/photos/' ~ produit.photo) }}" class="d-block m-auto" style="width: 375px" alt="...">
                         </div>
                         <div class="carousel-item h-100 py-1">
-                            <div class="card-body d-flex bgProduct rounded my-auto">
+                            <div class="card-body d-flex bgProduct rounded my-auto w-50 h-100">
                                 <img class="img-fluid imgProduct mt-1 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
                             </div>
                         </div>
@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-5 add_to_cart_block">
+        <div class="col-12 col-lg-5 add_to_cart_block  mb-2">
             <div class="card bg-light h-100">
                 <div class="card-body">
                     <p class="fw-bold fs-3 text-center">{{produit.titre}}</p>
@@ -139,10 +139,10 @@
     </div>
     <div class="row">
         {% if sameCategorie|length > 1 %}
-            <h2 class="text-white my-5"> Articles similaires </h2>
-            {% for sameproduit in sameCategorie %}
+            <h2 class="text-white my-3"> Articles similaires </h2>
+            {# {% for sameproduit in sameCategorie %}
                 {% if sameproduit.id != produit.id %}
-                    <div class="col-md-6 col-lg-3 col-xl-2 mb-4 d-flex">
+                    <div class="col-6 col-lg-3 col-xl-2 mb-4 d-flex">
                         <div id="product-1" class="single-product my-auto">
                             <div class="part-1 grow">
                                 <a href=" {{path("fiche_produit", {'id' : sameproduit.id})}} "><img src="{{ asset("uploads/photos/" ~ sameproduit.photo)}}" class="w-100" alt=""></a>
@@ -150,8 +150,23 @@
                         </div>
                     </div>
                 {% endif %}
-            {% endfor %}
+            {% endfor %} #}
         {% endif %}
+    </div>
+    <div id="sameProdSplide" class="splide">
+        <div class="splide__track">
+            <ul class="splide__list">
+                {% for sameproduit in sameCategorie %}
+                    {% if sameproduit.id != produit.id %}
+                        <li class="splide__slide mx-1 d-flex align-items-center">
+                            <a href=" {{path("fiche_produit", {'id' : sameproduit.id})}} ">
+                                <img src="{{ asset("uploads/photos/" ~ sameproduit.photo)}}" class="" style="width: 250px" alt="">
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -33,7 +33,7 @@
         <link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}}">
         <link rel="stylesheet" href=" {{asset('css/profil.css')}}">
         <link rel="stylesheet" href=" {{asset('css/panier.css')}}">
-
+        <link rel="stylesheet" href=" {{asset('css/slider.min.css')}}">
 
         <link rel="stylesheet" href=" {{asset('css/base.css')}} ">
 
@@ -87,7 +87,7 @@
                 <li class="nav-item">
                   <a class="nav-link text-white hover_effect mx-2" aria-current="page" href="{{ path('home') }}">Home</a>
                 </li>
-                <li class="dropdown pos-static nav-item">
+                {# <li class="dropdown pos-static nav-item">
                   <button class="btn border-0 text-white dropdown-toggle nav-link hover_effect" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Produit
                   </button>
@@ -100,7 +100,7 @@
                         <h3 class="text-center text-white">Categorie</h3>
                         <div class=" d-flex col-12">
                           <div class="col-4">
-                            <a class="text-center" href="#">Anime</a>
+                            <a class="text-center" href="{{ path('produits_par_cat', {'categorie' : 'anime'}) }}">Anime</a>
                             <a class="text-center" href="#">Jeu Vidéo</a>
                             <a class="text-center" href="#">Film</a>
                           </div>
@@ -126,12 +126,15 @@
                       </div>
                         <div class="column col-3 p-2">
                           <h3 class="text-center text-white">Tags</h3> 
-                          <a class="text-center" href="#">Nouveautés</a>
+                          <a class="text-center" href="{{ path('produits_par_cat', {'categorie' : 'nouveaute'}) }}">Nouveautés</a>
                           <a class="text-center" href="#">Bestcellers</a>
                           <a class="text-center" href="#">Tout nos Produits</a>
                       </div>
                     </div>
                   </ul>
+                </li> #}
+                <li class="nav-item">
+                    <a class="nav-link text-white hover_effect mx-2" href="{{ path('produits') }}">Produits</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white hover_effect mx-2" href="{{ path('nos_artistes') }}">Artistes</a>
@@ -322,8 +325,22 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="{{asset('js/lightbox.js')}}"></script>
         <script src="{{asset('js/base.js')}}"></script>
+        <script src="{{asset('js/slider.min.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script>
 
+          var splide = new Splide( '#sameProdSplide', {
+            type   : 'loop',
+            start: 1,
+            perPage: 10,
+            perMove: 1,
+            clone: 0,
+            pagination: false,
+            autoWidth: true
+          });
+
+          splide.mount();
+        </script>
         <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v64f9daad31f64f81be21cbef6184a5e31634941392597" integrity="sha512-gV/bogrUTVP2N3IzTDKzgP0Js1gg4fbwtYB6ftgLbKQu/V8yH2+lrKCfKHelh4SO3DPzKj4/glTO+tNJGDnb0A==" data-cf-beacon='{"rayId":"6bde55290d24a855","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.12.0","si":100}' crossorigin="anonymous"></script>
 
 
