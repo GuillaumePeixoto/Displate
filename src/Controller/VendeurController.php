@@ -20,9 +20,7 @@ class VendeurController extends AbstractController
     #[Route('/vendeur', name: 'vendeur')]
     public function index(): Response
     {
-        return $this->render('vendeur/index.html.twig', [
-            'controller_name' => 'VendeurController',
-        ]);
+        return $this->render('vendeur/index.html.twig');
     }
 
     #[Route('vendeur/profil/', name: 'mon_profil')]

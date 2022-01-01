@@ -1,10 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Page Profil
+    Boots Art | Profil
 {% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="col-4 mx-auto text-center bg-success p-3 text-white mb-3 rounded">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     <h1 class="text-center my-5 titreprofil">Votre page profil : {{ app.user.prenom }} {{ app.user.nom }}</h1>
 

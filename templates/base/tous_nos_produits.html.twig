@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-     Artiste Boots Art
+    Boots Art | Produits
 {% endblock %}
 
 {% block body %}
@@ -48,7 +48,7 @@
 			</div>
 			<div class="col-lg-9 col-12 d-flex flex-wrap">
 				{% if produit is empty %}
-					<h4 class="text-center titre fs-5">Aucun produit ne correspond à votre recherche.</h4>
+					<h4 class="mx-auto text-center titre fs-5">Aucun produit ne correspond à votre recherche.</h4>
 				{% else %}
 					{% for data in produit %}
 						<div class="col-6 col-lg-4 col-xl-3 d-flex p-2">

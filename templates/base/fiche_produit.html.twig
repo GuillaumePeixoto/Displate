@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Boots Arts fiche produit
+    Boots Art | {{produit.titre}}
 {% endblock %}
 
 
@@ -38,6 +38,12 @@
 
 <div class="container my-5">
     <div class="row">
+        {% for message in app.flashes('success') %}
+            <div class="col-4 mx-auto text-center bg-success p-3 text-white mb-3 rounded">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <a href="{{ path('produits') }}" class="text-white text-decoration-none my-2"><i class="bi bi-caret-left-fill"></i> Retour vers la boutique</a>
         <div class="col-12 col-lg-7 mb-2">
             <div class="card bg-light">
@@ -139,7 +145,7 @@
     </div>
     <div class="row">
         {% if sameCategorie|length > 1 %}
-            <h2 class="text-white my-3"> Articles similaires </h2>
+            <h2 class="my-3 titrehome"> Articles similaires </h2>
             {# {% for sameproduit in sameCategorie %}
                 {% if sameproduit.id != produit.id %}
                     <div class="col-6 col-lg-3 col-xl-2 mb-4 d-flex">
@@ -151,22 +157,74 @@
                     </div>
                 {% endif %}
             {% endfor %} #}
+            <div id="sameProdSplide" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {% for sameproduit in sameCategorie %}
+                            {% if sameproduit.id != produit.id %}
+                                <li class="splide__slide mx-1 d-flex align-items-center">
+                                    <a href=" {{path("fiche_produit", {'id' : sameproduit.id})}} ">
+                                        <img src="{{ asset("uploads/photos/" ~ sameproduit.photo)}}" class="" style="width: 250px" alt="">
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         {% endif %}
     </div>
-    <div id="sameProdSplide" class="splide">
-        <div class="splide__track">
-            <ul class="splide__list">
-                {% for sameproduit in sameCategorie %}
-                    {% if sameproduit.id != produit.id %}
-                        <li class="splide__slide mx-1 d-flex align-items-center">
-                            <a href=" {{path("fiche_produit", {'id' : sameproduit.id})}} ">
-                                <img src="{{ asset("uploads/photos/" ~ sameproduit.photo)}}" class="" style="width: 250px" alt="">
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
+    <div class="mt-4"> 
+
+        {% set acheter = false %}
+        
+        {% for commande in app.user.commandes %}
+            {% for detail in commande.detailsCommandes %}
+                {% if detail.produitid == produit.id %}
+                    {% set acheter = true %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        {% if app.user %}
+            {% if acheter == true %}
+                {{ form_start(commentaireForm) }}
+
+                    <p class="text-white"> Commentaire </p>
+                    {{ form_widget(commentaireForm) }}
+
+                    <button class="btn btn-dark">Poster</button>
+
+                 {{ form_end(commentaireForm) }}
+            {% else %}
+
+                <p class="text-center text-white">Vous ne pouvez pas posté de commentaire sur le produit car vous ne l'avez pas acheter</p>
+
+            {% endif %}
+            
+            
+        {% else %}
+
+            <p class="text-secondary">Il vous faut être <a href="{{ path('app_register') }}" class="link-secondary">connecter</a> et avoir acheter le produit pour pouvoir poster un avis.</p>
+            
+        {% endif %}
+
+        <h4 class="titrehome fs-2 my-3">Avis</h4>
+
+        {% if produit.commentaires|length == 0 %}
+            <h6 class="text-center text-white">Aucun avis n'a été poster.</h6>
+        {% else %}
+            {% for commentaire in produit.commentaires %}
+                <div class="bg-light rounded p-2 my-2">
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-bold">{{ commentaire.auteur }}</p>
+                        <p class="float-end">Posté le : {{ commentaire.date|date('d-m-Y') }} à {{ commentaire.date|date('H:i') }}</p>
+                    </div>
+                    <hr class="my-1">
+                    <p>{{commentaire.commentaire}}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
