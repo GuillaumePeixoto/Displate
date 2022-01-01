@@ -52,7 +52,7 @@
                                 {{ user.description }}
                             {% endif %}
                         </td>
-                        <td><a href="{{ path('profil_vendeur', {'id' : user.id }) }}" class="btn bg-success text-white"><i class="bi bi-eye-fill"></i></a> <a href="{{ path('modify_user', {'id' : user.id }) }}" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="{{ path('remove_user', {'id': user.id}) }}"><i class="bi bi-trash"></i></a></td>
+                        <td> {% if 'ROLE_VENDEUR' in user.roles %} <a href="{{ path('profil_vendeur', {'id' : user.id }) }}" class="btn bg-success text-white"><i class="bi bi-eye-fill"></i></a>{% endif %} <a href="{{ path('modify_user', {'id' : user.id }) }}" class="btn bg-primary text-white"><i class="bi bi-pencil-square"></i></a> <a class="btn bg-danger text-white" href="{{ path('remove_user', {'id': user.id}) }}"><i class="bi bi-trash"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>

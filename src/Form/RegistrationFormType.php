@@ -26,6 +26,56 @@ class RegistrationFormType extends AbstractType
         if($options['userRegistration'] == true)
         {
             $builder
+                ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Utilisateur' => 'ROLE_USER',
+                    'Vendeur' => 'ROLE_VENDEUR',
+                ],
+                'expanded' => true,
+                'multiple' => true,
+                'label' => "Définir le role de l'utilisteur"
+                ])
+                ->add('imageProfil', FileType::class, [
+                    'label' => "Uploader une image de profil",
+                    'mapped' => true,
+                    'required' => false,
+                    'data_class' => null,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '5M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/jpg'
+                            ],
+                            'mimeTypesMessage' => "Formats autorisé : jpeg, png, jpg."
+                        ])
+                    ]
+                ])
+                ->add('banniereProfil', FileType::class, [
+                    'label' => "Uploader une bannière ",
+                    'mapped' => true,
+                    'required' => false,
+                    'data_class' => null,
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '5M',
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/jpg'
+                            ],
+                            'mimeTypesMessage' => "Formats autorisé : jpeg, png, jpg."
+                        ])
+                    ]
+                ])
+                ->add('description', TextareaType::class, [
+                    'required' => false,
+                    'attr' => [
+                        'placeholder' => "Saisir une description du produit",
+                        'rows' => "10"
+                    ]
+                ])
                 ->add('adresse', TextType::class, [
                     'required' => false,
                     'constraints' => [
@@ -283,7 +333,7 @@ class RegistrationFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'label' => "Définir le role de l'utilisteur"
-            ]);
+                ]);
         }
         elseif($options['adminUserUpdate'] == true)
         {

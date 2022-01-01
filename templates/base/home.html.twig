@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Home Boots Arts
+    Boots Art | Home
 {% endblock %}
 
 {% block body %}
-    
+<div class="mb-5">
     <div>
       <img src="{{ asset("img/baniere.png") }}" style="width: 100%; height: 125px" class="stickyb" alt="">
     </div>
@@ -13,114 +13,76 @@
     <div id="CarouselHome" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-
                 <img src="{{ asset("img/caroussel-1.png") }}" class="d-block w-100" alt="...">
-
             </div>
-
             <div class="carousel-item">
                 <img src="{{ asset("img/caroussel-2.png") }}" class="d-block w-100" alt="...">
             </div>
-
             <div class="carousel-item">
-              <img src="{{ asset("img/caroussel-3.png") }}" class="d-block w-100" alt="...">
+                <img src="{{ asset("img/caroussel-3.png") }}" class="d-block w-100" alt="...">
             </div>
-          </div>
+        </div>
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#CarouselHome" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
+        <button class="carousel-control-prev" type="button" data-bs-target="#CarouselHome" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
 
-                <button class="carousel-control-next" type="button" data-bs-target="#CarouselHome" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#CarouselHome" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="mx-auto col-10 mt-5">
+        <h2 class="text-center me-5 my-3 titrehome">Nouveautés</h2>
+        <div id="newProdSlide" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for produit in derniers_produit %}
+                        <li class="splide__slide mx-1 d-flex align-items-center">
+                            <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
+                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
+        </div>
+    </div>
 
-            <div class="mx-auto col-10">
-              <h2 class="text-center me-5 my-3 titrehome">Nouveautés</h2>
-              <div id="sameProdSplide" class="splide">
-                  <div class="splide__track">
-                      <ul class="splide__list">
-                          {% for produit in derniers_produit %}
-                              <li class="splide__slide mx-1 d-flex align-items-center">
-                                  <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
-                                      <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
-                                  </a>
-                              </li>
-                          {% endfor %}
-                      </ul>
-                  </div>
-              </div>
+    <div class="mx-auto col-10 mt-5">
+        <h2 class="text-center me-5 my-3 titrehome">Bestsellers</h2>
+        <div id="bestSellProdSlide" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for produit in best_sellers %}
+                        <li class="splide__slide mx-1 d-flex align-items-center">
+                            <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
+                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
+        </div>
+    </div>
 
-
-              <h2 class="text-center my-3 titrehome">Bestcellers</h2>
-
-              <div id="carousel2" class="carousel slide">
-              
-                <div class="carousel-inner text-center ">
-                  <div class="carousel-item active">
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded" >
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-lg-inline" >
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-xxl-inline" >
-                  </div>
-
-                  <div class="carousel-item text-center">
-                    <img src="https://picsum.photos/300/300" class="mx-2 shadow p-3 mb-5 bg-body rounded" >
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-lg-inline" >
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-xxl-inline" >
-                  </div>
-
-                  <div class="carousel-item text-center">
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded" >
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-lg-inline" >
-                    <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-xxl-inline" >
-                  </div>
-                </div>
-
-                  <button class="carousel-control-prev text-primary" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
-                    <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-left-square"></i></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-
-                  <button class="carousel-control-next ms-3" type="button" data-bs-target="#carousel2" data-bs-slide="next">
-                    <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-right-square"></i></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-              </div>
-
-              <h2 class="text-center my-3 titrehome">Des trucs</h2>
-
-          <div id="carousel3" class="carousel slide">
-  
-            <div class="carousel-inner text-center ">
-              <div class="carousel-item active">
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded" >
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-lg-inline" >
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-xxl-inline" >
-              </div>
-              <div class="carousel-item text-center">
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded" >
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-lg-inline" >
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-xxl-inline" >
-              </div>
-              <div class="carousel-item text-center">
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded" >
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-lg-inline" >
-                <img src="https://picsum.photos/300/300" class="mx-5 shadow p-3 mb-5 bg-body rounded d-none d-xxl-inline" >
-              </div>
+    <div class="mx-auto col-10 mt-5">
+        <h2 class="text-center me-5 my-3 titrehome">Quelques Produits</h2>
+        <div id="randomProdSlide" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for produit in random_produit %}
+                        <li class="splide__slide mx-1 d-flex align-items-center">
+                            <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
+                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
-
-              <button class="carousel-control-prev text-primary" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
-                <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-left-square"></i></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next">
-                <span class="fs-1 text-white" aria-hidden="true"><i class="bi bi-arrow-right-square"></i></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-
+        </div>
+    </div>
+</div>
 {% endblock %}

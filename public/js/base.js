@@ -15,6 +15,25 @@ $(document).ready(function(){
         }
     });
 
+    $('#chooseRole').change(function(){
+        $('#artisteInputs').toggle('d-none');
+        if( $('#chooseRole').is(':checked') ){
+            console.log('oui');
+            $('#registration_form_roles_1').prop('checked', true);
+        } else {
+            console.log('non');
+            $('#registration_form_roles_1').prop('checked', false);
+            $('#registration_form_imageProfil').val('');
+            $('#registration_form_banniereProfil').val('');
+            $('#registration_form_description').val('');
+            $('#banniere-preview').css('display', 'none');
+            $('#profil-preview').css('display', 'none');
+        }
+    });
+
+    if( $('#chooseRole').is(':checked') ){
+        $('#artisteInputs').css('display', 'block');
+    }
 
     $('#carousel1').carousel('pause');
     $('#carousel2').carousel('pause');

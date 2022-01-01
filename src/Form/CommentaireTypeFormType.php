@@ -16,6 +16,7 @@ class CommentaireTypeFormType extends AbstractType
         $builder
         ->add('commentaire', TextareaType::class, [
             'required' => false,
+            'label' => false,
             'attr' => [
                 'placeholder' => "Saisir le contenu du commentaire",
                 'rows' => "10"

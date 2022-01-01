@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Entity\Commande;
+use App\Entity\Commentaire;
 use App\Entity\Produit;
 use App\Entity\User;
+use App\Form\CommentaireTypeFormType;
 use App\Form\RegistrationFormType;
 use App\Form\SearchFormType;
 use App\Repository\CategorieRepository;
+use App\Repository\DetailsCommandeRepository;
 use App\Repository\FormatRepository;
 use App\Repository\UserRepository;
 use App\Repository\ProduitRepository;
@@ -75,28 +78,53 @@ class DisController extends AbstractController
     #[Route('/a_propos', name: 'a_propos')]
     public function about(): Response
     {
-        return $this->render('base/a_propos.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
+        return $this->render('base/a_propos.html.twig');
     }
 
 
     #[Route('/', name: 'home')]
-    public function home(ProduitRepository $repoProduct): Response
+    public function home(ProduitRepository $repoProduct, DetailsCommandeRepository $repoDetailsCommande): Response
     {
-        $produit = $repoProduct->findAll();
 
         $derniers_produit = $repoProduct->findBy([], ['id' => 'DESC'], 9, null);
 
+        $random_produit = $repoProduct->findBy([], null, 9, rand(0, 5));
+
+        $all_details = $repoDetailsCommande->findAll();
+
+        $produit_best_sellers = [];
+
+        foreach($all_details as $detail)
+        {
+            if(!empty($produit_best_sellers[$detail->getProduitId()]))
+            {
+                $produit_best_sellers[$detail->getProduitId()] += $detail->getQuantite();
+            }
+            else
+            {
+                $produit_best_sellers[$detail->getProduitId()] = $detail->getQuantite();
+            }
+        }
+
+        arsort($produit_best_sellers, SORT_NUMERIC);
+
+        $bestSellers = [];
+
+        foreach($produit_best_sellers as $id => $quantite)
+        {
+            array_push($bestSellers, $repoProduct->find($id));
+        }
+
+
         return $this->render('base/home.html.twig', [
-            'controller_name' => 'DisController',
-            'produit' => $produit,
-            'derniers_produit' => $derniers_produit
+            'derniers_produit' => $derniers_produit,
+            'random_produit' => $random_produit,
+            'best_sellers' => $bestSellers
         ]);
     }
 
     #[Route('/fiche_produit/{id}', name: 'fiche_produit')]
-    public function ficheProduit(Produit $produit, ProduitRepository $repoProduct): Response
+    public function ficheProduit(Produit $produit, ProduitRepository $repoProduct, EntityManagerInterface $manager, Request $request): Response
     {
         $categories = array();
         foreach($produit->getCategorie() as $category)
@@ -106,43 +134,62 @@ class DisController extends AbstractController
         
         $sameCategorie = $repoProduct->findByCategorie($categories);
 
+        $commentaire = new Commentaire;
+
+        $commentForm = $this->createForm(CommentaireTypeFormType::class, $commentaire);
+
+        $commentForm->handleRequest($request);
+
+        if($commentForm->isSubmitted() && $commentForm->isValid())
+        {
+            $user = $this->getUser();
+
+            $commentaire->setDate(new \DateTime())
+                    ->setAuteur($user->getPrenom() . ' ' . $user->getNom())
+                    ->setProduit($produit);
+
+            // dd($comment);
+
+            $manager->persist($commentaire);
+            $manager->flush();
+
+            $this->addFlash('success', "Félicitations ! Votre commentaire a bien été posté !");
+
+            return $this->redirectToRoute('fiche_produit', [
+                'id' => $produit->getId()
+            ]);
+        }
+
         return $this->render('base/fiche_produit.html.twig', [
             'produit' => $produit,
-            'sameCategorie' => $sameCategorie
+            'sameCategorie' => $sameCategorie,
+            'commentaireForm' => $commentForm->createView()
         ]);
     }
 
     #[Route('/contact', name: 'contact')]
     public function fichecontact(): Response
     {
-        return $this->render('base/contact.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
+        return $this->render('base/contact.html.twig');
     }
 
     #[Route('/faq', name: 'faq')]
     public function fichefaq(): Response
     {
-        return $this->render('base/faq.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
+        return $this->render('base/faq.html.twig');
     }
 
 
     #[Route('/profil', name: 'profil')]
     public function pageProfil(): Response
     {
-        return $this->render('base/profil.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
+        return $this->render('base/profil.html.twig');
     }
 
     #[Route('/legal_notice', name: 'legal_notice')]
     public function pageNotice(): Response
     {
-        return $this->render('base/legal_notice.html.twig', [
-            'controller_name' => 'DisController',
-        ]);
+        return $this->render('base/legal_notice.html.twig');
     }
 
     #[Route('/profil/{id}/edit', name: 'edit_profil_user')]
@@ -216,6 +263,11 @@ class DisController extends AbstractController
     #[Route('artiste/{id}', name: 'profil_vendeur')]
     public function mon_profil(User $user): Response 
     {
+        if(!in_array('ROLE_VENDEUR' ,$user->getRoles()))
+        {
+            return $this->redirectToRoute('nos_artistes');
+        }
+
         return $this->render('base/profil_vendeur.html.twig', [
             'vendeur' => $user
         ]);
