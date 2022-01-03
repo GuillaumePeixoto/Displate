@@ -86,9 +86,9 @@ class DisController extends AbstractController
     public function home(ProduitRepository $repoProduct, DetailsCommandeRepository $repoDetailsCommande): Response
     {
 
-        $derniers_produit = $repoProduct->findBy([], ['id' => 'DESC'], 9, null);
+        $derniers_produit = $repoProduct->findBy([], ['id' => 'DESC'], 10, null);
 
-        $random_produit = $repoProduct->findBy([], null, 9, rand(0, 5));
+        $random_produit = $repoProduct->findBy([], null, 10, rand(0, 10));
 
         $all_details = $repoDetailsCommande->findAll();
 

@@ -178,13 +178,15 @@
 
         {% set acheter = false %}
         
-        {% for commande in app.user.commandes %}
-            {% for detail in commande.detailsCommandes %}
-                {% if detail.produitid == produit.id %}
-                    {% set acheter = true %}
-                {% endif %}
+        {% if app.user %}
+            {% for commande in app.user.commandes %}
+                {% for detail in commande.detailsCommandes %}
+                    {% if detail.produitid == produit.id %}
+                        {% set acheter = true %}
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
+        {% endif %}
 
         {% if app.user %}
             {% if acheter == true %}
