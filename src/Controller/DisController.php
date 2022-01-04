@@ -88,7 +88,9 @@ class DisController extends AbstractController
 
         $derniers_produit = $repoProduct->findBy([], ['id' => 'DESC'], 10, null);
 
-        $random_produit = $repoProduct->findBy([], null, 10, rand(0, 10));
+        $random_produit = $repoProduct->findAll();
+        shuffle($random_produit);
+        $random_produit = array_slice($random_produit, 0, 10);
 
         $all_details = $repoDetailsCommande->findAll();
 
@@ -132,7 +134,7 @@ class DisController extends AbstractController
             array_push($categories, $category);
         }
         
-        $sameCategorie = $repoProduct->findByCategorie($categories);
+        $sameCategorie = $repoProduct->findByCategorie($categories, $produit->getId());
 
         $commentaire = new Commentaire;
 

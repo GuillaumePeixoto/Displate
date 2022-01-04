@@ -38,7 +38,7 @@
         <h2 class="text-center me-5 my-3 titrehome">Nouveautés</h2>
         <div id="newProdSlide" class="splide">
             <div class="splide__track">
-                <ul class="splide__list">
+                <ul class="splide__list w-100">
                     {% for produit in derniers_produit %}
                         <li class="splide__slide mx-1 d-flex align-items-center">
                             <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
@@ -55,7 +55,7 @@
         <h2 class="text-center me-5 my-3 titrehome">Bestsellers</h2>
         <div id="bestSellProdSlide" class="splide">
             <div class="splide__track">
-                <ul class="splide__list">
+                <ul class="splide__list w-100">
                     {% for produit in best_sellers %}
                         <li class="splide__slide mx-1 d-flex align-items-center">
                             <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
@@ -72,7 +72,7 @@
         <h2 class="text-center me-5 my-3 titrehome">Quelques Produits</h2>
         <div id="randomProdSlide" class="splide">
             <div class="splide__track">
-                <ul class="splide__list">
+                <ul class="splide__list w-100">
                     {% for produit in random_produit %}
                         <li class="splide__slide mx-1 d-flex align-items-center">
                             <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
