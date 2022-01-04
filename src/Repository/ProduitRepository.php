@@ -39,17 +39,29 @@ class ProduitRepository extends ServiceEntityRepository
     }
     */
 
-    public function findByCategorie($categories){
+    public function findByCategorie($categories, $id){
         $query = $this->createQueryBuilder('produit')
                       ->select('produit')
                       ->leftJoin('produit.categorie', 'categorie')
                       ->addSelect('categorie')
-                      ->setMaxResults(10);
+                      ->where('produit.id != :id')
+                      ->setParameter('id', $id);
  
-        $query = $query->add('where', $query->expr()->in('categorie', ':categorie'))
-                      ->setParameter('categorie', $categories);
+        $query = $query->andWhere($query->expr()->in('categorie', ':categorie'))
+                      ->setParameter('categorie', $categories)
+                      ->setMaxResults(10);
 
         return $query->getQuery()->getResult();
+    }
+
+    public function findNotEqual($id)
+    {
+        $query = $this->createQueryBuilder('produit')
+                      ->select('produit')
+                      ->where('produit.id != :id')
+                      ->setParameter('id', $id);
+        return $query->getQuery()->getResult();
+
     }
 
     public function findSearch(SearchData $search)

@@ -46,14 +46,14 @@
 
         <a href="{{ path('produits') }}" class="text-white text-decoration-none my-2"><i class="bi bi-caret-left-fill"></i> Retour vers la boutique</a>
         <div class="col-12 col-lg-7 mb-2">
-            <div class="card bg-light">
+            <div class="card bg-light h-100">
                 {# <div class="card-body d-flex bgProduct growID">
                     <a href="" class="mx-auto text-center" data-toggle="modal" data-target="#productModal">
                         <img class="img-fluid imgProduct mt-5" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
                     </a>
                 </div> #}
 
-                <div id="carousel-fiche-produit" class="carousel slide d-flex flex-wrap">
+                <div id="carousel-fiche-produit" class="carousel slide d-flex flex-wrap h-100">
                     <div class="col-md-4 col-12 m-0">
                         <button type="button" class="active border-0 col-12 mb-2" data-bs-target="#carousel-fiche-produit" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1">
                             <img class="w-100 mt-1 mx-auto" src="{{ asset('uploads/photos/' ~ produit.photo) }}">
