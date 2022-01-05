@@ -38,29 +38,10 @@ class DisController extends AbstractController
         ]);
     }
 
-
     #[Route('/produits', name: 'produits')]
     #[Route('/produits/{categorie}', name: 'produits_par_cat')]
     public function produits(ProduitRepository $repoProduct, Request $request): Response
-    {
-
-        // $cat = '';
-        // if($categorie == "nouveaute")
-        // {
-        //     $produit = $repoProduct->findBy([], ['id' => 'DESC'], null , null);
-        //     $cat = $categorie;
-        // }
-        // elseif($categorie)
-        // {
-        //     $category = $repoCategory->findBy(['titre' => $categorie], [], null , null);
-        //     $cat = $categorie;
-        //     $produit = $repoProduct->findByCategorie($category);
-        // }
-        // else
-        // {
-        //     $data = new SearchData();
-        //     $produit = $repoProduct->findSearch($data);     
-        // }        
+    {      
         $data = new SearchData();
         $data->page = $request->get('page', 1);
         $searchForm = $this->createForm(SearchFormType::class, $data);
