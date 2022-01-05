@@ -30,9 +30,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Karma&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href=" {{asset('css/fiche_produit.css')}}">
-        <link rel="stylesheet" href=" {{asset('css/profil.css')}}">
-        <link rel="stylesheet" href=" {{asset('css/panier.css')}}">
         <link rel="stylesheet" href=" {{asset('css/slider.min.css')}}">
 
         <link rel="stylesheet" href=" {{asset('css/base.css')}} ">
@@ -75,7 +72,7 @@
 <body>
 
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark bgNav" aria-label="Eighth navbar example">
+  <nav class="navbar navbar-expand-xl navbar-dark bg-dark bgNav" aria-label="Eighth navbar example">
       <div class="container">
           <a class="navbar-brand shadow-none" href="{{ path('home') }}" style="background-color:transparent;font-size: 34px;vertical-align: baseline;display: flex;align-items: end;">
             <img src="{{ asset('img/logocode.png') }}" style="width:50px; background-color:transparent" class="" alt=""><span style="" class="font_titre">oots Art</span></a>
@@ -251,25 +248,25 @@
                 
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
 
-                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="#"><h5>A propos</h5></a>
+                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="{{ path('a_propos') }}"><h5>A propos</h5></a>
 
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
 
-                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="#"><h5>Contact</h5></a>
+                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="{{ path('contact') }}"><h5>Contact</h5></a>
 
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
 
-                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="#"><h5>FAQ</h5></a>
+                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="{{ path('faq') }}"><h5>FAQ</h5></a>
 
                 </div>
               
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
 
-                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="#"><h5>legal Notice</h5></a>
+                  <a class="footer-link text-white mx-2 text-uppercase allfontcolor couleurfontPC" aria-current="page" href="{{ path('legal_notice') }}"><h5>legal Notice</h5></a>
 
                 </div>
                 

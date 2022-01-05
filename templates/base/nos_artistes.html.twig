@@ -13,7 +13,7 @@
       
       {% for vendeur in vendeurs %}
         {% if "ROLE_VENDEUR" in vendeur.roles %}        
-          <div class="col-12 col-lg-3 col-md-6 p-2">
+          <div class="col-12 col-xxl-3 col-xl-4 col-md-6 p-2">
             <div class="card testimonial-card mt-2 mb-3 mx-2 h-100">
               {% if vendeur.banniereProfil is null %}
                 {% set banniere = asset('img/banniere-default.jpg') %}

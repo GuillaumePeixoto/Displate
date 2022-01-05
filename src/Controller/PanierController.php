@@ -115,7 +115,6 @@ class PanierController extends AbstractController
         $manager->persist($commande);
 
 
-
         foreach($panier as $produitPanier)
         {
             $detailsCommande = new DetailsCommande;
