@@ -104,27 +104,13 @@
                         </div>
                         <div class="form-group my-2">
                             <label>Quantité :</label>
-                            {# <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number me-1"  data-type="minus" data-field="">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control"  id="quantity" name="quantity" min="1" max="10" value="1">
-                                <div class="input-group-append">
-                                    <button type="button" class="quantity-right-plus btn btn-success btn-number ms-1" data-type="plus" data-field="">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div> #}
-
-                                <select name="quantity" class="form-select">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                            <select name="quantity" class="form-select">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                         <input type="hidden" name="id_produit" value="{{produit.id}}">
                         <div class="text-center ">
@@ -146,17 +132,6 @@
     <div class="row">
         {% if sameCategorie|length > 1 %}
             <h2 class="my-3 titrehome"> Articles similaires </h2>
-            {# {% for sameproduit in sameCategorie %}
-                {% if sameproduit.id != produit.id %}
-                    <div class="col-6 col-lg-3 col-xl-2 mb-4 d-flex">
-                        <div id="product-1" class="single-product my-auto">
-                            <div class="part-1 grow">
-                                <a href=" {{path("fiche_produit", {'id' : sameproduit.id})}} "><img src="{{ asset("uploads/photos/" ~ sameproduit.photo)}}" class="w-100" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %} #}
             <div id="sameProdSplide" class="splide">
                 <div class="splide__track">
                     <ul class="splide__list">
@@ -177,7 +152,7 @@
     <div class="mt-4"> 
 
         {% set acheter = false %}
-        
+        {# Ici je vérifie si l'utilisateur connecter à déja acheter se produit pour pouvoir le laisser mettre un avis sur le produit #}
         {% if app.user %}
             {% for commande in app.user.commandes %}
                 {% for detail in commande.detailsCommandes %}

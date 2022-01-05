@@ -32,6 +32,7 @@ class PanierController extends AbstractController
         $format_obj = $formatRepository->find($format);
 
         $all_ready_have = false;
+        // ici je vérifie si on possède pas déja produit avec le meme format
         foreach($panier as $key => $id)
         {
             if($id['produit']->getId() == $id_produit)
@@ -44,6 +45,7 @@ class PanierController extends AbstractController
             }
         }
 
+        // si on le possède déja je rajoute la quantite
         if($all_ready_have)
         { 
             $panier[$emplacement]['quantite'] += $quantite;
@@ -57,10 +59,6 @@ class PanierController extends AbstractController
             array_push($panier, $newValues);
         }
         $session->set('panier', $panier);
-        //$session->remove('panier');
-        // return $this->render('panier/index.html.twig', [
-        //     'panier' => $panier
-        // ]);
         return $this->redirectToRoute("panier");
     }
 
@@ -104,7 +102,7 @@ class PanierController extends AbstractController
         $commande->setDateCommande(new \DateTime());
         $commande->setUser($this->getUser());
         $montant = 0;
-        foreach($panier as $produitPanier)
+        foreach($panier as $produitPanier) // je calcul le montant total
         {
             $prix = $produitPanier['quantite'] * $produitPanier['format']->getPrix();
             $montant += $prix;
@@ -114,7 +112,7 @@ class PanierController extends AbstractController
 
         $manager->persist($commande);
 
-
+        // pour chaque produit, je crée un détails produit relié à la commande crée au dessus
         foreach($panier as $produitPanier)
         {
             $detailsCommande = new DetailsCommande;

@@ -31,7 +31,7 @@ class DisController extends AbstractController
     public function artistes(UserRepository $repoUser): Response
     {
 
-        $vendeurs = $repoUser->findAll();
+        $vendeurs = $repoUser->findAll(); // je récupère tout les Users
 
         return $this->render('base/nos_artistes.html.twig', [
             'vendeurs' => $vendeurs
@@ -42,11 +42,11 @@ class DisController extends AbstractController
     #[Route('/produits/{categorie}', name: 'produits_par_cat')]
     public function produits(ProduitRepository $repoProduct, Request $request): Response
     {      
-        $data = new SearchData();
-        $data->page = $request->get('page', 1);
-        $searchForm = $this->createForm(SearchFormType::class, $data);
-        $searchForm->handleRequest($request);
-        $produit = $repoProduct->findSearch($data);
+        $data = new SearchData(); // j'initie mon objet search data
+        $data->page = $request->get('page', 1); // j'associe à la variable page de SearchData la valeur passer dans le formulaire sinon je prends 1 par défaut
+        $searchForm = $this->createForm(SearchFormType::class, $data); // je crée le formulaire de filtre
+        $searchForm->handleRequest($request); // je récupère les valeurs du formulaire
+        $produit = $repoProduct->findSearch($data); // je lance ma requete en passant mon objet SearchData en paramètres
 
         return $this->render('base/tous_nos_produits.html.twig', [
             'produit' => $produit,
@@ -67,34 +67,38 @@ class DisController extends AbstractController
     public function home(ProduitRepository $repoProduct, DetailsCommandeRepository $repoDetailsCommande): Response
     {
 
-        $derniers_produit = $repoProduct->findBy([], ['id' => 'DESC'], 10, null);
+        $derniers_produit = $repoProduct->findBy([], ['id' => 'DESC'], 10, null); // je récupère les 10 dernier article passer en BDD
 
-        $random_produit = $repoProduct->findAll();
-        shuffle($random_produit);
-        $random_produit = array_slice($random_produit, 0, 10);
+        $random_produit = $repoProduct->findAll(); // je récupère tout les produits
+        shuffle($random_produit); // je mélange le tableau
+        $random_produit = array_slice($random_produit, 0, 10); // je découpe le tableau pour garder les 10 premier élément
+        // Ceci me permet d'avoir un équivalent de select random produit
 
+        // ici je vais récuperer les produits les plus vendus
         $all_details = $repoDetailsCommande->findAll();
 
         $produit_best_sellers = [];
 
-        foreach($all_details as $detail)
+        foreach($all_details as $detail) // je parcours chaque produit
         {
+            // pour chaque produit je mets en clé du tableau l'id produit et en valeur associé sa quantité acheter au total
             if(!empty($produit_best_sellers[$detail->getProduitId()]))
             {
-                $produit_best_sellers[$detail->getProduitId()] += $detail->getQuantite();
+                $produit_best_sellers[$detail->getProduitId()] += $detail->getQuantite(); // Si le produit existe déja dans mon tableau je lui rajoute la quantité
             }
             else
             {
-                $produit_best_sellers[$detail->getProduitId()] = $detail->getQuantite();
+                $produit_best_sellers[$detail->getProduitId()] = $detail->getQuantite(); // Si le produit n'existe pas dans mon tableau j'assigne la quantité à l'id du prduit en clé du tableau
             }
         }
 
-        arsort($produit_best_sellers, SORT_NUMERIC);
+        arsort($produit_best_sellers, SORT_NUMERIC); // je réorganise le tableau de manière croissante tout en gardant les bonnes clés
 
         $bestSellers = [];
 
         foreach($produit_best_sellers as $id => $quantite)
         {
+            // je rajoute chaque produit en le récupérant sous forme d'objet dans un tableau
             array_push($bestSellers, $repoProduct->find($id));
         }
 
@@ -112,10 +116,11 @@ class DisController extends AbstractController
         $categories = array();
         foreach($produit->getCategorie() as $category)
         {
+            // je récupère chaque categorie du produit
             array_push($categories, $category);
         }
         
-        $sameCategorie = $repoProduct->findByCategorie($categories, $produit->getId());
+        $sameCategorie = $repoProduct->findByCategorie($categories, $produit->getId()); // je recherche des produits qui possède une des categories passé en paramètres
 
         $commentaire = new Commentaire;
 
@@ -131,7 +136,6 @@ class DisController extends AbstractController
                     ->setAuteur($user->getPrenom() . ' ' . $user->getNom())
                     ->setProduit($produit);
 
-            // dd($comment);
 
             $manager->persist($commentaire);
             $manager->flush();
@@ -246,6 +250,7 @@ class DisController extends AbstractController
     #[Route('artiste/{id}', name: 'profil_vendeur')]
     public function mon_profil(User $user): Response 
     {
+        // dans le cas ou quelqu'un voudrait passer un ID d'un user qui n'a pas le role vendeur, on le redirige vers nos artiste
         if(!in_array('ROLE_VENDEUR' ,$user->getRoles()))
         {
             return $this->redirectToRoute('nos_artistes');
@@ -260,6 +265,7 @@ class DisController extends AbstractController
     public function ma_commande(Commande $commande, ProduitRepository $repoProduit, FormatRepository $repoFormat): Response 
     {
         $user = $this->getUser();
+        // si on essaye d'aller voir une commande qui ne nous appartient pas, on est rediriger vers profil
         if($user->getId() != $commande->getUser()->getId())
         {
             return $this->redirectToRoute('profil');

@@ -39,6 +39,8 @@ class ProduitRepository extends ServiceEntityRepository
     }
     */
 
+
+    // permet de sélectionner des produits en fonction des categories envoyé en parametres
     public function findByCategorie($categories, $id){
         $query = $this->createQueryBuilder('produit')
                       ->select('produit')
@@ -54,6 +56,7 @@ class ProduitRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    // permet de sélectionner les produits sauf celui passer en paramètres
     public function findNotEqual($id)
     {
         $query = $this->createQueryBuilder('produit')
@@ -64,6 +67,7 @@ class ProduitRepository extends ServiceEntityRepository
 
     }
 
+    // permet de selectionner les produits en fonction des différentes valeurs passer dans l'objet SearchData
     public function findSearch(SearchData $search)
     {
         $query = $this
@@ -71,6 +75,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->select('produit', 'categorie', 'format')
             ->leftJoin('produit.categorie', 'categorie')
             ->leftJoin('produit.format', 'format');
+        // en fonction de la recherche
         if(!empty($search->q))
         {
             $query = $query
@@ -78,13 +83,14 @@ class ProduitRepository extends ServiceEntityRepository
                     ->setParameter('q', "%{$search->q}%");
         }
 
+        // en fonction des categories selectionner
         if(!empty($search->categories))
         {
             $query = $query
                     ->andWhere('categorie.id IN (:categories)')
                     ->setParameter('categories', $search->categories);
         }
-
+        // en fonction des formats selectionner
         if(!empty($search->formats))
         {
             $query = $query
@@ -93,6 +99,7 @@ class ProduitRepository extends ServiceEntityRepository
         }
 
         $query = $query->getQuery();
+        // permet de créer une pagination sur la page produit
         return $this->paginator->paginate(
             $query,
             $search->page,
