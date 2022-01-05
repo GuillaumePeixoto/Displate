@@ -33,6 +33,13 @@ class VendeurController extends AbstractController
     #[Route('/vendeur/{id}/edit', name: 'edit_vendeur')]
     public function editProfil(User $user , EntityManagerInterface $manager, Request $request, SluggerInterface $slugger): Response
     {
+        // si on essaye d'aller voir une commande qui ne nous appartient pas, on est rediriger vers profil
+        $userConnected = $this->getUser();
+        if($user->getId() != $userConnected->getId())
+        {
+            return $this->redirectToRoute('mon_profil');
+        }
+
 
         $ProfilBdd = $user->getImageProfil();
         $banniereBdd = $user->getBanniereProfil();
@@ -44,7 +51,8 @@ class VendeurController extends AbstractController
 
         if ($vendeurForm->isSubmitted() && $vendeurForm->isValid()) {
             // encode the plain password
-
+            
+            // je vérifie si on recois une photo de profil
             $profilphoto = $vendeurForm->get('imageProfil')->getData();
             if($profilphoto)
             {
@@ -73,9 +81,11 @@ class VendeurController extends AbstractController
             }
             else
             {
+                // sinon je laisse celle qui est déja en place
                 $user->setImageProfil($ProfilBdd);                    
             }
 
+            // je vérifie si on recois une bannière de profil
             $banniere = $vendeurForm->get('banniereProfil')->getData();
             if($banniere)
             {
@@ -104,6 +114,7 @@ class VendeurController extends AbstractController
             }
             else
             {
+                // sinon je laisse celle qui est déja en place
                 $user->setBanniereProfil($banniereBdd);                    
             }
             

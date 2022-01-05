@@ -381,14 +381,15 @@ class BackOfficeController extends AbstractController
     #[Route('backoffice_commmande/{id}', name: 'commande_backoffice')]
     public function ma_commande(Commande $commande, ProduitRepository $repoProduit, FormatRepository $repoFormat): Response 
     {
+        // ici je crée une boucle qui parcourt tout les détails de la commande
         $articles = array();
         foreach($commande->getDetailsCommandes() as $details)
         {
-            $article['produit'] = $repoProduit->find($details->getProduitId());
-            $article['format'] = $repoFormat->find($details->getFormatId());
+            $article['produit'] = $repoProduit->find($details->getProduitId()); // j'insère dans produit l'objet produit en recherchant par son ID
+            $article['format'] = $repoFormat->find($details->getFormatId());// j'insère dans format l'objet format en recherchant par son ID
             $article['quantite'] = $details->getQuantite();
             $article['prix'] = $details->getPrix();
-            array_push($articles, $article);
+            array_push($articles, $article); // j'insère dans un tableau articles[] l'article que je viens de crée juste au dessus
         }
 
         return $this->render('back_office/details_commande.html.twig', [
