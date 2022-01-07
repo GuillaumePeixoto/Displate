@@ -38,7 +38,7 @@
                     {% for produit in derniers_produit %}
                         <li class="splide__slide mx-1 d-flex align-items-center">
                             <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
-                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
+                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" style="width: 250px" alt="{{ produit.photo }}">
                             </a>
                         </li>
                     {% endfor %}
@@ -55,7 +55,7 @@
                     {% for produit in best_sellers %}
                         <li class="splide__slide mx-1 d-flex align-items-center">
                             <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
-                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
+                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="{{ produit.photo }}">
                             </a>
                         </li>
                     {% endfor %}
@@ -72,7 +72,7 @@
                     {% for produit in random_produit %}
                         <li class="splide__slide mx-1 d-flex align-items-center">
                             <a href=" {{path("fiche_produit", {'id' : produit.id})}} ">
-                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="">
+                                <img src="{{ asset("uploads/photos/" ~ produit.photo)}}" class="" style="width: 250px" alt="{{ produit.photo }}">
                             </a>
                         </li>
                     {% endfor %}

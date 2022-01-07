@@ -35,7 +35,7 @@
                                             <span class="badge-perso p-2"><i class="bi bi-three-dots text-white"></i></span>
                                         {% endif %}
                                     </div>
-                                    <p class="card-text">{{produit.titre}}</p>
+                                    <p class="card-text fw-bold">{{produit.titre}}</p>
                                     <p class="card-text">{{ produit.description|length > 40 ? produit.description|slice(0, 40) ~ '...' : produit.description  }}</p>
                                     <p class="card-text">Format :
                                         {% for format in produit.format %}

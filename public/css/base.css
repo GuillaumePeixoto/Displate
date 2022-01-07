@@ -1,13 +1,98 @@
 /* Fiche Produit */
 
+#produit_on_bg{
+    width: 375px;
+}
+
+@media(max-width: 1400px){
+    .bgProduct{
+        height: 425px !important;
+    }
+
+    .imgProduct{
+        height: 180px !important;
+    }
+}
+
+@media(max-width: 1200px){
+    .bgProduct{
+        height: 360px !important;
+    }
+
+    .imgProduct{
+        height: 160px !important;
+    }
+
+    #produit_on_bg{
+        width: 350px;
+    }
+
+    .bg-carousel-button{
+        height: 160px !important;
+    }
+    
+    .img-carousel-button{
+        height: 75px !important;
+    }
+}
+
+@media(max-width: 992px){
+    .bgProduct{
+        height: 425px !important;
+    }
+
+    .imgProduct{
+        height: 200px !important;
+    }
+
+    #produit_on_bg{
+        width: 380px;
+    }
+
+    .bg-carousel-button{
+        height: 220px !important;
+    }
+    
+    .img-carousel-button{
+        height: 100px !important;
+    }
+}
+
+@media(max-width: 768px){
+    .bgProduct{
+        height: 515px !important;
+    }
+
+    .imgProduct{
+        height: 235px !important;
+    }
+
+    .bg-carousel-button{
+        height: 160px !important;
+    }
+    
+    .img-carousel-button{
+        height: 75px !important;
+    }
+}
+
+
 .bgProduct{
     background-image: url(https://www.murs-3d.fr/3168-thickbox_default/planche-de-bois-vieilli.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
 }
 
 .bg-carousel-button{
     background-image: url(https://www.murs-3d.fr/3168-thickbox_default/planche-de-bois-vieilli.jpg);
+    background-size: contain;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-carousel-button-2{
     background-size: contain;
     height: 200px;
     background-repeat: no-repeat;
@@ -20,7 +105,7 @@
 
 .imgProduct{
     padding: 0 !important;
-    height: 225px !important;
+    height: 225px;
 }
 
 .bloc_left_price {
@@ -473,6 +558,7 @@ body {
     user-select: none;
     pointer-events: none;
 }
+
 .switch-button-checkbox + .switch-button-label:before {
     content: "";
     background: #fff;
@@ -490,29 +576,12 @@ body {
     position: relative;
 }
 
-
 /* CSS page a propos ########################################################################################################################################################## */
 
 
 #abouttextstyle {
     font-family: 'Karma', serif !important;
   }
- /* REPONSIVE HOME */
-
-/* CSS PROFIL */
-
-/* FIN CSS PROFIL */
-
-@media screen and (max-width: 768px){
-
-}
-/* FIN REPONSIVE HOME */
-
-
-/* CSS artist */
-
-
-
 
 /* CSS contact ############################################################################################################################################################################ */
 
@@ -677,29 +746,27 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
     font-size: 22px;
     font-weight: 700;
     color: rgb(253, 203, 128);
-    
 }
 
 .section-contact .infos .single-info .text p {
 	line-height: 1.85em;
 	margin: 0;
     color: rgb(238, 231, 221);
-
 }
+
 .bouton 
 {
     color: rgb(253, 203, 128);
-
 }
+
 .contact-titre
 {
     color: rgb(253, 203, 128);
-
 }
 
 
 
-@media (max-width: 575.99px) {
+@media (max-width: 576px) {
 	.section-contact .content {
 	    margin-bottom: 100px;
 	}
@@ -726,7 +793,7 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
 	}
 }
 
-@media (min-width: 576px) and (max-width: 767.99px) {
+@media (min-width: 576px) and (max-width: 768px) {
 	.section-contact .content {
 	    margin-bottom: 100px;
 	}
@@ -741,7 +808,7 @@ p,a,h1,h2,h3,h4,h5,h6,ul,li {
 	}
 }
 
-@media (min-width: 768px) and (max-width: 991.99px) {
+@media (min-width: 768px) and (max-width: 992px) {
 	.section-contact .content {
 	    margin-bottom: 100px;
 	}
