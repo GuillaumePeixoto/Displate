@@ -40,7 +40,19 @@ $(document).ready(function() {
             url: '/js/dataTables.french.json'
         },
         "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [ 4 ] }
+            { 'bSortable': false, 'aTargets': [ 4 ] },
+            {"targets":3, "type":"date"}
         ]
+    });
+
+    $('#table-backoffice-commande').DataTable({
+        language: {
+            url: '/js/dataTables.french.json'
+        },
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [ 4 ] },
+            {"targets":3, "type":"date"}
+        ]
+        
     });
 });

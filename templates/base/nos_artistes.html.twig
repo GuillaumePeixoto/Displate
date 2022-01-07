@@ -34,7 +34,7 @@
                 <p>
                   {% if vendeur.description is not null %}
                     <i class="fas fa-quote-left"></i>
-                    {{vendeur.description}}
+                    {{vendeur.description|striptags|slice(0,50)}}
                   {% endif %}
                 </p>
                 <div class="">
