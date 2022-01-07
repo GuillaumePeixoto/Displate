@@ -100,6 +100,7 @@ class PanierController extends AbstractController
         $panier = $session->get("panier", []);
         $commande = new Commande;
         $commande->setDateCommande(new \DateTime());
+        $commande->setEtat('en cours de traitement');
         $commande->setUser($this->getUser());
         $montant = 0;
         foreach($panier as $produitPanier) // je calcul le montant total
