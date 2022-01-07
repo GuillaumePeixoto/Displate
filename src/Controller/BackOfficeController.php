@@ -9,6 +9,7 @@ use App\Entity\Format;
 use App\Entity\Produit;
 use App\Entity\User;
 use App\Form\CategorieTypeFormType;
+use App\Form\CommandeType;
 use App\Form\FormatFormType;
 use App\Form\ProduitFormType;
 use App\Form\RegistrationFormType;
@@ -291,8 +292,8 @@ class BackOfficeController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/categories', name: 'show_categories')]
-    #[Route('/admin/categorie/{id}/remove', name: 'remove_categorie')]
+    #[Route('/backoffice/categories', name: 'show_categories')]
+    #[Route('/backoffice/categorie/{id}/remove', name: 'remove_categorie')]
     public function adminCategory(EntityManagerInterface $manager, CategorieRepository $repoCategorie, Categorie $categorie = null): Response
     {
 
@@ -318,8 +319,8 @@ class BackOfficeController extends AbstractController
     }
 
     
-    #[Route('/admin/categorie/new', name: 'create_categorie')]
-    #[Route('/admin/categorie/{id}/modify', name: 'modify_categorie')]
+    #[Route('/backoffice/categorie/new', name: 'create_categorie')]
+    #[Route('/backoffice/categorie/{id}/modify', name: 'modify_categorie')]
     public function adminCategoryForm(Categorie $categorie = null, EntityManagerInterface $manager, Request $request): Response
     {
         if($categorie)
@@ -378,7 +379,34 @@ class BackOfficeController extends AbstractController
         ]);
     }
 
-    #[Route('backoffice_commmande/{id}', name: 'commande_backoffice')]
+    #[Route('/backoffice/commande/{id}/update', name: 'update_commande_backoffice')]
+    public function update_commande(Commande $commande, EntityManagerInterface $manager, Request $request)
+    {
+        $colonnes = $manager->getClassMetadata(Commande::class)->getFieldNames();
+
+        $commandeForm = $this->createForm(CommandeType::class, $commande);
+
+        $commandeForm->handleRequest($request);
+
+        if($commandeForm->isSubmitted() && $commandeForm->isValid())
+        {
+            $this->addFlash('success', "Mise à jour de la commande N°".$commande->getId()." !");
+
+            $manager->persist($commande);
+
+            $manager->flush();
+
+            return $this->redirectToRoute('show_commandes');
+        }
+
+        return $this->render('back_office/update_commande.html.twig',[
+            'commande' => $commande,
+            'colonnes' => $colonnes,
+            'commandeForm' => $commandeForm->createView()
+        ]);
+    }
+
+    #[Route('/backoffice/commmande/{id}/details', name: 'commande_backoffice')]
     public function ma_commande(Commande $commande, ProduitRepository $repoProduit, FormatRepository $repoFormat): Response 
     {
         // ici je crée une boucle qui parcourt tout les détails de la commande

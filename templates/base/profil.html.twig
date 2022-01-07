@@ -44,6 +44,7 @@
                         <th>Commande Numero</th>
                         <th>Montant</th>
                         <th>Date</th>
+                        <th>Etat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +53,7 @@
                             <td><a href="{{ path('ma_commande', {'id' : commande.id}) }}">{{ commande.id }}</a></td>
                             <td>{{ commande.montant }} €</td>
                             <td>{{ commande.dateCommande|date('d-m-Y H:i') }}</td>
+                            <td>{{ commande.etat }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

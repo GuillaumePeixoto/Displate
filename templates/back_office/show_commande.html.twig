@@ -32,7 +32,11 @@
                     <td class="align-middle">{{ commande.user.id}} - {{commande.user.pseudo}}</td>
                     <td class="align-middle">{{commande.montant}}</td>
                     <td class="align-middle">{{ commande.dateCommande|date('d-m-Y H:i')}}</td>
-                    <td><a class="btn bg-danger text-white" href="{{ path('remove_commande', {'id' : commande.id }) }}"><i class="bi bi-trash"></i></a></td>
+                    <td class="align-middle">{{ commande.etat}}</td>
+                    <td>
+                        <a class="btn bg-success text-white" href="{{ path('update_commande_backoffice', {'id' : commande.id }) }}"><i class="bi bi-bag-check-fill"></i></a>
+                        <a class="btn bg-danger text-white" href="{{ path('remove_commande', {'id' : commande.id }) }}"><i class="bi bi-trash"></i></a>
+                    </td>
                 </tr> 
             {% endfor %}
         </tbody>

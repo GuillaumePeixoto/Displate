@@ -39,6 +39,11 @@ class Commande
      */
     private $detailsCommandes;
 
+    /**
+     * @ORM\Column(type="string", length=255, columnDefinition="enum('en cours de traitement', 'en préparation', 'en cours de livraison', 'livré')")
+     */
+    private $etat;
+
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
@@ -111,6 +116,18 @@ class Commande
                 $detailsCommande->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }
